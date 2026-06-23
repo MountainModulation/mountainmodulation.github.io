@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mountain Modulation</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:   #173404;
+      --green-mid:    #3B6D11;
+      --green-light:  #639922;
+      --green-bright: #97C459;
+      --green-pale:   #C0DD97;
+      --cream:        #FAEEDA;
+      --amber:        #EF9F27;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--green-dark);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(23,52,4,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid rgba(99,153,34,0.25);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 36px; }
+    .nav-logo span {
+      font-family: 'Caveat', cursive;
+      font-size: 22px; font-weight: 700;
+      color: var(--green-pale);
+      letter-spacing: 1px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex; gap: 2rem;
+    }
+    nav ul a {
+      color: var(--green-bright);
+      text-decoration: none;
+      font-size: 14px; letter-spacing: 0.5px;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--cream); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 6rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero svg {
+      width: min(680px, 90vw);
+      margin-bottom: 2.5rem;
+      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5));
+    }
+    .hero h1 {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700; color: var(--green-pale);
+      letter-spacing: 2px; margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.05rem; color: var(--green-bright);
+      max-width: 520px; margin: 0 auto 2rem;
+    }
+    .hero-btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      background: transparent;
+      border: 1px solid var(--green-light);
+      color: var(--green-pale);
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 14px; letter-spacing: 1px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-btn:hover {
+      background: var(--green-mid);
+      color: var(--cream);
+    }
+
+    /* SECTION */
+    section {
+      max-width: 900px; margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+    .section-label {
+      font-size: 11px; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'Caveat', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700; color: var(--green-pale);
+      margin-bottom: 1.5rem;
+    }
+    .divider {
+      width: 60px; height: 2px;
+      background: var(--green-light);
+      margin-bottom: 2rem;
+      border-radius: 2px;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem; align-items: start;
+    }
+    .about-text p { color: rgba(192,221,151,0.85); margin-bottom: 1rem; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.5rem; }
+    .tag {
+      padding: 4px 12px;
+      border: 0.5px solid var(--green-light);
+      border-radius: 20px;
+      font-size: 12px; color: var(--green-bright);
+      letter-spacing: 0.5px;
+    }
+    .about-card {
+      background: rgba(59,109,17,0.15);
+      border: 0.5px solid rgba(99,153,34,0.3);
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .about-card h3 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.4rem; color: var(--green-pale);
+      margin-bottom: 1rem;
+    }
+    .about-card ul { list-style: none; }
+    .about-card ul li {
+      color: rgba(192,221,151,0.8);
+      font-size: 14px; padding: 6px 0;
+      border-bottom: 0.5px solid rgba(99,153,34,0.15);
+    }
+    .about-card ul li:last-child { border-bottom: none; }
+    .about-card ul li::before {
+      content: '→ '; color: var(--green-light);
+    }
+
+    /* BLOG */
+    #blog { border-top: 0.5px solid rgba(99,153,34,0.2); }
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .post-card {
+      background: rgba(59,109,17,0.12);
+      border: 0.5px solid rgba(99,153,34,0.25);
+      border-radius: 12px; padding: 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      display: block;
+    }
+    .post-card:hover {
+      border-color: var(--green-light);
+      background: rgba(59,109,17,0.22);
+    }
+    .post-date {
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--green-light); text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem; color: var(--green-pale);
+      margin-bottom: 0.5rem; font-weight: 700;
+    }
+    .post-excerpt {
+      font-size: 13px; color: rgba(192,221,151,0.7);
+      line-height: 1.6;
+    }
+    .post-tag {
+      display: inline-block; margin-top: 1rem;
+      font-size: 11px; letter-spacing: 1px;
+      color: var(--amber); text-transform: uppercase;
+    }
+    .coming-soon {
+      text-align: center; padding: 3rem;
+      color: rgba(192,221,151,0.4);
+      border: 0.5px dashed rgba(99,153,34,0.2);
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 0.5px solid rgba(99,153,34,0.2);
+      padding: 2rem;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(99,153,34,0.5);
+      letter-spacing: 1px;
+    }
+    footer a { color: var(--green-bright); text-decoration: none; }
+
+    @media (max-width: 640px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="mountain_modulation_logo.svg" alt="Mountain Modulation logo"/>
+  </a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#blog">Blog</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420">
+    <defs>
+      <style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&amp;display=swap');</style>
+    </defs>
+    <rect x="0" y="0" width="680" height="420" rx="12" fill="#173404"/>
+    <circle cx="460" cy="130" r="70" fill="#EF9F27" opacity="0.08"/>
+    <circle cx="460" cy="130" r="50" fill="#FAC775" opacity="0.13"/>
+    <circle cx="460" cy="130" r="32" fill="#FAC775" opacity="0.22"/>
+    <circle cx="460" cy="130" r="19" fill="#FAEEDA" opacity="0.65"/>
+    <circle cx="460" cy="130" r="11" fill="#FAEEDA" opacity="0.95"/>
+    <g stroke="#FAC775" stroke-linecap="round" opacity="0.38">
+      <line x1="460" y1="103" x2="460" y2="113" stroke-width="1.8"/>
+      <line x1="432" y1="111" x2="438" y2="118" stroke-width="1.5"/>
+      <line x1="418" y1="130" x2="428" y2="130" stroke-width="1.5"/>
+      <line x1="432" y1="149" x2="438" y2="142" stroke-width="1.5"/>
+      <line x1="488" y1="103" x2="482" y2="113" stroke-width="1.5"/>
+      <line x1="492" y1="130" x2="482" y2="130" stroke-width="1.5"/>
+      <line x1="488" y1="149" x2="482" y2="142" stroke-width="1.5"/>
+    </g>
+    <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208 L680,265 Z" fill="#3B6D11"/>
+    <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208" fill="none" stroke="#97C459" stroke-width="3" stroke-linecap="round"/>
+    <g fill="#27500A">
+      <polygon points="68,268 80,233 92,268"/><polygon points="74,248 80,230 86,248"/><rect x="78" y="266" width="4" height="7" rx="1"/>
+      <polygon points="96,268 110,244 124,268"/><polygon points="103,256 110,241 117,256"/><rect x="108" y="266" width="4" height="7" rx="1"/>
+      <polygon points="124,268 136,250 148,268"/><polygon points="130,259 136,247 142,259"/><rect x="134" y="266" width="4" height="7" rx="1"/>
+      <polygon points="490,268 504,236 518,268"/><polygon points="497,250 504,233 511,250"/><rect x="502" y="266" width="4" height="7" rx="1"/>
+      <polygon points="518,268 530,244 542,268"/><polygon points="524,256 530,241 536,256"/><rect x="528" y="266" width="4" height="7" rx="1"/>
+      <polygon points="544,268 556,250 568,268"/><polygon points="550,260 556,247 562,260"/><rect x="554" y="266" width="4" height="7" rx="1"/>
+    </g>
+    <rect x="0" y="265" width="680" height="5" fill="#27500A"/>
+    <text x="340" y="334" text-anchor="middle" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="#C0DD97" letter-spacing="3">Mountain</text>
+    <text x="340" y="374" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="400" fill="#97C459" letter-spacing="3">Modulation</text>
+    <line x1="70" y1="356" x2="195" y2="356" stroke="#639922" stroke-width="0.8" opacity="0.4"/>
+    <line x1="485" y1="356" x2="610" y2="356" stroke="#639922" stroke-width="0.8" opacity="0.4"/>
+  </svg>
+  <p>Networking, wireless, and the signal between the peaks.</p>
+  <a href="#blog" class="hero-btn">Read the blog →</a>
+</div>
+
+<section id="about">
+  <p class="section-label">Who I am</p>
+  <h2 class="section-title">About</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>Welcome to Mountain Modulation — a blog about networking, wireless technology, and the craft of keeping signals strong across any terrain.</p>
+      <p>I'm a network engineer with a passion for Juniper, Wi-Fi, SD-WAN, and the endlessly fascinating world of RF. This is where I share what I learn, break down complex topics, and document the journey.</p>
+      <div class="about-tags">
+        <span class="tag">Juniper Mist</span>
+        <span class="tag">SD-WAN</span>
+        <span class="tag">Wi-Fi</span>
+        <span class="tag">RF</span>
+        <span class="tag">Automation</span>
+        <span class="tag">APIs</span>
+      </div>
+    </div>
+    <div class="about-card">
+      <h3>Topics covered</h3>
+      <ul>
+        <li>Juniper Mist & WAN Assurance</li>
+        <li>Wireless design & RF fundamentals</li>
+        <li>Network automation & REST APIs</li>
+        <li>SD-WAN with SSR & SRX</li>
+        <li>Certifications & study notes</li>
+        <li>Tools, scripts & lab builds</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <p class="section-label">Latest posts</p>
+  <h2 class="section-title">Blog</h2>
+  <div class="divider"></div>
+  <div class="coming-soon">
+    ✦ &nbsp; Posts coming soon — check back shortly &nbsp; ✦
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Mountain Modulation &nbsp;·&nbsp; <a href="https://mountainmodulation.github.io">mountainmodulation.github.io</a></p>
+</footer>
+
+</body>
+</html>
