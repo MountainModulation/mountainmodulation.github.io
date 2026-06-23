@@ -33,28 +33,28 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center;
-      padding: 0.75rem 2rem;
+      padding: 0.5rem 2rem;
       background: rgba(15,28,4,0.97);
       backdrop-filter: blur(8px);
       border-bottom: 0.5px solid rgba(99,153,34,0.3);
       gap: 1.5rem;
     }
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
-    .nav-logo svg { height: 52px; width: auto; }
+    .nav-logo svg { height: 80px; width: auto; }
     .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-    .nav-logo-text .t1 { font-family: 'Caveat', cursive; font-size: 22px; font-weight: 700; color: var(--green-pale); letter-spacing: 1px; }
-    .nav-logo-text .t2 { font-family: 'Caveat', cursive; font-size: 14px; font-weight: 400; color: var(--green-bright); letter-spacing: 2px; }
+    .nav-logo-text .t1 { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; color: var(--green-pale); letter-spacing: 1px; }
+    .nav-logo-text .t2 { font-family: 'Caveat', cursive; font-size: 18px; font-weight: 400; color: var(--green-bright); letter-spacing: 2px; }
     .nav-right { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
     .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; letter-spacing: 0.5px; transition: color 0.2s; }
     .nav-right a:hover { color: var(--cream); }
 
     /* LAYOUT */
-    .layout { display: flex; margin-top: 70px; min-height: calc(100vh - 70px); }
+    .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
 
     /* SIDEBAR */
     .sidebar {
       width: var(--sidebar-w); flex-shrink: 0;
-      position: fixed; top: 70px; left: 0; bottom: 0;
+      position: fixed; top: 90px; left: 0; bottom: 0;
       overflow-y: auto;
       background: rgba(10,20,3,0.97);
       border-right: 0.5px solid rgba(99,153,34,0.2);
@@ -67,7 +67,7 @@
     /* level 1 — top links */
     .sb-link {
       display: block; padding: 0.45rem 1.25rem;
-      font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase;
       color: var(--green-light); text-decoration: none;
       transition: color 0.2s;
     }
@@ -78,7 +78,7 @@
     .sb-h1 {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.45rem 1.25rem;
-      font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+      font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase;
       color: var(--green-light);
       cursor: pointer; user-select: none;
       border: none; background: none; width: 100%; text-align: left;
@@ -95,7 +95,7 @@
     /* level 2 — plain link */
     .sb-l2 {
       display: block; padding: 0.35rem 1.25rem 0.35rem 2rem;
-      font-size: 13px; color: rgba(192,221,151,0.7);
+      font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7);
       text-decoration: none; transition: color 0.2s, background 0.2s;
     }
     .sb-l2:hover { color: var(--cream); background: rgba(59,109,17,0.14); }
@@ -104,7 +104,7 @@
     .sb-h2 {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.35rem 1.25rem 0.35rem 2rem;
-      font-size: 13px; color: rgba(192,221,151,0.7);
+      font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7);
       cursor: pointer; user-select: none;
       border: none; background: none; width: 100%; text-align: left;
       transition: color 0.2s;
@@ -120,7 +120,7 @@
     /* level 3 — plain link */
     .sb-l3 {
       display: block; padding: 0.3rem 1.25rem 0.3rem 3rem;
-      font-size: 12px; color: rgba(192,221,151,0.55);
+      font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55);
       text-decoration: none; transition: color 0.2s, background 0.2s;
     }
     .sb-l3:hover { color: var(--cream); background: rgba(59,109,17,0.1); }
@@ -129,7 +129,7 @@
     .sb-h3 {
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.3rem 1.25rem 0.3rem 3rem;
-      font-size: 12px; color: rgba(192,221,151,0.55);
+      font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55);
       cursor: pointer; user-select: none;
       border: none; background: none; width: 100%; text-align: left;
       transition: color 0.2s;
@@ -145,7 +145,7 @@
     /* level 4 — plain link */
     .sb-l4 {
       display: block; padding: 0.28rem 1.25rem 0.28rem 3.75rem;
-      font-size: 11px; color: rgba(192,221,151,0.4);
+      font-family: 'Caveat', cursive; font-size: 14px; color: rgba(192,221,151,0.4);
       text-decoration: none; transition: color 0.2s, background 0.2s;
     }
     .sb-l4:hover { color: var(--cream); background: rgba(59,109,17,0.08); }
@@ -162,7 +162,7 @@
     .hero svg.logo-hero { width: min(580px, 85vw); margin-bottom: 2rem; filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5)); }
     .hero p { font-size: 1.05rem; color: var(--green-bright); max-width: 480px; margin: 0 auto 2rem; }
     .hero-btn {
-      display: inline-block; padding: 0.75rem 2rem;
+      display: inline-block; padding: 0.5rem 2rem;
       background: transparent; border: 1px solid var(--green-light);
       color: var(--green-pale); border-radius: 6px; text-decoration: none;
       font-size: 14px; letter-spacing: 1px; transition: background 0.2s, color 0.2s;
@@ -194,6 +194,66 @@
       .main, footer { margin-left: 0; }
       .about-grid { grid-template-columns: 1fr; }
     }
+
+    .about-me-card {
+      margin: 0.5rem 1rem 1rem;
+      background: rgba(59,109,17,0.12);
+      border: 0.5px solid rgba(99,153,34,0.25);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .about-me-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 0.85rem;
+    }
+    .about-me-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(99,153,34,0.3);
+      border: 1px solid rgba(99,153,34,0.5);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Caveat', cursive;
+      font-size: 16px; font-weight: 700;
+      color: var(--green-pale); flex-shrink: 0;
+    }
+    .about-me-name {
+      font-family: 'Caveat', cursive;
+      font-size: 17px; font-weight: 700;
+      color: var(--green-pale); line-height: 1.2;
+    }
+    .about-me-title {
+      font-family: 'Caveat', cursive;
+      font-size: 13px; color: var(--green-bright); line-height: 1.3;
+    }
+    .about-me-company {
+      font-family: 'Caveat', cursive;
+      font-size: 12px; color: rgba(192,221,151,0.5); line-height: 1.3;
+    }
+    .about-me-buttons {
+      display: flex; flex-wrap: wrap; gap: 6px;
+      margin-bottom: 0.75rem;
+    }
+    .about-btn {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 4px 10px; border-radius: 6px;
+      font-family: 'Caveat', cursive;
+      font-size: 14px; text-decoration: none;
+      border: 0.5px solid transparent;
+      transition: opacity 0.2s; cursor: pointer;
+    }
+    .about-btn:hover { opacity: 0.8; }
+    .btn-linkedin  { background: rgba(10,102,194,0.2);  border-color: rgba(10,102,194,0.5);  color: #7ab3e0; }
+    .btn-github    { background: rgba(192,221,151,0.1); border-color: rgba(192,221,151,0.25); color: var(--green-pale); }
+    .btn-email     { background: rgba(239,159,39,0.15); border-color: rgba(239,159,39,0.35);  color: var(--amber); }
+    .btn-other     { background: rgba(99,153,34,0.15);  border-color: rgba(99,153,34,0.35);   color: var(--green-bright); }
+    .btn-location  { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
+    .about-me-full {
+      display: block; text-align: center; padding: 6px;
+      font-family: 'Caveat', cursive; font-size: 14px;
+      color: var(--green-bright); text-decoration: none;
+      border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
   </style>
 </head>
 <body>
@@ -342,6 +402,28 @@
     <div class="sb-c1">
       <a href="#" class="sb-l2">Scripts</a>
       <a href="#" class="sb-l2">Lab Builds</a>
+    </div>
+
+
+    <div class="sb-divider"></div>
+
+    <div class="about-me-card">
+      <div class="about-me-header">
+        <div class="about-me-avatar">MM</div>
+        <div>
+          <div class="about-me-name">Your Name</div>
+          <div class="about-me-title">Your Title</div>
+          <div class="about-me-company">@ Your Company</div>
+        </div>
+      </div>
+      <div class="about-me-buttons">
+        <a href="#" class="about-btn btn-linkedin">💼 LinkedIn</a>
+        <a href="https://github.com/MountainModulation" target="_blank" class="about-btn btn-github">🐙 GitHub</a>
+        <a href="#" class="about-btn btn-email">✉️ Email</a>
+        <a href="#" class="about-btn btn-other">🔗 Other</a>
+        <span class="about-btn btn-location">📍 United States</span>
+      </div>
+      <a href="#about" class="about-me-full">👤 View Full Profile →</a>
     </div>
 
   </aside>
