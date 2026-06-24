@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mobility Field Day 14 | Mountain Modulation</title>
+  <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #173404; --green-mid: #3B6D11; --green-light: #639922;
+      --green-bright: #97C459; --green-pale: #C0DD97; --cream: #FAEEDA;
+      --amber: #EF9F27; --sidebar-w: 260px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--green-dark); color: var(--cream); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; min-height: 100vh; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 0.5rem 2rem; background: rgba(15,28,4,0.97); backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(99,153,34,0.3); gap: 1.5rem; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo svg { height: 80px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text .t1 { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; color: var(--green-pale); letter-spacing: 1px; }
+    .nav-logo-text .t2 { font-family: 'Caveat', cursive; font-size: 18px; font-weight: 400; color: var(--green-bright); letter-spacing: 2px; }
+    .nav-right { margin-left: auto; display: flex; gap: 1.5rem; }
+    .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-right a:hover { color: var(--cream); }
+
+    .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
+
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: fixed; top: 90px; left: 0; bottom: 0; overflow-y: auto; background: rgba(10,20,3,0.97); border-right: 0.5px solid rgba(99,153,34,0.2); padding: 1.25rem 0 2rem; }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(99,153,34,0.2); border-radius: 2px; }
+    .sb-link { display: block; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); text-decoration: none; transition: color 0.2s; }
+    .sb-link:hover { color: var(--green-pale); }
+    .sb-divider { height: 0.5px; background: rgba(99,153,34,0.15); margin: 0.6rem 1.25rem; }
+    .sb-h1 { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h1:hover { color: var(--green-pale); }
+    .sb-h1 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h1.open .arr { transform: rotate(90deg); }
+    .sb-c1 { display: none; } .sb-c1.open { display: block; }
+    .sb-l2 { display: block; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l2:hover { color: var(--cream); background: rgba(59,109,17,0.14); }
+    .sb-h2 { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h2:hover { color: var(--cream); }
+    .sb-h2 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h2.open .arr { transform: rotate(90deg); }
+    .sb-c2 { display: none; } .sb-c2.open { display: block; }
+    .sb-l3 { display: block; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l3:hover { color: var(--cream); background: rgba(59,109,17,0.1); }
+    .sb-l3.active { color: var(--green-pale); border-left: 2px solid var(--green-light); padding-left: calc(3rem - 2px); }
+    .sb-h3 { display: flex; align-items: center; justify-content: space-between; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; }
+    .sb-h3 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h3.open .arr { transform: rotate(90deg); }
+    .sb-c3 { display: none; } .sb-c3.open { display: block; }
+    .sb-l4 { display: block; padding: 0.28rem 1.25rem 0.28rem 3.75rem; font-family: 'Caveat', cursive; font-size: 14px; color: rgba(192,221,151,0.4); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l4:hover { color: var(--cream); background: rgba(59,109,17,0.08); }
+    .about-me-card { margin: 0.5rem 1rem 1rem; background: rgba(59,109,17,0.12); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 12px; padding: 1rem; }
+    .about-me-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
+    .about-me-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(99,153,34,0.3); border: 1px solid rgba(99,153,34,0.5); display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 16px; font-weight: 700; color: var(--green-pale); flex-shrink: 0; }
+    .about-me-name { font-family: 'Caveat', cursive; font-size: 17px; font-weight: 700; color: var(--green-pale); }
+    .about-me-title { font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); }
+    .about-me-company { font-family: 'Caveat', cursive; font-size: 12px; color: rgba(192,221,151,0.5); }
+    .about-me-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.75rem; }
+    .about-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-family: 'Caveat', cursive; font-size: 14px; text-decoration: none; border: 0.5px solid transparent; transition: opacity 0.2s; cursor: pointer; }
+    .about-btn:hover { opacity: 0.8; }
+    .btn-linkedin { background: rgba(10,102,194,0.2); border-color: rgba(10,102,194,0.5); color: #7ab3e0; }
+    .btn-github { background: rgba(192,221,151,0.1); border-color: rgba(192,221,151,0.25); color: var(--green-pale); }
+    .btn-email { background: rgba(239,159,39,0.15); border-color: rgba(239,159,39,0.35); color: var(--amber); }
+    .btn-other { background: rgba(99,153,34,0.15); border-color: rgba(99,153,34,0.35); color: var(--green-bright); }
+    .btn-location { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
+    .about-me-full { display: block; text-align: center; padding: 6px; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); text-decoration: none; border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px; transition: background 0.2s; }
+    .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
+
+    /* MAIN */
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; }
+
+    .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
+    .breadcrumb a { color: var(--green-light); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--green-pale); }
+    .breadcrumb span { margin: 0 6px; }
+
+    /* EVENT HEADER */
+    .event-header {
+      background: rgba(59,109,17,0.08);
+      border: 0.5px solid rgba(99,153,34,0.2);
+      border-radius: 14px;
+      padding: 2rem 2.5rem;
+      margin-bottom: 2.5rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .event-header-left {}
+    .event-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.5rem; }
+    .event-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,4vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; margin-bottom: 0.5rem; }
+    .event-date { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin-bottom: 1rem; }
+    .event-desc { font-size: 13px; color: rgba(192,221,151,0.7); max-width: 560px; line-height: 1.7; }
+    .event-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.25rem; }
+    .event-link-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 18px; border-radius: 8px;
+      font-family: 'Caveat', cursive; font-size: 15px;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .event-link-primary { background: rgba(99,153,34,0.2); border: 0.5px solid var(--green-light); color: var(--green-pale); }
+    .event-link-primary:hover { background: rgba(99,153,34,0.35); }
+    .event-link-secondary { background: rgba(239,159,39,0.1); border: 0.5px solid rgba(239,159,39,0.4); color: var(--amber); }
+    .event-link-secondary:hover { background: rgba(239,159,39,0.2); }
+    .event-badge {
+      background: rgba(59,109,17,0.15);
+      border: 0.5px solid rgba(99,153,34,0.25);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      min-width: 180px;
+      text-align: center;
+    }
+    .event-badge-icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+    .event-badge-label { font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); letter-spacing: 1px; text-transform: uppercase; }
+    .event-badge-value { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--green-pale); }
+
+    /* SECTION TITLE */
+    .section-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
+    .section-divider { height: 0.5px; background: rgba(99,153,34,0.15); margin-bottom: 1.5rem; }
+
+    /* VENDOR GRID */
+    .vendor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .vendor-card {
+      background: rgba(59,109,17,0.08);
+      border: 0.5px solid rgba(99,153,34,0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .vendor-card:hover {
+      border-color: var(--green-light);
+      background: rgba(59,109,17,0.15);
+      transform: translateY(-2px);
+    }
+    .vendor-card-day { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); }
+    .vendor-card-name { font-family: 'Caveat', cursive; font-size: 1.5rem; font-weight: 700; color: var(--green-pale); }
+    .vendor-card-time { font-size: 12px; color: rgba(192,221,151,0.5); }
+    .vendor-card-footer {
+      margin-top: auto;
+      padding-top: 0.75rem;
+      border-top: 0.5px solid rgba(99,153,34,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .vendor-card-tag { font-size: 11px; color: var(--green-light); letter-spacing: 0.5px; }
+    .vendor-card-arrow { color: var(--green-bright); font-size: 14px; }
+
+    footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
+    footer a { color: var(--green-bright); text-decoration: none; }
+    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420">
+      <rect width="680" height="420" rx="12" fill="#173404"/>
+      <circle cx="460" cy="130" r="32" fill="#FAC775" opacity="0.22"/>
+      <circle cx="460" cy="130" r="19" fill="#FAEEDA" opacity="0.65"/>
+      <circle cx="460" cy="130" r="11" fill="#FAEEDA" opacity="0.95"/>
+      <g stroke="#FAC775" stroke-linecap="round" opacity="0.4">
+        <line x1="460" y1="103" x2="460" y2="113" stroke-width="1.8"/>
+        <line x1="432" y1="111" x2="438" y2="118" stroke-width="1.5"/>
+        <line x1="418" y1="130" x2="428" y2="130" stroke-width="1.5"/>
+        <line x1="432" y1="149" x2="438" y2="142" stroke-width="1.5"/>
+        <line x1="488" y1="103" x2="482" y2="113" stroke-width="1.5"/>
+        <line x1="492" y1="130" x2="482" y2="130" stroke-width="1.5"/>
+        <line x1="488" y1="149" x2="482" y2="142" stroke-width="1.5"/>
+      </g>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208 L680,265 Z" fill="#3B6D11"/>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208" fill="none" stroke="#97C459" stroke-width="3" stroke-linecap="round"/>
+      <g fill="#27500A">
+        <polygon points="68,268 80,233 92,268"/><polygon points="74,248 80,230 86,248"/>
+        <polygon points="96,268 110,244 124,268"/><polygon points="103,256 110,241 117,256"/>
+        <polygon points="490,268 504,236 518,268"/><polygon points="497,250 504,233 511,250"/>
+        <polygon points="544,268 556,250 568,268"/><polygon points="550,260 556,247 562,260"/>
+      </g>
+      <rect x="0" y="265" width="680" height="5" fill="#27500A"/>
+      <text x="340" y="334" text-anchor="middle" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="#C0DD97" letter-spacing="3">Mountain</text>
+      <text x="340" y="374" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="400" fill="#97C459" letter-spacing="3">Modulation</text>
+    </svg>
+    <div class="nav-logo-text"><span class="t1">Mountain</span><span class="t2">Modulation</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html#about">About</a>
+    <a href="index.html#blog">Blog</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="sb-link">Home</a>
+    <a href="index.html#blog" class="sb-link">Blog</a>
+    <a href="index.html#about" class="sb-link">About</a>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Certifications <span class="arr">&#9658;</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2 open" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
+      <div class="sb-c2 open">
+        <a href="jncia-junos.html" class="sb-l3">JNCIA-Junos</a>
+        <a href="jncia-mistai.html" class="sb-l3">JNCIA-MistAI</a>
+        <a href="jncis-mistai-wireless.html" class="sb-l3">JNCIS-MistAI-Wireless</a>
+        <a href="jncis-mistai-wired.html" class="sb-l3">JNCIS-MistAI-Wired</a>
+        <a href="automating-mist-ai.html" class="sb-l3">Automating Mist AI Enterprise</a>
+      </div>
+      <button class="sb-h2" onclick="tog(this)">CWNP <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="cwna.html" class="sb-l3">CWNA</a></div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Coming Soon</a></div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Networking <span class="arr">&#9658;</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">RF</a><a href="#" class="sb-l3">Automation</a><a href="#" class="sb-l3">Switch</a></div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2">
+        <button class="sb-h3" onclick="tog(this)">Panorama <span class="arr">&#9658;</span></button>
+        <div class="sb-c3"><a href="#" class="sb-l4">CLI</a></div>
+        <a href="#" class="sb-l3">Firewalls</a>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1 open" onclick="tog(this)">Tech Field Day <span class="arr">&#9658;</span></button>
+    <div class="sb-c1 open">
+      <button class="sb-h2 open" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
+      <div class="sb-c2 open">
+        <a href="mfd14.html" class="sb-l3 active">MFD14</a>
+        <button class="sb-h3 open" onclick="tog(this)">Vendors <span class="arr">&#9658;</span></button>
+        <div class="sb-c3 open">
+          <a href="mfd14-hpe.html" class="sb-l4">HPE</a>
+          <a href="mfd14-cisco.html" class="sb-l4">Cisco</a>
+          <a href="mfd14-celona.html" class="sb-l4">Celona</a>
+          <a href="mfd14-wyebot.html" class="sb-l4">Wyebot</a>
+          <a href="mfd14-onelayer.html" class="sb-l4">OneLayer</a>
+          <a href="mfd14-ubiquiti.html" class="sb-l4">Ubiquiti</a>
+          <a href="mfd14-fortinet.html" class="sb-l4">Fortinet</a>
+          <a href="mfd14-arista.html" class="sb-l4">Arista</a>
+          <a href="mfd14-nile.html" class="sb-l4">Nile</a>
+        </div>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Tools &amp; Lab <span class="arr">&#9658;</span></button>
+    <div class="sb-c1"><a href="#" class="sb-l2">Scripts</a><a href="#" class="sb-l2">Lab Builds</a></div>
+    <div class="sb-divider"></div>
+    <div class="about-me-card">
+      <div class="about-me-header">
+        <div class="about-me-avatar">MM</div>
+        <div><div class="about-me-name">Your Name</div><div class="about-me-title">Your Title</div><div class="about-me-company">@ Your Company</div></div>
+      </div>
+      <div class="about-me-buttons">
+        <a href="#" class="about-btn btn-linkedin">&#128188; LinkedIn</a>
+        <a href="https://github.com/MountainModulation" target="_blank" class="about-btn btn-github">&#128025; GitHub</a>
+        <a href="#" class="about-btn btn-email">&#9993;&#65039; Email</a>
+        <a href="#" class="about-btn btn-other">&#128279; Other</a>
+        <span class="about-btn btn-location">&#128205; United States</span>
+      </div>
+      <a href="index.html#about" class="about-me-full">&#128100; View Full Profile &#8594;</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span>
+      Tech Field Day<span>›</span>
+      Mobility Field Day<span>›</span>
+      MFD14
+    </div>
+
+    <!-- EVENT HEADER -->
+    <div class="event-header">
+      <div class="event-header-left">
+        <p class="event-label">Mobility Field Day</p>
+        <h1 class="event-title">MFD14</h1>
+        <p class="event-date">&#128197; May 6–8, 2026 &nbsp;·&nbsp; Silicon Valley</p>
+        <p class="event-desc">Mobility Field Day 14 brought together wireless networking experts and industry vendors for three days of technical presentations. I attended as a delegate, representing Mountain Modulation.</p>
+        <div class="event-links">
+          <a href="https://techfieldday.com/event/mfd14/" target="_blank" class="event-link-btn event-link-primary">&#128279; Official Event Page</a>
+          <a href="https://youtube.com/playlist?list=PLinuRwpnsHaekbVvLhH0Wok334leNekun" target="_blank" class="event-link-btn event-link-secondary">&#9654;&#65039; Watch on YouTube</a>
+        </div>
+      </div>
+      <div class="event-badge">
+        <span class="event-badge-icon">&#127891;</span>
+        <div class="event-badge-label">Delegate</div>
+        <div class="event-badge-value">Megan Sorensen</div>
+      </div>
+    </div>
+
+    <!-- VENDOR GRID -->
+    <div class="section-title">&#127970; Vendor Presentations</div>
+    <div class="section-divider"></div>
+
+    <div class="vendor-grid">
+
+      <a href="mfd14-hpe.html" class="vendor-card">
+        <div class="vendor-card-day">Wednesday, May 6</div>
+        <div class="vendor-card-name">HPE</div>
+        <div class="vendor-card-time">7:30 – 11:30 AM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-cisco.html" class="vendor-card">
+        <div class="vendor-card-day">Wednesday, May 6</div>
+        <div class="vendor-card-name">Cisco</div>
+        <div class="vendor-card-time">1:00 – 2:30 PM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-celona.html" class="vendor-card">
+        <div class="vendor-card-day">Wednesday, May 6</div>
+        <div class="vendor-card-name">Celona</div>
+        <div class="vendor-card-time">3:30 – 5:00 PM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-wyebot.html" class="vendor-card">
+        <div class="vendor-card-day">Thursday, May 7</div>
+        <div class="vendor-card-name">Wyebot</div>
+        <div class="vendor-card-time">8:00 – 9:00 AM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-onelayer.html" class="vendor-card">
+        <div class="vendor-card-day">Thursday, May 7</div>
+        <div class="vendor-card-name">OneLayer</div>
+        <div class="vendor-card-time">10:00 – 11:30 AM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-ubiquiti.html" class="vendor-card">
+        <div class="vendor-card-day">Thursday, May 7</div>
+        <div class="vendor-card-name">Ubiquiti</div>
+        <div class="vendor-card-time">1:00 – 2:30 PM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-fortinet.html" class="vendor-card">
+        <div class="vendor-card-day">Thursday, May 7</div>
+        <div class="vendor-card-name">Fortinet</div>
+        <div class="vendor-card-time">3:30 – 5:00 PM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-arista.html" class="vendor-card">
+        <div class="vendor-card-day">Friday, May 8</div>
+        <div class="vendor-card-name">Arista</div>
+        <div class="vendor-card-time">8:00 – 9:30 AM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+      <a href="mfd14-nile.html" class="vendor-card">
+        <div class="vendor-card-day">Friday, May 8</div>
+        <div class="vendor-card-name">Nile</div>
+        <div class="vendor-card-time">10:30 AM – 12:00 PM</div>
+        <div class="vendor-card-footer">
+          <span class="vendor-card-tag">My Notes</span>
+          <span class="vendor-card-arrow">&#8599;</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+</div>
+
+<footer>
+  <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
+</footer>
+
+<script>
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+</script>
+</body>
+</html>

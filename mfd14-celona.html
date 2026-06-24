@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Celona at MFD14 | Mountain Modulation</title>
+  <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #173404; --green-mid: #3B6D11; --green-light: #639922;
+      --green-bright: #97C459; --green-pale: #C0DD97; --cream: #FAEEDA;
+      --amber: #EF9F27; --sidebar-w: 260px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--green-dark); color: var(--cream); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; min-height: 100vh; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 0.5rem 2rem; background: rgba(15,28,4,0.97); backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(99,153,34,0.3); gap: 1.5rem; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo svg { height: 80px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text .t1 { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; color: var(--green-pale); letter-spacing: 1px; }
+    .nav-logo-text .t2 { font-family: 'Caveat', cursive; font-size: 18px; font-weight: 400; color: var(--green-bright); letter-spacing: 2px; }
+    .nav-right { margin-left: auto; display: flex; gap: 1.5rem; }
+    .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-right a:hover { color: var(--cream); }
+    .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: fixed; top: 90px; left: 0; bottom: 0; overflow-y: auto; background: rgba(10,20,3,0.97); border-right: 0.5px solid rgba(99,153,34,0.2); padding: 1.25rem 0 2rem; }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(99,153,34,0.2); border-radius: 2px; }
+    .sb-link { display: block; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); text-decoration: none; transition: color 0.2s; }
+    .sb-link:hover { color: var(--green-pale); }
+    .sb-divider { height: 0.5px; background: rgba(99,153,34,0.15); margin: 0.6rem 1.25rem; }
+    .sb-h1 { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h1:hover { color: var(--green-pale); }
+    .sb-h1 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h1.open .arr { transform: rotate(90deg); }
+    .sb-c1 { display: none; } .sb-c1.open { display: block; }
+    .sb-l2 { display: block; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l2:hover { color: var(--cream); background: rgba(59,109,17,0.14); }
+    .sb-h2 { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h2:hover { color: var(--cream); }
+    .sb-h2 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h2.open .arr { transform: rotate(90deg); }
+    .sb-c2 { display: none; } .sb-c2.open { display: block; }
+    .sb-l3 { display: block; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l3:hover { color: var(--cream); background: rgba(59,109,17,0.1); }
+    .sb-l3.active { color: var(--green-pale); border-left: 2px solid var(--green-light); padding-left: calc(3rem - 2px); }
+    .sb-h3 { display: flex; align-items: center; justify-content: space-between; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h3 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h3.open .arr { transform: rotate(90deg); }
+    .sb-c3 { display: none; } .sb-c3.open { display: block; }
+    .sb-l4 { display: block; padding: 0.28rem 1.25rem 0.28rem 3.75rem; font-family: 'Caveat', cursive; font-size: 14px; color: rgba(192,221,151,0.4); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l4:hover { color: var(--cream); background: rgba(59,109,17,0.08); }
+    .about-me-card { margin: 0.5rem 1rem 1rem; background: rgba(59,109,17,0.12); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 12px; padding: 1rem; }
+    .about-me-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
+    .about-me-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(99,153,34,0.3); border: 1px solid rgba(99,153,34,0.5); display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 16px; font-weight: 700; color: var(--green-pale); flex-shrink: 0; }
+    .about-me-name { font-family: 'Caveat', cursive; font-size: 17px; font-weight: 700; color: var(--green-pale); }
+    .about-me-title { font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); }
+    .about-me-company { font-family: 'Caveat', cursive; font-size: 12px; color: rgba(192,221,151,0.5); }
+    .about-me-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.75rem; }
+    .about-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-family: 'Caveat', cursive; font-size: 14px; text-decoration: none; border: 0.5px solid transparent; transition: opacity 0.2s; cursor: pointer; }
+    .about-btn:hover { opacity: 0.8; }
+    .btn-linkedin { background: rgba(10,102,194,0.2); border-color: rgba(10,102,194,0.5); color: #7ab3e0; }
+    .btn-github { background: rgba(192,221,151,0.1); border-color: rgba(192,221,151,0.25); color: var(--green-pale); }
+    .btn-email { background: rgba(239,159,39,0.15); border-color: rgba(239,159,39,0.35); color: var(--amber); }
+    .btn-other { background: rgba(99,153,34,0.15); border-color: rgba(99,153,34,0.35); color: var(--green-bright); }
+    .btn-location { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
+    .about-me-full { display: block; text-align: center; padding: 6px; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); text-decoration: none; border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px; transition: background 0.2s; }
+    .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; max-width: 920px; }
+    .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
+    .breadcrumb a { color: var(--green-light); text-decoration: none; }
+    .breadcrumb span { margin: 0 6px; }
+    .page-title-row { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
+    .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
+    .page-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,5vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
+    .block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
+    .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); flex-wrap: wrap; gap: 0.75rem; }
+    .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); display: flex; align-items: center; gap: 8px; }
+    .btn-edit { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-edit:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
+    .edit-mode .btn-edit { display: inline-flex; }
+    .btn-add-small { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-add-small:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
+    .edit-mode .btn-add-small { display: inline-flex; }
+    .markdown-editor { display: none; width: 100%; min-height: 320px; padding: 1rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: 'Inter', monospace; font-size: 13px; resize: vertical; outline: none; line-height: 1.7; }
+    .markdown-editor:focus { border-color: var(--green-light); }
+    .editor-actions { display: none; gap: 10px; margin-top: 0.75rem; }
+    .editor-actions.visible { display: flex; }
+    .btn-save { padding: 0.5rem 1.4rem; background: var(--green-mid); border: none; border-radius: 8px; color: var(--cream); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+    .btn-save:hover { background: var(--green-light); }
+    .btn-cancel { padding: 0.5rem 1.2rem; background: transparent; border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: rgba(192,221,151,0.6); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
+    .btn-cancel:hover { border-color: var(--green-light); color: var(--cream); }
+    .markdown-body { color: rgba(192,221,151,0.88); font-size: 14px; line-height: 1.85; }
+    .markdown-body h1 { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--green-pale); margin: 1.5rem 0 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); padding-bottom: 0.4rem; }
+    .markdown-body h2 { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--green-pale); margin: 1.25rem 0 0.5rem; }
+    .markdown-body h3 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin: 1rem 0 0.4rem; }
+    .markdown-body p { margin-bottom: 0.85rem; }
+    .markdown-body ul, .markdown-body ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .markdown-body li { margin-bottom: 0.3rem; }
+    .markdown-body code { background: rgba(99,153,34,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--green-pale); }
+    .markdown-body pre { background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .markdown-body pre code { background: none; padding: 0; color: var(--green-bright); font-size: 13px; }
+    .markdown-body blockquote { border-left: 3px solid var(--green-light); padding-left: 1rem; margin: 1rem 0; color: rgba(192,221,151,0.6); font-style: italic; }
+    .markdown-body a { color: var(--green-bright); }
+    .markdown-body strong { color: var(--cream); font-weight: 500; }
+    .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; }
+    .markdown-body th { background: rgba(59,109,17,0.2); color: var(--green-pale); padding: 8px 12px; text-align: left; border: 0.5px solid rgba(99,153,34,0.2); font-family: 'Caveat', cursive; font-size: 15px; }
+    .markdown-body td { padding: 7px 12px; border: 0.5px solid rgba(99,153,34,0.15); color: rgba(192,221,151,0.8); }
+    .notes-placeholder { color: rgba(192,221,151,0.25); font-size: 14px; text-align: center; padding: 2rem 0; }
+    .resource-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .resource-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem 1rem; background: rgba(23,52,4,0.4); border: 0.5px solid rgba(99,153,34,0.15); border-radius: 8px; transition: border-color 0.2s; }
+    .resource-row:hover { border-color: rgba(99,153,34,0.35); }
+    .resource-row-info { flex: 1; min-width: 0; }
+    .resource-row-title { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--green-pale); margin-bottom: 2px; }
+    .resource-row-url { font-size: 11px; color: rgba(99,153,34,0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .resource-row-note { font-size: 12px; color: rgba(192,221,151,0.6); margin-top: 4px; }
+    .resource-row-actions { display: flex; gap: 5px; flex-shrink: 0; }
+    .resource-open { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 5px; background: rgba(99,153,34,0.12); border: 0.5px solid rgba(99,153,34,0.25); font-size: 12px; color: var(--green-bright); text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .resource-open:hover { background: rgba(99,153,34,0.22); }
+    .btn-icon { padding: 3px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; border: 0.5px solid transparent; background: none; display: none; }
+    .edit-mode .btn-icon { display: inline-block; }
+    .btn-del { color: rgba(239,100,100,0.6); border-color: rgba(239,100,100,0.15); }
+    .btn-del:hover { background: rgba(239,100,100,0.08); }
+    .res-form { display: none; background: rgba(10,20,3,0.5); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 10px; padding: 1.25rem; margin-top: 1rem; gap: 0.6rem; flex-direction: column; }
+    .res-form.visible { display: flex; }
+    .res-form input, .res-form textarea { width: 100%; padding: 0.5rem 0.8rem; background: rgba(23,52,4,0.8); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 7px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+    .res-form input:focus, .res-form textarea:focus { border-color: var(--green-light); }
+    .res-form textarea { min-height: 70px; resize: vertical; }
+    .res-form label { font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); }
+    .res-form-actions { display: flex; gap: 8px; margin-top: 0.25rem; }
+    .res-empty { color: rgba(192,221,151,0.25); font-size: 13px; text-align: center; padding: 1.5rem 0; }
+    .exam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .exam-field { display: flex; flex-direction: column; gap: 4px; }
+    .exam-field label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); }
+    .exam-field-value { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--cream); }
+    .exam-field-value a { color: var(--amber); text-decoration: none; }
+    .exam-field-value a:hover { text-decoration: underline; }
+    .exam-bullets { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 0.5px solid rgba(99,153,34,0.15); }
+    .exam-bullets-title { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--green-pale); margin-bottom: 0.75rem; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .bullet-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(192,221,151,0.8); }
+    .bullet-list li::before { content: '▸'; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
+    .exam-edit-form { display: none; flex-direction: column; gap: 0.75rem; }
+    .exam-edit-form.visible { display: flex; }
+    .exam-edit-form input, .exam-edit-form textarea { width: 100%; padding: 0.5rem 0.8rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 7px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+    .exam-edit-form input:focus, .exam-edit-form textarea:focus { border-color: var(--green-light); }
+    .exam-edit-form label { font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); }
+    .exam-edit-form textarea { min-height: 90px; resize: vertical; }
+    .exam-edit-form small { font-size: 11px; color: rgba(99,153,34,0.5); }
+    .exam-display { display: block; }
+
+    /* LOCK BUTTON */
+    .lock-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(59,109,17,0.3); border: 0.5px solid rgba(99,153,34,0.4); color: var(--green-bright); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; transition: background 0.2s; }
+    .lock-btn:hover { background: rgba(59,109,17,0.5); }
+    .lock-btn.unlocked { background: rgba(239,159,39,0.2); border-color: rgba(239,159,39,0.5); color: var(--amber); }
+
+    /* EDIT MODE BANNER */
+    .edit-banner { display: none; position: fixed; top: 90px; left: var(--sidebar-w); right: 0; background: rgba(239,159,39,0.15); border-bottom: 0.5px solid rgba(239,159,39,0.3); padding: 0.5rem 1.5rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--amber); z-index: 100; text-align: center; }
+    .edit-mode .edit-banner { display: block; }
+
+    .save-banner { position: fixed; bottom: 4.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
+    .save-banner.show { display: block; }
+
+    footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
+    footer a { color: var(--green-bright); text-decoration: none; }
+    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .exam-grid { grid-template-columns: 1fr; } .edit-banner { left: 0; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420">
+      <rect width="680" height="420" rx="12" fill="#173404"/>
+      <circle cx="460" cy="130" r="32" fill="#FAC775" opacity="0.22"/>
+      <circle cx="460" cy="130" r="19" fill="#FAEEDA" opacity="0.65"/>
+      <circle cx="460" cy="130" r="11" fill="#FAEEDA" opacity="0.95"/>
+      <g stroke="#FAC775" stroke-linecap="round" opacity="0.4">
+        <line x1="460" y1="103" x2="460" y2="113" stroke-width="1.8"/>
+        <line x1="432" y1="111" x2="438" y2="118" stroke-width="1.5"/>
+        <line x1="418" y1="130" x2="428" y2="130" stroke-width="1.5"/>
+        <line x1="432" y1="149" x2="438" y2="142" stroke-width="1.5"/>
+        <line x1="488" y1="103" x2="482" y2="113" stroke-width="1.5"/>
+        <line x1="492" y1="130" x2="482" y2="130" stroke-width="1.5"/>
+        <line x1="488" y1="149" x2="482" y2="142" stroke-width="1.5"/>
+      </g>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208 L680,265 Z" fill="#3B6D11"/>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208" fill="none" stroke="#97C459" stroke-width="3" stroke-linecap="round"/>
+      <g fill="#27500A">
+        <polygon points="68,268 80,233 92,268"/><polygon points="74,248 80,230 86,248"/>
+        <polygon points="96,268 110,244 124,268"/><polygon points="103,256 110,241 117,256"/>
+        <polygon points="490,268 504,236 518,268"/><polygon points="497,250 504,233 511,250"/>
+        <polygon points="544,268 556,250 568,268"/><polygon points="550,260 556,247 562,260"/>
+      </g>
+      <rect x="0" y="265" width="680" height="5" fill="#27500A"/>
+      <text x="340" y="334" text-anchor="middle" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="#C0DD97" letter-spacing="3">Mountain</text>
+      <text x="340" y="374" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="400" fill="#97C459" letter-spacing="3">Modulation</text>
+    </svg>
+    <div class="nav-logo-text"><span class="t1">Mountain</span><span class="t2">Modulation</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html#about">About</a>
+    <a href="index.html#blog">Blog</a>
+  </div>
+</nav>
+
+<div class="edit-banner">&#9999;&#65039; Edit mode active — changes save directly to GitHub</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="sb-link">Home</a>
+    <a href="index.html#blog" class="sb-link">Blog</a>
+    <a href="index.html#about" class="sb-link">About</a>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Certifications <span class="arr">&#9658;</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
+      <div class="sb-c2">
+        <a href="jncia-junos.html" class="sb-l3">JNCIA-Junos</a>
+        <a href="jncia-mistai.html" class="sb-l3">JNCIA-MistAI</a>
+        <a href="jncis-mistai-wireless.html" class="sb-l3">JNCIS-MistAI-Wireless</a>
+        <a href="jncis-mistai-wired.html" class="sb-l3">JNCIS-MistAI-Wired</a>
+        <a href="automating-mist-ai.html" class="sb-l3">Automating Mist AI Enterprise</a>
+      </div>
+      <button class="sb-h2" onclick="tog(this)">CWNP <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="cwna.html" class="sb-l3">CWNA</a></div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Coming Soon</a></div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Networking <span class="arr">&#9658;</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">RF</a><a href="#" class="sb-l3">Automation</a><a href="#" class="sb-l3">Switch</a></div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2">
+        <button class="sb-h3" onclick="tog(this)">Panorama <span class="arr">&#9658;</span></button>
+        <div class="sb-c3"><a href="#" class="sb-l4">CLI</a></div>
+        <a href="#" class="sb-l3">Firewalls</a>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1 open" onclick="tog(this)">Tech Field Day <span class="arr">&#9658;</span></button>
+    <div class="sb-c1 open">
+      <button class="sb-h2 open" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
+      <div class="sb-c2 open">
+        <a href="mfd14.html" class="sb-l3">MFD14</a>
+        <button class="sb-h3 open" onclick="tog(this)">Vendors <span class="arr">&#9658;</span></button>
+        <div class="sb-c3 open">
+          <a href="mfd14-hpe.html" class="sb-l4">HPE</a>
+          <a href="mfd14-cisco.html" class="sb-l4">Cisco</a>
+          <a href="mfd14-celona.html" class="sb-l4 active">Celona</a>
+          <a href="mfd14-wyebot.html" class="sb-l4">Wyebot</a>
+          <a href="mfd14-onelayer.html" class="sb-l4">OneLayer</a>
+          <a href="mfd14-ubiquiti.html" class="sb-l4">Ubiquiti</a>
+          <a href="mfd14-fortinet.html" class="sb-l4">Fortinet</a>
+          <a href="mfd14-arista.html" class="sb-l4">Arista</a>
+          <a href="mfd14-nile.html" class="sb-l4">Nile</a>
+        </div>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Tools &amp; Lab <span class="arr">&#9658;</span></button>
+    <div class="sb-c1"><a href="#" class="sb-l2">Scripts</a><a href="#" class="sb-l2">Lab Builds</a></div>
+    <div class="sb-divider"></div>
+    <div class="about-me-card">
+      <div class="about-me-header">
+        <div class="about-me-avatar">MM</div>
+        <div><div class="about-me-name">Your Name</div><div class="about-me-title">Your Title</div><div class="about-me-company">@ Your Company</div></div>
+      </div>
+      <div class="about-me-buttons">
+        <a href="#" class="about-btn btn-linkedin">&#128188; LinkedIn</a>
+        <a href="https://github.com/MountainModulation" target="_blank" class="about-btn btn-github">&#128025; GitHub</a>
+        <a href="#" class="about-btn btn-email">&#9993;&#65039; Email</a>
+        <a href="#" class="about-btn btn-other">&#128279; Other</a>
+        <span class="about-btn btn-location">&#128205; United States</span>
+      </div>
+      <a href="index.html#about" class="about-me-full">&#128100; View Full Profile &#8594;</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>&#8250;</span>
+      <a href="mfd14.html">MFD14</a><span>&#8250;</span>
+      Celona
+    </div>
+
+    <div class="page-title-row">
+      <p class="page-label">Mobility Field Day 14</p>
+      <h1 class="page-title">Celona</h1>
+    </div>
+
+    <!-- PRESENTATION INFO BLOCK -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-title">&#127916; Presentation Info</div>
+      </div>
+      <div class="exam-grid">
+        <div class="exam-field">
+          <label>Date</label>
+          <div class="exam-field-value">Wednesday, May 6</div>
+        </div>
+        <div class="exam-field">
+          <label>Time</label>
+          <div class="exam-field-value">3:30 – 5:00 PM</div>
+        </div>
+        <div class="exam-field">
+          <label>Official TFD Page</label>
+          <div class="exam-field-value"><a href="https://techfieldday.com/appearance/celona-presents-at-mobility-field-day-14/" target="_blank">&#128279; View on TechFieldDay.com</a></div>
+        </div>
+        <div class="exam-field">
+          <label>Event</label>
+          <div class="exam-field-value"><a href="mfd14.html">Mobility Field Day 14</a></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESOURCES -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-title">&#128279; Resources</div>
+        <button class="btn-add-small" onclick="toggleResForm()">&#65291; Add Resource</button>
+      </div>
+      <div class="res-form" id="resForm">
+        <label>Title</label>
+        <input type="text" id="resTitle" placeholder="e.g. Presentation Video"/>
+        <label>URL</label>
+        <input type="url" id="resUrl" placeholder="https://..."/>
+        <label>Notes (optional)</label>
+        <textarea id="resNote" placeholder="Why is this useful?"></textarea>
+        <div class="res-form-actions">
+          <button class="btn-save" onclick="saveResource()">Save</button>
+          <button class="btn-cancel" onclick="toggleResForm()">Cancel</button>
+        </div>
+      </div>
+      <div class="resource-list" id="resList"></div>
+      <div class="res-empty" id="resEmpty">No resources yet</div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="block">
+      <div class="block-header">
+        <div class="block-title">&#128221; My Notes</div>
+        <button class="btn-edit" onclick="toggleNotesEditor()">&#9999;&#65039; Edit Notes</button>
+      </div>
+      <textarea class="markdown-editor" id="notesEditor" placeholder="Your notes on the Celona presentation..."></textarea>
+      <div class="editor-actions" id="notesActions">
+        <button class="btn-save" onclick="saveNotes()">Save Notes</button>
+        <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
+      </div>
+      <div class="markdown-body" id="notesDisplay">
+        <p class="notes-placeholder">No notes yet.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()" title="Toggle edit mode">&#128274;</button>
+<div class="save-banner" id="saveBanner">&#10003; Saved</div>
+
+<footer>
+  <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
+</footer>
+
+<script>
+  const REPO = 'MountainModulation/mountainmodulation.github.io';
+  const FILE = 'data/mfd14-celona.json';
+  let pat     = sessionStorage.getItem('mm_pat') || '';
+  let data    = { resources: [], notes: '' };
+  let fileSha = '';
+
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function banner(msg) {
+    const b = document.getElementById('saveBanner');
+    b.textContent = msg; b.classList.add('show');
+    setTimeout(() => b.classList.remove('show'), 2500);
+  }
+
+  async function loadData() {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+        headers: pat ? { Authorization: `token ${pat}` } : {}
+      });
+      if (!r.ok) return;
+      const json = await r.json();
+      fileSha = json.sha;
+      data = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    } catch(e) {}
+    renderAll();
+  }
+
+  async function saveData() {
+    if (!pat) { alert('Enter your PAT first by clicking the lock icon.'); return; }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const body = { message: 'Update mfd14-celona data', content, sha: fileSha };
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (r.ok) {
+      const json = await r.json();
+      fileSha = json.content.sha;
+      banner('&#10003; Saved to GitHub — live in ~60s');
+    } else {
+      banner('&#10007; Save failed — check your PAT');
+    }
+  }
+
+  function toggleEditMode() {
+    if (!pat) {
+      const token = prompt('Enter your GitHub Personal Access Token:');
+      if (!token) return;
+      pat = token.trim();
+      sessionStorage.setItem('mm_pat', pat);
+    } else {
+      pat = '';
+      sessionStorage.removeItem('mm_pat');
+      document.body.classList.remove('edit-mode');
+      document.getElementById('lockBtn').classList.remove('unlocked');
+      document.getElementById('lockBtn').textContent = '&#128274;';
+      return;
+    }
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '&#128275;';
+    banner('&#10003; Edit mode unlocked');
+  }
+
+  function toggleResForm() {
+    const f = document.getElementById('resForm');
+    f.classList.toggle('visible');
+    if (!f.classList.contains('visible')) {
+      document.getElementById('resTitle').value='';
+      document.getElementById('resUrl').value='';
+      document.getElementById('resNote').value='';
+    }
+  }
+  async function saveResource() {
+    const title = document.getElementById('resTitle').value.trim();
+    const url   = document.getElementById('resUrl').value.trim();
+    const note  = document.getElementById('resNote').value.trim();
+    if (!title && !url) return;
+    data.resources.unshift({ id: Date.now(), title: title||url, url, note });
+    await saveData(); renderResources(); toggleResForm();
+  }
+  async function deleteResource(id) {
+    if (!confirm('Delete this resource?')) return;
+    data.resources = data.resources.filter(r=>r.id!==id);
+    await saveData(); renderResources();
+  }
+  function renderResources() {
+    const list  = document.getElementById('resList');
+    const empty = document.getElementById('resEmpty');
+    if (!data.resources.length) { list.innerHTML=''; empty.style.display='block'; return; }
+    empty.style.display='none';
+    list.innerHTML = data.resources.map(r=>`
+      <div class="resource-row">
+        <div class="resource-row-info">
+          <div class="resource-row-title">${esc(r.title)}</div>
+          ${r.url  ? `<div class="resource-row-url">${esc(r.url)}</div>` : ''}
+          ${r.note ? `<div class="resource-row-note">${esc(r.note)}</div>` : ''}
+        </div>
+        <div class="resource-row-actions">
+          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-open">&#8599; Open</a>` : ''}
+          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">&#128465;</button>
+        </div>
+      </div>`).join('');
+  }
+
+  function toggleNotesEditor() {
+    const ed = document.getElementById('notesEditor');
+    const ac = document.getElementById('notesActions');
+    const ds = document.getElementById('notesDisplay');
+    const editing = ed.style.display==='block';
+    ed.style.display = editing ? 'none'  : 'block';
+    ac.style.display = editing ? 'none'  : 'flex';
+    ds.style.display = editing ? 'block' : 'none';
+    if (!editing) ed.value = data.notes||'';
+  }
+  async function saveNotes() {
+    data.notes = document.getElementById('notesEditor').value;
+    await saveData(); renderNotes(); toggleNotesEditor();
+  }
+  function cancelNotes() { toggleNotesEditor(); }
+  function renderNotes() {
+    const el = document.getElementById('notesDisplay');
+    el.innerHTML = (data.notes||'').trim()
+      ? marked.parse(data.notes)
+      : '<p class="notes-placeholder">No notes yet.</p>';
+  }
+
+  function renderAll() { renderResources(); renderNotes(); }
+
+  if (pat) {
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '&#128275;';
+  }
+
+  loadData();
+</script>
+</body>
+</html>
