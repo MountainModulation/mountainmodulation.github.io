@@ -337,7 +337,7 @@
   </main>
 </div>
 
-<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()">&#128274;</button>
+<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()">🔒</button>
 <div class="save-banner" id="saveBanner">&#10003; Saved</div>
 <footer>
   <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
@@ -393,12 +393,12 @@
       pat = ''; sessionStorage.removeItem('mm_pat');
       document.body.classList.remove('edit-mode');
       document.getElementById('lockBtn').classList.remove('unlocked');
-      document.getElementById('lockBtn').textContent = '&#128274;';
+      document.getElementById('lockBtn').textContent = '🔒';
       return;
     }
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent = '&#128275;';
+    document.getElementById('lockBtn').textContent = '🔓';
     banner('&#10003; Edit mode unlocked');
   }
 
@@ -472,7 +472,7 @@
   if (pat) {
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent='&#128275;';
+    document.getElementById('lockBtn').textContent='🔓';
   }
   loadData();
 </script>
