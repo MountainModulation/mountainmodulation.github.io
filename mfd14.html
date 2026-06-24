@@ -15,7 +15,6 @@
     }
     html { scroll-behavior: smooth; }
     body { background: var(--green-dark); color: var(--cream); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; min-height: 100vh; }
-
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 0.5rem 2rem; background: rgba(15,28,4,0.97); backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(99,153,34,0.3); gap: 1.5rem; }
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
     .nav-logo svg { height: 80px; width: auto; }
@@ -25,9 +24,7 @@
     .nav-right { margin-left: auto; display: flex; gap: 1.5rem; }
     .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; transition: color 0.2s; }
     .nav-right a:hover { color: var(--cream); }
-
     .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
-
     .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: fixed; top: 90px; left: 0; bottom: 0; overflow-y: auto; background: rgba(10,20,3,0.97); border-right: 0.5px solid rgba(99,153,34,0.2); padding: 1.25rem 0 2rem; }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-thumb { background: rgba(99,153,34,0.2); border-radius: 2px; }
@@ -49,7 +46,7 @@
     .sb-l3 { display: block; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); text-decoration: none; transition: color 0.2s, background 0.2s; }
     .sb-l3:hover { color: var(--cream); background: rgba(59,109,17,0.1); }
     .sb-l3.active { color: var(--green-pale); border-left: 2px solid var(--green-light); padding-left: calc(3rem - 2px); }
-    .sb-h3 { display: flex; align-items: center; justify-content: space-between; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; }
+    .sb-h3 { display: flex; align-items: center; justify-content: space-between; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
     .sb-h3 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
     .sb-h3.open .arr { transform: rotate(90deg); }
     .sb-c3 { display: none; } .sb-c3.open { display: block; }
@@ -71,164 +68,140 @@
     .btn-location { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
     .about-me-full { display: block; text-align: center; padding: 6px; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); text-decoration: none; border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px; transition: background 0.2s; }
     .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
-
-    /* MAIN */
-    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; }
-
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; max-width: 920px; }
     .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
     .breadcrumb a { color: var(--green-light); text-decoration: none; }
     .breadcrumb a:hover { color: var(--green-pale); }
     .breadcrumb span { margin: 0 6px; }
-
-    /* EVENT HEADER */
-    .event-header {
-      background: rgba(59,109,17,0.08);
-      border: 0.5px solid rgba(99,153,34,0.2);
-      border-radius: 14px;
-      padding: 2rem 2.5rem;
-      margin-bottom: 2.5rem;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
+    .block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
+    .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); flex-wrap: wrap; gap: 0.75rem; }
+    .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); display: flex; align-items: center; gap: 8px; }
+    .btn-edit { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-edit:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
+    .edit-mode .btn-edit { display: inline-flex; }
+    .btn-add-small { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-add-small:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
+    .edit-mode .btn-add-small { display: inline-flex; }
+    .markdown-editor { display: none; width: 100%; min-height: 320px; padding: 1rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: 'Inter', monospace; font-size: 13px; resize: vertical; outline: none; line-height: 1.7; }
+    .markdown-editor:focus { border-color: var(--green-light); }
+    .editor-actions { display: none; gap: 10px; margin-top: 0.75rem; }
+    .editor-actions.visible { display: flex; }
+    .btn-save { padding: 0.5rem 1.4rem; background: var(--green-mid); border: none; border-radius: 8px; color: var(--cream); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+    .btn-save:hover { background: var(--green-light); }
+    .btn-cancel { padding: 0.5rem 1.2rem; background: transparent; border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: rgba(192,221,151,0.6); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
+    .btn-cancel:hover { border-color: var(--green-light); color: var(--cream); }
+    .markdown-body { color: rgba(192,221,151,0.88); font-size: 14px; line-height: 1.85; }
+    .markdown-body h1 { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--green-pale); margin: 1.5rem 0 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); padding-bottom: 0.4rem; }
+    .markdown-body h2 { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--green-pale); margin: 1.25rem 0 0.5rem; }
+    .markdown-body h3 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin: 1rem 0 0.4rem; }
+    .markdown-body p { margin-bottom: 0.85rem; }
+    .markdown-body ul, .markdown-body ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .markdown-body li { margin-bottom: 0.3rem; }
+    .markdown-body code { background: rgba(99,153,34,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--green-pale); }
+    .markdown-body pre { background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .markdown-body pre code { background: none; padding: 0; color: var(--green-bright); font-size: 13px; }
+    .markdown-body blockquote { border-left: 3px solid var(--green-light); padding-left: 1rem; margin: 1rem 0; color: rgba(192,221,151,0.6); font-style: italic; }
+    .markdown-body a { color: var(--green-bright); }
+    .markdown-body strong { color: var(--cream); font-weight: 500; }
+    .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; }
+    .markdown-body th { background: rgba(59,109,17,0.2); color: var(--green-pale); padding: 8px 12px; text-align: left; border: 0.5px solid rgba(99,153,34,0.2); font-family: 'Caveat', cursive; font-size: 15px; }
+    .markdown-body td { padding: 7px 12px; border: 0.5px solid rgba(99,153,34,0.15); color: rgba(192,221,151,0.8); }
+    .notes-placeholder { color: rgba(192,221,151,0.25); font-size: 14px; text-align: center; padding: 2rem 0; }
+    .resource-list { display: flex; flex-direction: column; gap: 0.75rem; }
+    .resource-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem 1rem; background: rgba(23,52,4,0.4); border: 0.5px solid rgba(99,153,34,0.15); border-radius: 8px; transition: border-color 0.2s; }
+    .resource-row:hover { border-color: rgba(99,153,34,0.35); }
+    .resource-row-info { flex: 1; min-width: 0; }
+    .resource-row-title { font-family: 'Caveat', cursive; font-size: 1rem; color: var(--green-pale); margin-bottom: 2px; }
+    .resource-row-url { font-size: 11px; color: rgba(99,153,34,0.5); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .resource-row-note { font-size: 12px; color: rgba(192,221,151,0.6); margin-top: 4px; }
+    .resource-row-actions { display: flex; gap: 5px; flex-shrink: 0; }
+    .resource-open { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 5px; background: rgba(99,153,34,0.12); border: 0.5px solid rgba(99,153,34,0.25); font-size: 12px; color: var(--green-bright); text-decoration: none; transition: background 0.2s; white-space: nowrap; }
+    .resource-open:hover { background: rgba(99,153,34,0.22); }
+    .btn-icon { padding: 3px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; border: 0.5px solid transparent; background: none; display: none; }
+    .edit-mode .btn-icon { display: inline-block; }
+    .btn-del { color: rgba(239,100,100,0.6); border-color: rgba(239,100,100,0.15); }
+    .btn-del:hover { background: rgba(239,100,100,0.08); }
+    .res-form { display: none; background: rgba(10,20,3,0.5); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 10px; padding: 1.25rem; margin-top: 1rem; gap: 0.6rem; flex-direction: column; }
+    .res-form.visible { display: flex; }
+    .res-form input, .res-form textarea { width: 100%; padding: 0.5rem 0.8rem; background: rgba(23,52,4,0.8); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 7px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+    .res-form input:focus, .res-form textarea:focus { border-color: var(--green-light); }
+    .res-form textarea { min-height: 70px; resize: vertical; }
+    .res-form label { font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); }
+    .res-form-actions { display: flex; gap: 8px; margin-top: 0.25rem; }
+    .res-empty { color: rgba(192,221,151,0.25); font-size: 13px; text-align: center; padding: 1.5rem 0; }
+    .exam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .exam-field { display: flex; flex-direction: column; gap: 4px; }
+    .exam-field label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); }
+    .exam-field-value { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--cream); }
+    .exam-field-value a { color: var(--amber); text-decoration: none; }
+    .exam-field-value a:hover { text-decoration: underline; }
+    .exam-bullets { margin-top: 1.25rem; padding-top: 1.25rem; border-top: 0.5px solid rgba(99,153,34,0.15); }
+    .exam-bullets-title { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--green-pale); margin-bottom: 0.75rem; }
+    .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+    .bullet-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(192,221,151,0.8); }
+    .bullet-list li::before { content: "▸"; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
+    .exam-edit-form { display: none; flex-direction: column; gap: 0.75rem; }
+    .exam-edit-form.visible { display: flex; }
+    .exam-edit-form input, .exam-edit-form textarea { width: 100%; padding: 0.5rem 0.8rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 7px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
+    .exam-edit-form input:focus, .exam-edit-form textarea:focus { border-color: var(--green-light); }
+    .exam-edit-form label { font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); }
+    .exam-edit-form textarea { min-height: 90px; resize: vertical; }
+    .exam-edit-form small { font-size: 11px; color: rgba(99,153,34,0.5); }
+    .exam-display { display: block; }
+    .page-title-row { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
+    .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
+    .page-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,5vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
+    .lock-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(59,109,17,0.3); border: 0.5px solid rgba(99,153,34,0.4); color: var(--green-bright); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; transition: background 0.2s; }
+    .lock-btn:hover { background: rgba(59,109,17,0.5); }
+    .lock-btn.unlocked { background: rgba(239,159,39,0.2); border-color: rgba(239,159,39,0.5); color: var(--amber); }
+    .edit-banner { display: none; position: fixed; top: 90px; left: var(--sidebar-w); right: 0; background: rgba(239,159,39,0.15); border-bottom: 0.5px solid rgba(239,159,39,0.3); padding: 0.5rem 1.5rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--amber); z-index: 100; text-align: center; }
+    .edit-mode .edit-banner { display: block; }
+    .save-banner { position: fixed; bottom: 4.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
+    .save-banner.show { display: block; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; position: fixed; top: 20px; right: 1rem; z-index: 999; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--green-bright); border-radius: 2px; }
+    .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 150; }
+    .mobile-overlay.show { display: block; }
+    footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
+    footer a { color: var(--green-bright); text-decoration: none; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex !important; }
+      .nav-right { display: none; }
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; display: flex !important; flex-direction: column; z-index: 200; }
+      .sidebar.open { transform: translateX(0); }
+      .main, footer { margin-left: 0 !important; }
+      .edit-banner { left: 0 !important; }
+      .exam-grid { grid-template-columns: 1fr; }
     }
-    .event-header-left {}
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; }
+    .event-header { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 2rem 2.5rem; margin-bottom: 2.5rem; display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
     .event-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.5rem; }
     .event-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,4vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; margin-bottom: 0.5rem; }
     .event-date { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin-bottom: 1rem; }
     .event-desc { font-size: 13px; color: rgba(192,221,151,0.7); max-width: 560px; line-height: 1.7; }
     .event-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.25rem; }
-    .event-link-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 8px 18px; border-radius: 8px;
-      font-family: 'Caveat', cursive; font-size: 15px;
-      text-decoration: none; transition: background 0.2s;
-    }
+    .event-link-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border-radius: 8px; font-family: 'Caveat', cursive; font-size: 15px; text-decoration: none; transition: background 0.2s; }
     .event-link-primary { background: rgba(99,153,34,0.2); border: 0.5px solid var(--green-light); color: var(--green-pale); }
     .event-link-primary:hover { background: rgba(99,153,34,0.35); }
     .event-link-secondary { background: rgba(239,159,39,0.1); border: 0.5px solid rgba(239,159,39,0.4); color: var(--amber); }
     .event-link-secondary:hover { background: rgba(239,159,39,0.2); }
-    .event-badge {
-      background: rgba(59,109,17,0.15);
-      border: 0.5px solid rgba(99,153,34,0.25);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      min-width: 180px;
-      text-align: center;
-    }
+    .event-badge { background: rgba(59,109,17,0.15); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 12px; padding: 1.25rem 1.5rem; min-width: 180px; text-align: center; }
     .event-badge-icon { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
     .event-badge-label { font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); letter-spacing: 1px; text-transform: uppercase; }
     .event-badge-value { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--green-pale); }
-
-    /* SECTION TITLE */
-    .section-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 8px; }
+    .section-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1rem; }
     .section-divider { height: 0.5px; background: rgba(99,153,34,0.15); margin-bottom: 1.5rem; }
-
-    /* VENDOR GRID */
-    .vendor-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 3rem;
-    }
-    .vendor-card {
-      background: rgba(59,109,17,0.08);
-      border: 0.5px solid rgba(99,153,34,0.2);
-      border-radius: 12px;
-      padding: 1.5rem;
-      text-decoration: none;
-      transition: border-color 0.2s, background 0.2s, transform 0.15s;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .vendor-card:hover {
-      border-color: var(--green-light);
-      background: rgba(59,109,17,0.15);
-      transform: translateY(-2px);
-    }
+    .vendor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin-bottom: 3rem; }
+    .vendor-card { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 12px; padding: 1.5rem; text-decoration: none; transition: border-color 0.2s, background 0.2s, transform 0.15s; display: flex; flex-direction: column; gap: 0.75rem; }
+    .vendor-card:hover { border-color: var(--green-light); background: rgba(59,109,17,0.15); transform: translateY(-2px); }
+    .vendor-card-logo { height: 36px; max-width: 140px; object-fit: contain; filter: brightness(0) invert(0.85); display: block; }
+    .vendor-card:hover .vendor-card-logo { filter: brightness(0) invert(1); }
     .vendor-card-day { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); }
     .vendor-card-name { font-family: 'Caveat', cursive; font-size: 1.5rem; font-weight: 700; color: var(--green-pale); }
     .vendor-card-time { font-size: 12px; color: rgba(192,221,151,0.5); }
-    .vendor-card-footer {
-      margin-top: auto;
-      padding-top: 0.75rem;
-      border-top: 0.5px solid rgba(99,153,34,0.15);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .vendor-card-tag { font-size: 11px; color: var(--green-light); letter-spacing: 0.5px; }
-    .vendor-card-arrow { color: var(--green-bright); font-size: 14px; }
-
-    footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
-    footer a { color: var(--green-bright); text-decoration: none; }
-
-    .vendor-card-logo {
-      height: 36px;
-      max-width: 140px;
-      object-fit: contain;
-      filter: brightness(0) invert(0.85);
-      margin-bottom: 0.5rem;
-      display: block;
-    }
-    .vendor-card:hover .vendor-card-logo { filter: brightness(0) invert(1); }
-
-    /* MOBILE HAMBURGER */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      background: none;
-      border: none;
-      position: fixed;
-      top: 20px;
-      right: 1rem;
-      z-index: 999;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--green-bright);
-      border-radius: 2px;
-    }
-    .mobile-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 150;
-    }
-    .mobile-overlay.show { display: block; }
-    @media (max-width: 768px) {
-      .hamburger { display: flex !important; }
-      .nav-right { display: none; }
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        display: flex !important;
-        flex-direction: column;
-        z-index: 200;
-      }
-      .sidebar.open { transform: translateX(0); }
-      .main, footer { margin-left: 0 !important; }
-      .edit-banner { left: 0 !important; }
-    }
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        display: flex !important;
-        flex-direction: column;
-        z-index: 200;
-      }
-      .sidebar.open { transform: translateX(0); }
-      .main, footer { margin-left: 0 !important; }
-      .edit-banner { left: 0 !important; }
-    }
+    .vendor-card-footer { margin-top: auto; padding-top: 0.75rem; border-top: 0.5px solid rgba(99,153,34,0.15); }
+    .vendor-card-arrow { color: var(--green-bright); font-size: 13px; }
+    @media (max-width: 768px) { .main { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } .event-header { flex-direction: column; } }
   </style>
 </head>
 <body>
@@ -267,14 +240,11 @@
     <a href="index.html#about">About</a>
     <a href="index.html#blog">Blog</a>
   </div>
-
 </nav>
-<button class="hamburger" onclick="toggleSidebar()" style="flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:20px;right:1rem;z-index:999;">
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+<button class="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
 </button>
-<div id="mobileOverlay" onclick="toggleSidebar()" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:150;"></div>
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
@@ -338,20 +308,16 @@
   </aside>
 
   <main class="main">
-    <div class="breadcrumb">
-      <a href="index.html">Home</a><span>›</span>
-      Tech Field Day<span>›</span>
-      Mobility Field Day<span>›</span>
-      MFD14
+    <div class="breadcrumb" style="font-size:12px;color:rgba(99,153,34,0.6);margin-bottom:2rem;">
+      <a href="index.html" style="color:var(--green-light);text-decoration:none;">Home</a><span style="margin:0 6px;">&#8250;</span>Tech Field Day<span style="margin:0 6px;">&#8250;</span>Mobility Field Day<span style="margin:0 6px;">&#8250;</span>MFD14
     </div>
 
-    <!-- EVENT HEADER -->
     <div class="event-header">
-      <div class="event-header-left">
+      <div>
         <p class="event-label">Mobility Field Day</p>
         <h1 class="event-title">MFD14</h1>
-        <p class="event-date">&#128197; May 6–8, 2026 &nbsp;·&nbsp; Silicon Valley</p>
-        <p class="event-desc">Mobility Field Day 14 brought together wireless networking experts and industry vendors for three days of technical presentations. I attended as a delegate, representing Mountain Modulation.</p>
+        <p class="event-date">&#128197; May 6&#8211;8, 2026 &nbsp;&#183;&nbsp; Silicon Valley</p>
+        <p class="event-desc">Mobility Field Day 14 brought together wireless networking experts and industry vendors for three days of technical presentations. I attended as a delegate.</p>
         <div class="event-links">
           <a href="https://techfieldday.com/event/mfd14/" target="_blank" class="event-link-btn event-link-primary">&#128279; Official Event Page</a>
           <a href="https://youtube.com/playlist?list=PLinuRwpnsHaekbVvLhH0Wok334leNekun" target="_blank" class="event-link-btn event-link-secondary">&#9654;&#65039; Watch on YouTube</a>
@@ -364,102 +330,72 @@
       </div>
     </div>
 
-    <!-- VENDOR GRID -->
     <div class="section-title">&#127970; Vendor Presentations</div>
     <div class="section-divider"></div>
-
     <div class="vendor-grid">
-
       <a href="mfd14-hpe.html" class="vendor-card">
         <img src="images/hpe.jpg" alt="HPE" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">HPE</div>
         <div class="vendor-card-time">7:30 – 11:30 AM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-cisco.html" class="vendor-card">
         <img src="images/cisco.png" alt="Cisco" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Cisco</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-celona.html" class="vendor-card">
         <img src="images/celona.png" alt="Celona" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Celona</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-wyebot.html" class="vendor-card">
         <img src="images/wyebot.png" alt="Wyebot" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Wyebot</div>
         <div class="vendor-card-time">8:00 – 9:00 AM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-onelayer.html" class="vendor-card">
         <img src="images/onelayer.png" alt="OneLayer" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">OneLayer</div>
         <div class="vendor-card-time">10:00 – 11:30 AM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-ubiquiti.html" class="vendor-card">
         <img src="images/ubiquiti.png" alt="Ubiquiti" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Ubiquiti</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-fortinet.html" class="vendor-card">
         <img src="images/fortinet.png" alt="Fortinet" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Fortinet</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-arista.html" class="vendor-card">
         <img src="images/arista.jpg" alt="Arista" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Arista</div>
         <div class="vendor-card-time">8:00 – 9:30 AM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
       <a href="mfd14-nile.html" class="vendor-card">
         <img src="images/nile.png" alt="Nile" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Nile</div>
         <div class="vendor-card-time">10:30 AM – 12:00 PM</div>
-        <div class="vendor-card-footer">
-          <span class="vendor-card-arrow">&#8599; View Notes</span>
-        </div>
+        <div class="vendor-card-footer"><span class="vendor-card-arrow">&#8599; View Notes</span></div>
       </a>
-
     </div>
   </main>
 </div>

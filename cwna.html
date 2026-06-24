@@ -72,10 +72,8 @@
     .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; max-width: 920px; }
     .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
     .breadcrumb a { color: var(--green-light); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--green-pale); }
     .breadcrumb span { margin: 0 6px; }
-    .page-title-row { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
-    .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
-    .page-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,5vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
     .block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
     .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); flex-wrap: wrap; gap: 0.75rem; }
     .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); display: flex; align-items: center; gap: 8px; }
@@ -142,7 +140,7 @@
     .exam-bullets-title { font-family: 'Caveat', cursive; font-size: 1.1rem; color: var(--green-pale); margin-bottom: 0.75rem; }
     .bullet-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
     .bullet-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(192,221,151,0.8); }
-    .bullet-list li::before { content: '▸'; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
+    .bullet-list li::before { content: "▸"; color: var(--green-light); flex-shrink: 0; margin-top: 2px; }
     .exam-edit-form { display: none; flex-direction: column; gap: 0.75rem; }
     .exam-edit-form.visible { display: flex; }
     .exam-edit-form input, .exam-edit-form textarea { width: 100%; padding: 0.5rem 0.8rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 7px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 13px; outline: none; transition: border-color 0.2s; }
@@ -151,72 +149,30 @@
     .exam-edit-form textarea { min-height: 90px; resize: vertical; }
     .exam-edit-form small { font-size: 11px; color: rgba(99,153,34,0.5); }
     .exam-display { display: block; }
-
-    /* LOCK BUTTON */
+    .page-title-row { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
+    .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
+    .page-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,5vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
     .lock-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(59,109,17,0.3); border: 0.5px solid rgba(99,153,34,0.4); color: var(--green-bright); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; transition: background 0.2s; }
     .lock-btn:hover { background: rgba(59,109,17,0.5); }
     .lock-btn.unlocked { background: rgba(239,159,39,0.2); border-color: rgba(239,159,39,0.5); color: var(--amber); }
-
-    /* EDIT MODE BANNER */
     .edit-banner { display: none; position: fixed; top: 90px; left: var(--sidebar-w); right: 0; background: rgba(239,159,39,0.15); border-bottom: 0.5px solid rgba(239,159,39,0.3); padding: 0.5rem 1.5rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--amber); z-index: 100; text-align: center; }
     .edit-mode .edit-banner { display: block; }
-
     .save-banner { position: fixed; bottom: 4.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
     .save-banner.show { display: block; }
-
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; background: none; border: none; position: fixed; top: 20px; right: 1rem; z-index: 999; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--green-bright); border-radius: 2px; }
+    .mobile-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); z-index: 150; }
+    .mobile-overlay.show { display: block; }
     footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
     footer a { color: var(--green-bright); text-decoration: none; }
-
-    /* MOBILE HAMBURGER */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      background: none;
-      border: none;
-      z-index: 300;
-      margin-left: auto;
-    }
-    .hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--green-bright);
-      border-radius: 2px;
-    }
-    .mobile-overlay {
-      display: none;
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
-      z-index: 150;
-    }
-    .mobile-overlay.show { display: block; }
     @media (max-width: 768px) {
       .hamburger { display: flex !important; }
       .nav-right { display: none; }
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        display: flex !important;
-        flex-direction: column;
-        z-index: 200;
-      }
+      .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; display: flex !important; flex-direction: column; z-index: 200; }
       .sidebar.open { transform: translateX(0); }
       .main, footer { margin-left: 0 !important; }
       .edit-banner { left: 0 !important; }
-    }
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform 0.3s ease;
-        display: flex !important;
-        flex-direction: column;
-        z-index: 200;
-      }
-      .sidebar.open { transform: translateX(0); }
-      .main, footer { margin-left: 0 !important; }
+      .exam-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -257,14 +213,11 @@
     <a href="index.html#blog">Blog</a>
   </div>
 </nav>
-<button class="hamburger" onclick="toggleSidebar()" style="flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:20px;right:1rem;z-index:999;">
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
-  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+<button class="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
 </button>
-<div id="mobileOverlay" onclick="toggleSidebar()" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:150;"></div>
-
-<div class="edit-banner">✏️ Edit mode active — changes save directly to GitHub</div>
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<div class="edit-banner">&#9999;&#65039; Edit mode active</div>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
@@ -295,7 +248,11 @@
     <button class="sb-h1" onclick="tog(this)">Networking <span class="arr">&#9658;</span></button>
     <div class="sb-c1">
       <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
-      <div class="sb-c2"><a href="#" class="sb-l3">RF</a><a href="#" class="sb-l3">Automation</a><a href="#" class="sb-l3">Switch</a></div>
+      <div class="sb-c2">
+        <a href="#" class="sb-l3">RF</a>
+        <a href="#" class="sb-l3">Automation</a>
+        <a href="#" class="sb-l3">Switch</a>
+      </div>
       <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
       <div class="sb-c2">
         <button class="sb-h3" onclick="tog(this)">Panorama <span class="arr">&#9658;</span></button>
@@ -307,16 +264,25 @@
     <button class="sb-h1" onclick="tog(this)">Tech Field Day <span class="arr">&#9658;</span></button>
     <div class="sb-c1">
       <button class="sb-h2" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
-      <div class="sb-c2"><a href="#" class="sb-l3">MFD14</a></div>
+      <div class="sb-c2">
+        <a href="mfd14.html" class="sb-l3">MFD14</a>
+      </div>
     </div>
     <div class="sb-divider"></div>
     <button class="sb-h1" onclick="tog(this)">Tools &amp; Lab <span class="arr">&#9658;</span></button>
-    <div class="sb-c1"><a href="#" class="sb-l2">Scripts</a><a href="#" class="sb-l2">Lab Builds</a></div>
+    <div class="sb-c1">
+      <a href="#" class="sb-l2">Scripts</a>
+      <a href="#" class="sb-l2">Lab Builds</a>
+    </div>
     <div class="sb-divider"></div>
     <div class="about-me-card">
       <div class="about-me-header">
         <div class="about-me-avatar">MM</div>
-        <div><div class="about-me-name">Your Name</div><div class="about-me-title">Your Title</div><div class="about-me-company">@ Your Company</div></div>
+        <div>
+          <div class="about-me-name">Your Name</div>
+          <div class="about-me-title">Your Title</div>
+          <div class="about-me-company">@ Your Company</div>
+        </div>
       </div>
       <div class="about-me-buttons">
         <a href="#" class="about-btn btn-linkedin">&#128188; LinkedIn</a>
@@ -331,8 +297,8 @@
 
   <main class="main">
     <div class="breadcrumb">
-      <a href="index.html">Home</a><span>›</span>
-      <a href="#">Certifications</a><span>›</span>
+      <a href="index.html">Home</a><span>&#8250;</span>
+      <a href="#">Certifications</a><span>&#8250;</span>
       CWNA
     </div>
 
@@ -341,7 +307,6 @@
       <h1 class="page-title">CWNA</h1>
     </div>
 
-    <!-- EXAM DETAILS -->
     <div class="block">
       <div class="block-header">
         <div class="block-title">&#127891; Exam Details</div>
@@ -363,9 +328,9 @@
       </div>
       <div class="exam-display" id="examDisplay">
         <div class="exam-grid">
-          <div class="exam-field"><label>Exam Version</label><div class="exam-field-value" id="dispVersion">—</div></div>
-          <div class="exam-field"><label>Date Taken</label><div class="exam-field-value" id="dispDate">—</div></div>
-          <div class="exam-field"><label>Credly Badge</label><div class="exam-field-value" id="dispCredly">—</div></div>
+          <div class="exam-field"><label>Exam Version</label><div class="exam-field-value" id="dispVersion">&#8212;</div></div>
+          <div class="exam-field"><label>Date Taken</label><div class="exam-field-value" id="dispDate">&#8212;</div></div>
+          <div class="exam-field"><label>Credly Badge</label><div class="exam-field-value" id="dispCredly">&#8212;</div></div>
         </div>
         <div class="exam-bullets" id="examBulletsSection" style="display:none">
           <div class="exam-bullets-title">Tidbits</div>
@@ -374,19 +339,15 @@
       </div>
     </div>
 
-    <!-- RESOURCES -->
     <div class="block">
       <div class="block-header">
         <div class="block-title">&#128279; Resources</div>
         <button class="btn-add-small" onclick="toggleResForm()">&#65291; Add Resource</button>
       </div>
       <div class="res-form" id="resForm">
-        <label>Title</label>
-        <input type="text" id="resTitle" placeholder="e.g. Junos Documentation"/>
-        <label>URL</label>
-        <input type="url" id="resUrl" placeholder="https://..."/>
-        <label>Why is this helpful? (optional)</label>
-        <textarea id="resNote" placeholder="Brief note..."></textarea>
+        <label>Title</label><input type="text" id="resTitle" placeholder="e.g. Documentation"/>
+        <label>URL</label><input type="url" id="resUrl" placeholder="https://..."/>
+        <label>Why helpful? (optional)</label><textarea id="resNote" placeholder="Brief note..."></textarea>
         <div class="res-form-actions">
           <button class="btn-save" onclick="saveResource()">Save</button>
           <button class="btn-cancel" onclick="toggleResForm()">Cancel</button>
@@ -396,7 +357,6 @@
       <div class="res-empty" id="resEmpty">No resources yet</div>
     </div>
 
-    <!-- NOTES -->
     <div class="block">
       <div class="block-header">
         <div class="block-title">&#128221; Notes</div>
@@ -407,22 +367,23 @@
         <button class="btn-save" onclick="saveNotes()">Save Notes</button>
         <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
       </div>
-      <div class="markdown-body" id="notesDisplay">
-        <p class="notes-placeholder">No notes yet.</p>
-      </div>
+      <div class="markdown-body" id="notesDisplay"><p class="notes-placeholder">No notes yet.</p></div>
     </div>
-
   </main>
 </div>
 
-<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()" title="Toggle edit mode">&#128274;</button>
+<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()">&#128274;</button>
 <div class="save-banner" id="saveBanner">&#10003; Saved</div>
-
 <footer>
   <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
 </footer>
 
 <script>
+  const REPO = 'MountainModulation/mountainmodulation.github.io';
+  let pat = sessionStorage.getItem('mm_pat') || '';
+  let data = {{ exam: {{ version:'', date:'', credly:'', bullets:'' }}, resources: [], notes: '' }};
+  let fileSha = '';
+
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
   function toggleSidebar() {
     var sb = document.getElementById('sidebar');
@@ -432,192 +393,160 @@
     sb.classList.toggle('open');
     if (ov) ov.style.display = isOpen ? 'none' : 'block';
   }
-  const REPO  = 'MountainModulation/mountainmodulation.github.io';
-  const FILE  = 'data/cwna.json';
-  let pat     = sessionStorage.getItem('mm_pat') || '';
-  let data    = { exam: { version:'', date:'', credly:'', bullets:'' }, resources: [], notes: '' };
-  let fileSha = '';
 
-  
-  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function banner(msg) {
-    const b = document.getElementById('saveBanner');
-    b.textContent = msg; b.classList.add('show');
-    setTimeout(() => b.classList.remove('show'), 2500);
-  }
-
-  /* ── LOAD DATA FROM GITHUB ── */
-  async function loadData() {
-    try {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-        headers: pat ? { Authorization: `token ${pat}` } : {}
-      });
+  async function loadData() {{
+    try {{
+      const r = await fetch(`https://api.github.com/repos/${{REPO}}/contents/data/cwna.json`, {{
+        headers: pat ? {{ Authorization: `token ${{pat}}` }} : {{}}
+      }});
       if (!r.ok) return;
       const json = await r.json();
       fileSha = json.sha;
       data = JSON.parse(atob(json.content.replace(/\n/g,'')));
-    } catch(e) {}
+    }} catch(e) {{}}
     renderAll();
-  }
+  }}
 
-  /* ── SAVE DATA TO GITHUB ── */
-  async function saveData() {
-    if (!pat) { alert('Enter your PAT first by clicking the lock icon.'); return; }
+  async function saveData() {{
+    if (!pat) {{ alert('Enter your PAT first by clicking the lock icon.'); return; }}
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const body = { message: 'Update cwna data', content, sha: fileSha };
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+    const body = {{ message: 'Update cwna data', content, sha: fileSha }};
+    const r = await fetch(`https://api.github.com/repos/${{REPO}}/contents/data/cwna.json`, {{
       method: 'PUT',
-      headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+      headers: {{ Authorization: `token ${{pat}}`, 'Content-Type': 'application/json' }},
       body: JSON.stringify(body)
-    });
-    if (r.ok) {
+    }});
+    if (r.ok) {{
       const json = await r.json();
       fileSha = json.content.sha;
-      banner('✓ Saved to GitHub — live in ~60s');
-    } else {
-      banner('✗ Save failed — check your PAT');
-    }
-  }
+      banner('&#10003; Saved to GitHub');
+    }} else {{ banner('&#10007; Save failed'); }}
+  }}
 
-  /* ── EDIT MODE ── */
-  function toggleEditMode() {
-    if (!pat) {
+  function toggleEditMode() {{
+    if (!pat) {{
       const token = prompt('Enter your GitHub Personal Access Token:');
       if (!token) return;
       pat = token.trim();
       sessionStorage.setItem('mm_pat', pat);
-    } else {
-      // Already have PAT — toggle off
-      pat = '';
-      sessionStorage.removeItem('mm_pat');
+    }} else {{
+      pat = ''; sessionStorage.removeItem('mm_pat');
       document.body.classList.remove('edit-mode');
       document.getElementById('lockBtn').classList.remove('unlocked');
-      document.getElementById('lockBtn').textContent = '🔒';
+      document.getElementById('lockBtn').textContent = '&#128274;';
       return;
-    }
+    }}
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent = '🔓';
-    banner('✓ Edit mode unlocked');
-  }
+    document.getElementById('lockBtn').textContent = '&#128275;';
+    banner('&#10003; Edit mode unlocked');
+  }}
 
-  /* ── EXAM ── */
-  function toggleExamEdit() {
+  function toggleExamEdit() {{
     const form = document.getElementById('examForm');
     const disp = document.getElementById('examDisplay');
     const editing = form.classList.contains('visible');
-    if (!editing) {
+    if (!editing) {{
       document.getElementById('examVersion').value = data.exam.version || '';
       document.getElementById('examDate').value    = data.exam.date    || '';
       document.getElementById('examCredly').value  = data.exam.credly  || '';
       document.getElementById('examBullets').value = data.exam.bullets || '';
-    }
+    }}
     form.classList.toggle('visible');
     disp.style.display = editing ? 'block' : 'none';
-  }
-  async function saveExam() {
+  }}
+  async function saveExam() {{
     data.exam.version = document.getElementById('examVersion').value.trim();
     data.exam.date    = document.getElementById('examDate').value.trim();
     data.exam.credly  = document.getElementById('examCredly').value.trim();
     data.exam.bullets = document.getElementById('examBullets').value.trim();
     await saveData(); renderExam(); toggleExamEdit();
-  }
-  function renderExam() {
-    document.getElementById('dispVersion').textContent = data.exam.version || '—';
-    document.getElementById('dispDate').textContent    = data.exam.date    || '—';
+  }}
+  function renderExam() {{
+    document.getElementById('dispVersion').textContent = data.exam.version || '&#8212;';
+    document.getElementById('dispDate').textContent    = data.exam.date    || '&#8212;';
     const ce = document.getElementById('dispCredly');
-    ce.innerHTML = data.exam.credly ? `<a href="${esc(data.exam.credly)}" target="_blank">🏅 View Badge</a>` : '—';
+    ce.innerHTML = data.exam.credly ? `<a href="${{esc(data.exam.credly)}}" target="_blank">&#127885; View Badge</a>` : '&#8212;';
     const bullets = (data.exam.bullets||'').split('\n').map(s=>s.trim()).filter(Boolean);
-    const sec  = document.getElementById('examBulletsSection');
+    const sec = document.getElementById('examBulletsSection');
     const list = document.getElementById('dispBullets');
-    if (bullets.length) { sec.style.display='block'; list.innerHTML=bullets.map(b=>`<li>${esc(b)}</li>`).join(''); }
+    if (bullets.length) {{ sec.style.display='block'; list.innerHTML=bullets.map(b=>`<li>${{esc(b)}}</li>`).join(''); }}
     else sec.style.display='none';
-  }
+  }}
 
-  /* ── RESOURCES ── */
-  function toggleResForm() {
+  function toggleResForm() {{
     const f = document.getElementById('resForm');
     f.classList.toggle('visible');
-    if (!f.classList.contains('visible')) {
+    if (!f.classList.contains('visible')) {{
       document.getElementById('resTitle').value='';
       document.getElementById('resUrl').value='';
       document.getElementById('resNote').value='';
-    }
-  }
-  async function saveResource() {
+    }}
+  }}
+  async function saveResource() {{
     const title = document.getElementById('resTitle').value.trim();
     const url   = document.getElementById('resUrl').value.trim();
     const note  = document.getElementById('resNote').value.trim();
     if (!title && !url) return;
-    data.resources.unshift({ id: Date.now(), title: title||url, url, note });
+    data.resources.unshift({{ id: Date.now(), title: title||url, url, note }});
     await saveData(); renderResources(); toggleResForm();
-  }
-  async function deleteResource(id) {
+  }}
+  async function deleteResource(id) {{
     if (!confirm('Delete this resource?')) return;
     data.resources = data.resources.filter(r=>r.id!==id);
     await saveData(); renderResources();
-  }
-  function renderResources() {
+  }}
+  function renderResources() {{
     const list  = document.getElementById('resList');
     const empty = document.getElementById('resEmpty');
-    if (!data.resources.length) { list.innerHTML=''; empty.style.display='block'; return; }
+    if (!data.resources.length) {{ list.innerHTML=''; empty.style.display='block'; return; }}
     empty.style.display='none';
     list.innerHTML = data.resources.map(r=>`
       <div class="resource-row">
         <div class="resource-row-info">
-          <div class="resource-row-title">${esc(r.title)}</div>
-          ${r.url  ? `<div class="resource-row-url">${esc(r.url)}</div>` : ''}
-          ${r.note ? `<div class="resource-row-note">${esc(r.note)}</div>` : ''}
+          <div class="resource-row-title">${{esc(r.title)}}</div>
+          ${{r.url  ? `<div class="resource-row-url">${{esc(r.url)}}</div>` : ''}}
+          ${{r.note ? `<div class="resource-row-note">${{esc(r.note)}}</div>` : ''}}
         </div>
         <div class="resource-row-actions">
-          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-open">&#8599; Open</a>` : ''}
-          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">&#128465;</button>
+          ${{r.url ? `<a href="${{esc(r.url)}}" target="_blank" class="resource-open">&#8599; Open</a>` : ''}}
+          <button class="btn-icon btn-del" onclick="deleteResource(${{r.id}})">&#128465;</button>
         </div>
       </div>`).join('');
-  }
+  }}
 
-  /* ── NOTES ── */
-  function toggleNotesEditor() {
+  function toggleNotesEditor() {{
     const ed = document.getElementById('notesEditor');
     const ac = document.getElementById('notesActions');
     const ds = document.getElementById('notesDisplay');
     const editing = ed.style.display==='block';
-    ed.style.display = editing ? 'none'  : 'block';
-    ac.style.display = editing ? 'none'  : 'flex'; // use flex not "visible"
+    ed.style.display = editing ? 'none' : 'block';
+    ac.style.display = editing ? 'none' : 'flex';
     ds.style.display = editing ? 'block' : 'none';
     if (!editing) ed.value = data.notes||'';
-  }
-  async function saveNotes() {
+  }}
+  async function saveNotes() {{
     data.notes = document.getElementById('notesEditor').value;
     await saveData(); renderNotes(); toggleNotesEditor();
-  }
-  function cancelNotes() { toggleNotesEditor(); }
-  function renderNotes() {
+  }}
+  function cancelNotes() {{ toggleNotesEditor(); }}
+  function renderNotes() {{
     const el = document.getElementById('notesDisplay');
-    el.innerHTML = (data.notes||'').trim()
-      ? marked.parse(data.notes)
-      : '<p class="notes-placeholder">No notes yet.</p>';
-  }
-
-  function renderAll() { renderExam(); renderResources(); renderNotes(); }
-
-  // Restore edit mode if PAT still in session
-  if (pat) {
+    el.innerHTML = (data.notes||'').trim() ? marked.parse(data.notes) : '<p class="notes-placeholder">No notes yet.</p>';
+  }}
+  function esc(s) {{ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }}
+  function banner(msg) {{
+    const b = document.getElementById('saveBanner');
+    b.textContent = msg; b.classList.add('show');
+    setTimeout(() => b.classList.remove('show'), 2500);
+  }}
+  function renderAll() {{ renderExam(); renderResources(); renderNotes(); }}
+  if (pat) {{
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent = '🔓';
-  }
-
+    document.getElementById('lockBtn').textContent = '&#128275;';
+  }}
   loadData();
-  
-    function toggleSidebar() {
-    var sb = document.getElementById('sidebar');
-    var ov = document.getElementById('mobileOverlay');
-    if (!sb) return;
-    var isOpen = sb.classList.contains('open');
-    sb.classList.toggle('open');
-    if (ov) ov.style.display = isOpen ? 'none' : 'block';
-  }
 </script>
 </body>
 </html>
