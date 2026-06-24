@@ -346,7 +346,7 @@
 <script>
   const REPO = 'MountainModulation/mountainmodulation.github.io';
   let pat = sessionStorage.getItem('mm_pat') || '';
-  let data = {{ resources: [], notes: '' }};
+  let data = { resources: [], notes: '' };
   let fileSha = '';
 
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
@@ -359,91 +359,91 @@
     if (ov) ov.style.display = isOpen ? 'none' : 'block';
   }
 
-  async function loadData() {{
-    try {{
-      const r = await fetch(`https://api.github.com/repos/${{REPO}}/contents/data/mfd14-wyebot.json`, {{
-        headers: pat ? {{ Authorization: `token ${{pat}}` }} : {{}}
-      }});
+  async function loadData() {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/contents/data/mfd14-wyebot.json`, {
+        headers: pat ? { Authorization: `token ${pat}` } : {}
+      });
       if (!r.ok) return;
       const json = await r.json();
       fileSha = json.sha;
       data = JSON.parse(atob(json.content.replace(/\n/g,'')));
-    }} catch(e) {{}}
+    } catch(e) {}
     renderAll();
-  }}
+  }
 
-  async function saveData() {{
-    if (!pat) {{ alert('Enter your PAT first.'); return; }}
+  async function saveData() {
+    if (!pat) { alert('Enter your PAT first.'); return; }
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const r = await fetch(`https://api.github.com/repos/${{REPO}}/contents/data/mfd14-wyebot.json`, {{
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/data/mfd14-wyebot.json`, {
       method: 'PUT',
-      headers: {{ Authorization: `token ${{pat}}`, 'Content-Type': 'application/json' }},
-      body: JSON.stringify({{ message: 'Update wyebot data', content, sha: fileSha }})
-    }});
-    if (r.ok) {{ const j = await r.json(); fileSha = j.content.sha; banner('&#10003; Saved'); }}
+      headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update wyebot data', content, sha: fileSha })
+    });
+    if (r.ok) { const j = await r.json(); fileSha = j.content.sha; banner('&#10003; Saved'); }
     else banner('&#10007; Save failed');
-  }}
+  }
 
-  function toggleEditMode() {{
-    if (!pat) {{
+  function toggleEditMode() {
+    if (!pat) {
       const t = prompt('Enter your GitHub Personal Access Token:');
       if (!t) return;
       pat = t.trim(); sessionStorage.setItem('mm_pat', pat);
-    }} else {{
+    } else {
       pat = ''; sessionStorage.removeItem('mm_pat');
       document.body.classList.remove('edit-mode');
       document.getElementById('lockBtn').classList.remove('unlocked');
       document.getElementById('lockBtn').textContent = '&#128274;';
       return;
-    }}
+    }
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
     document.getElementById('lockBtn').textContent = '&#128275;';
     banner('&#10003; Edit mode unlocked');
-  }}
+  }
 
-  function toggleResForm() {{
+  function toggleResForm() {
     const f = document.getElementById('resForm');
     f.classList.toggle('visible');
-    if (!f.classList.contains('visible')) {{
+    if (!f.classList.contains('visible')) {
       document.getElementById('resTitle').value='';
       document.getElementById('resUrl').value='';
       document.getElementById('resNote').value='';
-    }}
-  }}
-  async function saveResource() {{
+    }
+  }
+  async function saveResource() {
     const title=document.getElementById('resTitle').value.trim();
     const url=document.getElementById('resUrl').value.trim();
     const note=document.getElementById('resNote').value.trim();
     if (!title && !url) return;
-    data.resources.unshift({{id:Date.now(),title:title||url,url,note}});
+    data.resources.unshift({id:Date.now(),title:title||url,url,note});
     await saveData(); renderResources(); toggleResForm();
-  }}
-  async function deleteResource(id) {{
+  }
+  async function deleteResource(id) {
     if (!confirm('Delete?')) return;
     data.resources=data.resources.filter(r=>r.id!==id);
     await saveData(); renderResources();
-  }}
-  function renderResources() {{
+  }
+  function renderResources() {
     const list=document.getElementById('resList');
     const empty=document.getElementById('resEmpty');
-    if (!data.resources.length) {{ list.innerHTML=''; empty.style.display='block'; return; }}
+    if (!data.resources.length) { list.innerHTML=''; empty.style.display='block'; return; }
     empty.style.display='none';
     list.innerHTML=data.resources.map(r=>`
       <div class="resource-row">
         <div class="resource-row-info">
-          <div class="resource-row-title">${{esc(r.title)}}</div>
-          ${{r.url?`<div class="resource-row-url">${{esc(r.url)}}</div>`:''}}
-          ${{r.note?`<div class="resource-row-note">${{esc(r.note)}}</div>`:''}}
+          <div class="resource-row-title">${esc(r.title)}</div>
+          ${r.url?`<div class="resource-row-url">${esc(r.url)}</div>`:''}
+          ${r.note?`<div class="resource-row-note">${esc(r.note)}</div>`:''}
         </div>
         <div class="resource-row-actions">
-          ${{r.url?`<a href="${{esc(r.url)}}" target="_blank" class="resource-open">&#8599; Open</a>`:''}}
-          <button class="btn-icon btn-del" onclick="deleteResource(${{r.id}})">&#128465;</button>
+          ${r.url?`<a href="${esc(r.url)}" target="_blank" class="resource-open">&#8599; Open</a>`:''}
+          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">&#128465;</button>
         </div>
       </div>`).join('');
-  }}
+  }
 
-  function toggleNotesEditor() {{
+  function toggleNotesEditor() {
     const ed=document.getElementById('notesEditor');
     const ac=document.getElementById('notesActions');
     const ds=document.getElementById('notesDisplay');
@@ -452,28 +452,28 @@
     ac.style.display=editing?'none':'flex';
     ds.style.display=editing?'block':'none';
     if (!editing) ed.value=data.notes||'';
-  }}
-  async function saveNotes() {{
+  }
+  async function saveNotes() {
     data.notes=document.getElementById('notesEditor').value;
     await saveData(); renderNotes(); toggleNotesEditor();
-  }}
-  function cancelNotes() {{ toggleNotesEditor(); }}
-  function renderNotes() {{
+  }
+  function cancelNotes() { toggleNotesEditor(); }
+  function renderNotes() {
     const el=document.getElementById('notesDisplay');
     el.innerHTML=(data.notes||'').trim()?marked.parse(data.notes):'<p class="notes-placeholder">No notes yet.</p>';
-  }}
-  function esc(s) {{ return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }}
-  function banner(msg) {{
+  }
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function banner(msg) {
     const b=document.getElementById('saveBanner');
     b.textContent=msg; b.classList.add('show');
     setTimeout(()=>b.classList.remove('show'),2500);
-  }}
-  function renderAll() {{ renderResources(); renderNotes(); }}
-  if (pat) {{
+  }
+  function renderAll() { renderResources(); renderNotes(); }
+  if (pat) {
     document.body.classList.add('edit-mode');
     document.getElementById('lockBtn').classList.add('unlocked');
     document.getElementById('lockBtn').textContent='&#128275;';
-  }}
+  }
   loadData();
 </script>
 </body>
