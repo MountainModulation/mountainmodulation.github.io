@@ -165,24 +165,17 @@
     footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
     footer a { color: var(--green-bright); text-decoration: none; }
 
+    @media (max-width: 768px) { .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
+
     .vendor-card-logo {
       height: 36px;
       max-width: 140px;
       object-fit: contain;
-      filter: brightness(0) invert(0.8);
+      filter: brightness(0) invert(0.85);
       margin-bottom: 0.5rem;
       display: block;
     }
     .vendor-card:hover .vendor-card-logo { filter: brightness(0) invert(1); }
-    .vendor-card-logo-text {
-      font-family: 'Caveat', cursive;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--green-bright);
-      margin-bottom: 0.5rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
 
     /* MOBILE HAMBURGER */
     .hamburger {
@@ -194,6 +187,7 @@
       background: none;
       border: none;
       z-index: 300;
+      margin-left: 1rem;
     }
     .hamburger span {
       display: block;
@@ -201,18 +195,18 @@
       height: 2px;
       background: var(--green-bright);
       border-radius: 2px;
-      transition: all 0.3s;
     }
     .mobile-overlay {
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.6);
       z-index: 150;
     }
     .mobile-overlay.show { display: block; }
     @media (max-width: 768px) {
       .hamburger { display: flex; }
+      .nav-right { display: none; }
       .sidebar {
         transform: translateX(-100%);
         transition: transform 0.3s ease;
@@ -221,9 +215,9 @@
         z-index: 200;
       }
       .sidebar.open { transform: translateX(0); }
+      .main, footer { margin-left: 0 !important; }
+      .edit-banner { left: 0 !important; }
     }
-
-    @media (max-width: 768px) { .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -262,22 +256,20 @@
     <a href="index.html#about">About</a>
     <a href="index.html#blog">Blog</a>
   </div>
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+
 </nav>
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
 <div class="layout">
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <a href="index.html" class="sb-link">Home</a>
     <a href="index.html#blog" class="sb-link">Blog</a>
     <a href="index.html#about" class="sb-link">About</a>
     <div class="sb-divider"></div>
     <button class="sb-h1" onclick="tog(this)">Certifications <span class="arr">&#9658;</span></button>
     <div class="sb-c1">
-      <button class="sb-h2 open" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
-      <div class="sb-c2 open">
+      <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">&#9658;</span></button>
+      <div class="sb-c2">
         <a href="jncia-junos.html" class="sb-l3">JNCIA-Junos</a>
         <a href="jncia-mistai.html" class="sb-l3">JNCIA-MistAI</a>
         <a href="jncis-mistai-wireless.html" class="sb-l3">JNCIS-MistAI-Wireless</a>
@@ -363,7 +355,7 @@
     <div class="vendor-grid">
 
       <a href="mfd14-hpe.html" class="vendor-card">
-        <div class="vendor-card-logo-text">HPE</div>
+        <img src="images/hpe.jpg" alt="HPE" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">HPE</div>
         <div class="vendor-card-time">7:30 – 11:30 AM</div>
@@ -373,7 +365,7 @@
       </a>
 
       <a href="mfd14-cisco.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2014/04/cisco-logo-transparent-100x53.png" alt="Cisco logo" class="vendor-card-logo"/>
+        <img src="images/cisco.png" alt="Cisco" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Cisco</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
@@ -383,7 +375,7 @@
       </a>
 
       <a href="mfd14-celona.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2019/09/Celona-Logo-2022-100x23.png" alt="Celona logo" class="vendor-card-logo"/>
+        <img src="images/celona.png" alt="Celona" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Celona</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
@@ -393,7 +385,7 @@
       </a>
 
       <a href="mfd14-wyebot.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2022/08/Wyebot-Logo-100x32.png" alt="Wyebot logo" class="vendor-card-logo"/>
+        <img src="images/wyebot.png" alt="Wyebot" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Wyebot</div>
         <div class="vendor-card-time">8:00 – 9:00 AM</div>
@@ -403,7 +395,7 @@
       </a>
 
       <a href="mfd14-onelayer.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2025/09/OneLayer-Logo-100x20.png" alt="OneLayer logo" class="vendor-card-logo"/>
+        <img src="images/onelayer.png" alt="OneLayer" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">OneLayer</div>
         <div class="vendor-card-time">10:00 – 11:30 AM</div>
@@ -413,7 +405,7 @@
       </a>
 
       <a href="mfd14-ubiquiti.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2024/04/UbiquitiHorizontal-logo-dark-100x24.png" alt="Ubiquiti logo" class="vendor-card-logo"/>
+        <img src="images/ubiquiti.png" alt="Ubiquiti" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Ubiquiti</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
@@ -423,7 +415,7 @@
       </a>
 
       <a href="mfd14-fortinet.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2018/07/Fortinet-logo-100x33.png" alt="Fortinet logo" class="vendor-card-logo"/>
+        <img src="images/fortinet.png" alt="Fortinet" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Fortinet</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
@@ -433,7 +425,7 @@
       </a>
 
       <a href="mfd14-arista.html" class="vendor-card">
-        <div class="vendor-card-logo-text">Arista</div>
+        <img src="images/arista.jpg" alt="Arista" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Arista</div>
         <div class="vendor-card-time">8:00 – 9:30 AM</div>
@@ -443,7 +435,7 @@
       </a>
 
       <a href="mfd14-nile.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2023/05/Nile-Logo-White-Amber-100x50.png" alt="Nile logo" class="vendor-card-logo"/>
+        <img src="images/nile.png" alt="Nile" class="vendor-card-logo" onerror="this.style.display='none'"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Nile</div>
         <div class="vendor-card-time">10:30 AM – 12:00 PM</div>
@@ -461,11 +453,18 @@
 </footer>
 
 <script>
-  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+      function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('hamburgerBtn');
+    var overlay = document.getElementById('mobileOverlay');
+    if (btn) btn.addEventListener('click', toggleSidebar);
+    if (overlay) overlay.addEventListener('click', toggleSidebar);
+  });
   function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-    document.getElementById('mobileOverlay').classList.toggle('show');
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    if (sb) sb.classList.toggle('open');
+    if (ov) ov.classList.toggle('show');
   }
-</script>
 </body>
 </html>

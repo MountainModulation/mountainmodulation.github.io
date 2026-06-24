@@ -168,6 +168,8 @@
     footer a { color: var(--green-bright); text-decoration: none; }
     @media (max-width: 768px) { .main, footer { margin-left: 0; } .exam-grid { grid-template-columns: 1fr; } .edit-banner { left: 0; } }
 
+    
+
     /* MOBILE HAMBURGER */
     .hamburger {
       display: none;
@@ -178,7 +180,7 @@
       background: none;
       border: none;
       z-index: 300;
-      margin-left: auto;
+      margin-left: 1rem;
     }
     .hamburger span {
       display: block;
@@ -207,6 +209,7 @@
       }
       .sidebar.open { transform: translateX(0); }
       .main, footer { margin-left: 0 !important; }
+      .edit-banner { left: 0 !important; }
     }
   </style>
 </head>
@@ -246,16 +249,16 @@
     <a href="index.html#about">About</a>
     <a href="index.html#blog">Blog</a>
   </div>
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+  <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<div class="mobile-overlay" id="mobileOverlay"></div>
 
 <div class="edit-banner">&#9999;&#65039; Edit mode active — changes save directly to GitHub</div>
 
 <div class="layout">
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <a href="index.html" class="sb-link">Home</a>
     <a href="index.html#blog" class="sb-link">Blog</a>
     <a href="index.html#about" class="sb-link">About</a>
@@ -293,18 +296,6 @@
       <button class="sb-h2 open" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
       <div class="sb-c2 open">
         <a href="mfd14.html" class="sb-l3">MFD14</a>
-        <button class="sb-h3 open" onclick="tog(this)">Vendors <span class="arr">&#9658;</span></button>
-        <div class="sb-c3 open">
-          <a href="mfd14-hpe.html" class="sb-l4">HPE</a>
-          <a href="mfd14-cisco.html" class="sb-l4">Cisco</a>
-          <a href="mfd14-celona.html" class="sb-l4">Celona</a>
-          <a href="mfd14-wyebot.html" class="sb-l4">Wyebot</a>
-          <a href="mfd14-onelayer.html" class="sb-l4 active">OneLayer</a>
-          <a href="mfd14-ubiquiti.html" class="sb-l4">Ubiquiti</a>
-          <a href="mfd14-fortinet.html" class="sb-l4">Fortinet</a>
-          <a href="mfd14-arista.html" class="sb-l4">Arista</a>
-          <a href="mfd14-nile.html" class="sb-l4">Nile</a>
-        </div>
       </div>
     </div>
     <div class="sb-divider"></div>
@@ -419,140 +410,18 @@
   let data    = { resources: [], notes: '' };
   let fileSha = '';
 
-  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
-  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  function banner(msg) {
-    const b = document.getElementById('saveBanner');
-    b.textContent = msg; b.classList.add('show');
-    setTimeout(() => b.classList.remove('show'), 2500);
-  }
-
-  async function loadData() {
-    try {
-      const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-        headers: pat ? { Authorization: `token ${pat}` } : {}
-      });
-      if (!r.ok) return;
-      const json = await r.json();
-      fileSha = json.sha;
-      data = JSON.parse(atob(json.content.replace(/\n/g,'')));
-    } catch(e) {}
-    renderAll();
-  }
-
-  async function saveData() {
-    if (!pat) { alert('Enter your PAT first by clicking the lock icon.'); return; }
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const body = { message: 'Update mfd14-onelayer data', content, sha: fileSha };
-    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
-      method: 'PUT',
-      headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-    if (r.ok) {
-      const json = await r.json();
-      fileSha = json.content.sha;
-      banner('&#10003; Saved to GitHub — live in ~60s');
-    } else {
-      banner('&#10007; Save failed — check your PAT');
-    }
-  }
-
-  function toggleEditMode() {
-    if (!pat) {
-      const token = prompt('Enter your GitHub Personal Access Token:');
-      if (!token) return;
-      pat = token.trim();
-      sessionStorage.setItem('mm_pat', pat);
-    } else {
-      pat = '';
-      sessionStorage.removeItem('mm_pat');
-      document.body.classList.remove('edit-mode');
-      document.getElementById('lockBtn').classList.remove('unlocked');
-      document.getElementById('lockBtn').textContent = '&#128274;';
-      return;
-    }
-    document.body.classList.add('edit-mode');
-    document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent = '&#128275;';
-    banner('&#10003; Edit mode unlocked');
-  }
-
-  function toggleResForm() {
-    const f = document.getElementById('resForm');
-    f.classList.toggle('visible');
-    if (!f.classList.contains('visible')) {
-      document.getElementById('resTitle').value='';
-      document.getElementById('resUrl').value='';
-      document.getElementById('resNote').value='';
-    }
-  }
-  async function saveResource() {
-    const title = document.getElementById('resTitle').value.trim();
-    const url   = document.getElementById('resUrl').value.trim();
-    const note  = document.getElementById('resNote').value.trim();
-    if (!title && !url) return;
-    data.resources.unshift({ id: Date.now(), title: title||url, url, note });
-    await saveData(); renderResources(); toggleResForm();
-  }
-  async function deleteResource(id) {
-    if (!confirm('Delete this resource?')) return;
-    data.resources = data.resources.filter(r=>r.id!==id);
-    await saveData(); renderResources();
-  }
-  function renderResources() {
-    const list  = document.getElementById('resList');
-    const empty = document.getElementById('resEmpty');
-    if (!data.resources.length) { list.innerHTML=''; empty.style.display='block'; return; }
-    empty.style.display='none';
-    list.innerHTML = data.resources.map(r=>`
-      <div class="resource-row">
-        <div class="resource-row-info">
-          <div class="resource-row-title">${esc(r.title)}</div>
-          ${r.url  ? `<div class="resource-row-url">${esc(r.url)}</div>` : ''}
-          ${r.note ? `<div class="resource-row-note">${esc(r.note)}</div>` : ''}
-        </div>
-        <div class="resource-row-actions">
-          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-open">&#8599; Open</a>` : ''}
-          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">&#128465;</button>
-        </div>
-      </div>`).join('');
-  }
-
-  function toggleNotesEditor() {
-    const ed = document.getElementById('notesEditor');
-    const ac = document.getElementById('notesActions');
-    const ds = document.getElementById('notesDisplay');
-    const editing = ed.style.display==='block';
-    ed.style.display = editing ? 'none'  : 'block';
-    ac.style.display = editing ? 'none'  : 'flex';
-    ds.style.display = editing ? 'block' : 'none';
-    if (!editing) ed.value = data.notes||'';
-  }
-  async function saveNotes() {
-    data.notes = document.getElementById('notesEditor').value;
-    await saveData(); renderNotes(); toggleNotesEditor();
-  }
-  function cancelNotes() { toggleNotesEditor(); }
-  function renderNotes() {
-    const el = document.getElementById('notesDisplay');
-    el.innerHTML = (data.notes||'').trim()
-      ? marked.parse(data.notes)
-      : '<p class="notes-placeholder">No notes yet.</p>';
-  }
-
-  function renderAll() { renderResources(); renderNotes(); }
-
-  if (pat) {
-    document.body.classList.add('edit-mode');
-    document.getElementById('lockBtn').classList.add('unlocked');
-    document.getElementById('lockBtn').textContent = '&#128275;';
-  }
-
-  loadData();
+      function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  document.addEventListener('DOMContentLoaded', function() {
+    var btn = document.getElementById('hamburgerBtn');
+    var overlay = document.getElementById('mobileOverlay');
+    if (btn) btn.addEventListener('click', toggleSidebar);
+    if (overlay) overlay.addEventListener('click', toggleSidebar);
+  });
   function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-    document.getElementById('mobileOverlay').classList.toggle('show');
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    if (sb) sb.classList.toggle('open');
+    if (ov) ov.classList.toggle('show');
   }
 </script>
 </body>
