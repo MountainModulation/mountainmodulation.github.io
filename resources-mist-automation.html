@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resources — Automating Juniper Mist AI Enterprise | Mountain Modulation</title>
+  <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --green-dark: #173404; --green-mid: #3B6D11; --green-light: #639922;
+      --green-bright: #97C459; --green-pale: #C0DD97; --cream: #FAEEDA;
+      --amber: #EF9F27; --sidebar-w: 260px;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--green-dark); color: var(--cream); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; min-height: 100vh; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 0.5rem 2rem; background: rgba(15,28,4,0.97); backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(99,153,34,0.3); gap: 1.5rem; }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
+    .nav-logo svg { height: 80px; width: auto; }
+    .nav-logo-text { display: flex; flex-direction: column; line-height: 1.1; }
+    .nav-logo-text .t1 { font-family: 'Caveat', cursive; font-size: 28px; font-weight: 700; color: var(--green-pale); letter-spacing: 1px; }
+    .nav-logo-text .t2 { font-family: 'Caveat', cursive; font-size: 18px; font-weight: 400; color: var(--green-bright); letter-spacing: 2px; }
+    .nav-right { margin-left: auto; display: flex; gap: 1.5rem; align-items: center; }
+    .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+    .nav-right a:hover { color: var(--cream); }
+
+    .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
+
+    .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: fixed; top: 90px; left: 0; bottom: 0; overflow-y: auto; background: rgba(10,20,3,0.97); border-right: 0.5px solid rgba(99,153,34,0.2); padding: 1.25rem 0 2rem; }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-thumb { background: rgba(99,153,34,0.2); border-radius: 2px; }
+    .sb-link { display: block; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); text-decoration: none; transition: color 0.2s; }
+    .sb-link:hover { color: var(--green-pale); }
+    .sb-divider { height: 0.5px; background: rgba(99,153,34,0.15); margin: 0.6rem 1.25rem; }
+    .sb-h1 { display: flex; align-items: center; justify-content: space-between; padding: 0.45rem 1.25rem; font-family: 'Caveat', cursive; font-size: 16px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h1:hover { color: var(--green-pale); }
+    .sb-h1 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h1.open .arr { transform: rotate(90deg); }
+    .sb-c1 { display: none; } .sb-c1.open { display: block; }
+    .sb-l2 { display: block; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l2:hover { color: var(--cream); background: rgba(59,109,17,0.14); }
+    .sb-h2 { display: flex; align-items: center; justify-content: space-between; padding: 0.35rem 1.25rem 0.35rem 2rem; font-family: 'Caveat', cursive; font-size: 16px; color: rgba(192,221,151,0.7); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h2:hover { color: var(--cream); }
+    .sb-h2 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h2.open .arr { transform: rotate(90deg); }
+    .sb-c2 { display: none; } .sb-c2.open { display: block; }
+    .sb-l3 { display: block; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l3:hover { color: var(--cream); background: rgba(59,109,17,0.1); }
+    .sb-l3.active { color: var(--green-pale); border-left: 2px solid var(--green-light); padding-left: calc(3rem - 2px); }
+    .sb-h3 { display: flex; align-items: center; justify-content: space-between; padding: 0.3rem 1.25rem 0.3rem 3rem; font-family: 'Caveat', cursive; font-size: 15px; color: rgba(192,221,151,0.55); cursor: pointer; user-select: none; border: none; background: none; width: 100%; text-align: left; transition: color 0.2s; }
+    .sb-h3 .arr { font-size: 9px; transition: transform 0.2s; opacity: 0.7; }
+    .sb-h3.open .arr { transform: rotate(90deg); }
+    .sb-c3 { display: none; } .sb-c3.open { display: block; }
+    .sb-l4 { display: block; padding: 0.28rem 1.25rem 0.28rem 3.75rem; font-family: 'Caveat', cursive; font-size: 14px; color: rgba(192,221,151,0.4); text-decoration: none; transition: color 0.2s, background 0.2s; }
+    .sb-l4:hover { color: var(--cream); background: rgba(59,109,17,0.08); }
+    .sb-l4.active { color: var(--green-pale); }
+    .about-me-card { margin: 0.5rem 1rem 1rem; background: rgba(59,109,17,0.12); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 12px; padding: 1rem; }
+    .about-me-header { display: flex; align-items: center; gap: 10px; margin-bottom: 0.85rem; }
+    .about-me-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(99,153,34,0.3); border: 1px solid rgba(99,153,34,0.5); display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 16px; font-weight: 700; color: var(--green-pale); flex-shrink: 0; }
+    .about-me-name { font-family: 'Caveat', cursive; font-size: 17px; font-weight: 700; color: var(--green-pale); line-height: 1.2; }
+    .about-me-title { font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); line-height: 1.3; }
+    .about-me-company { font-family: 'Caveat', cursive; font-size: 12px; color: rgba(192,221,151,0.5); line-height: 1.3; }
+    .about-me-buttons { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 0.75rem; }
+    .about-btn { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 6px; font-family: 'Caveat', cursive; font-size: 14px; text-decoration: none; border: 0.5px solid transparent; transition: opacity 0.2s; cursor: pointer; }
+    .about-btn:hover { opacity: 0.8; }
+    .btn-linkedin { background: rgba(10,102,194,0.2); border-color: rgba(10,102,194,0.5); color: #7ab3e0; }
+    .btn-github { background: rgba(192,221,151,0.1); border-color: rgba(192,221,151,0.25); color: var(--green-pale); }
+    .btn-email { background: rgba(239,159,39,0.15); border-color: rgba(239,159,39,0.35); color: var(--amber); }
+    .btn-other { background: rgba(99,153,34,0.15); border-color: rgba(99,153,34,0.35); color: var(--green-bright); }
+    .btn-location { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
+    .about-me-full { display: block; text-align: center; padding: 6px; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); text-decoration: none; border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px; transition: background 0.2s, color 0.2s; }
+    .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
+
+    /* MAIN */
+    .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 4rem; max-width: 900px; }
+    .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
+    .breadcrumb a { color: var(--green-light); text-decoration: none; }
+    .breadcrumb span { margin: 0 6px; }
+    .page-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+    .page-header-text .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.5rem; }
+    .page-header-text .page-title { font-family: 'Caveat', cursive; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
+    .btn-add { display: inline-flex; align-items: center; gap: 6px; padding: 0.6rem 1.2rem; background: rgba(59,109,17,0.2); border: 1px solid var(--green-light); border-radius: 8px; color: var(--green-pale); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+    .btn-add:hover { background: rgba(59,109,17,0.35); }
+
+    /* ADD FORM */
+    .add-form { background: rgba(59,109,17,0.12); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; display: none; }
+    .add-form.visible { display: block; }
+    .add-form label { display: block; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-bright); margin-bottom: 0.4rem; }
+    .add-form input, .add-form textarea { width: 100%; padding: 0.6rem 0.9rem; margin-bottom: 1rem; background: rgba(23,52,4,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: 'Inter', sans-serif; font-size: 14px; resize: vertical; outline: none; transition: border-color 0.2s; }
+    .add-form input:focus, .add-form textarea:focus { border-color: var(--green-light); }
+    .add-form textarea { min-height: 100px; }
+    .form-actions { display: flex; gap: 10px; }
+    .btn-save { padding: 0.5rem 1.4rem; background: var(--green-mid); border: none; border-radius: 8px; color: var(--cream); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; transition: background 0.2s; }
+    .btn-save:hover { background: var(--green-light); }
+    .btn-cancel { padding: 0.5rem 1.2rem; background: transparent; border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: rgba(192,221,151,0.6); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
+    .btn-cancel:hover { border-color: var(--green-light); color: var(--cream); }
+
+    /* RESOURCE CARDS */
+    .resources-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .resource-card { background: rgba(59,109,17,0.1); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 12px; padding: 1.25rem 1.5rem; position: relative; transition: border-color 0.2s, background 0.2s; }
+    .resource-card:hover { border-color: rgba(99,153,34,0.4); background: rgba(59,109,17,0.15); }
+    .resource-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.6rem; }
+    .resource-title { font-family: 'Caveat', cursive; font-size: 1.2rem; font-weight: 700; color: var(--green-pale); }
+    .resource-link { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 6px; background: rgba(99,153,34,0.15); border: 0.5px solid rgba(99,153,34,0.3); font-family: 'Caveat', cursive; font-size: 13px; color: var(--green-bright); text-decoration: none; white-space: nowrap; flex-shrink: 0; transition: background 0.2s; }
+    .resource-link:hover { background: rgba(99,153,34,0.25); color: var(--cream); }
+    .resource-desc { font-size: 13px; color: rgba(192,221,151,0.75); line-height: 1.7; }
+    .resource-tag { display: inline-block; margin-top: 0.6rem; padding: 2px 10px; border-radius: 20px; font-size: 11px; letter-spacing: 0.5px; border: 0.5px solid rgba(239,159,39,0.3); color: rgba(239,159,39,0.7); }
+    .resource-actions { position: absolute; top: 1rem; right: 1rem; display: flex; gap: 6px; opacity: 0; transition: opacity 0.2s; }
+    .resource-card:hover .resource-actions { opacity: 1; }
+    .btn-icon { padding: 3px 8px; border-radius: 5px; font-size: 12px; cursor: pointer; border: 0.5px solid transparent; background: none; transition: background 0.2s; }
+    .btn-edit-res { color: var(--green-bright); border-color: rgba(99,153,34,0.3); }
+    .btn-edit-res:hover { background: rgba(99,153,34,0.15); }
+    .btn-delete-res { color: rgba(239,100,100,0.7); border-color: rgba(239,100,100,0.2); }
+    .btn-delete-res:hover { background: rgba(239,100,100,0.1); }
+
+    .empty-state { text-align: center; padding: 3rem; color: rgba(192,221,151,0.25); border: 0.5px dashed rgba(99,153,34,0.15); border-radius: 12px; font-size: 14px; }
+    .empty-state .icon { font-size: 2.5rem; display: block; margin-bottom: 0.75rem; opacity: 0.3; }
+    .save-banner { position: fixed; bottom: 1.5rem; right: 1.5rem; background: rgba(59,109,17,0.9); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
+    .save-banner.show { display: block; }
+
+    footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
+    footer a { color: var(--green-bright); text-decoration: none; }
+    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420">
+      <rect width="680" height="420" rx="12" fill="#173404"/>
+      <circle cx="460" cy="130" r="32" fill="#FAC775" opacity="0.22"/>
+      <circle cx="460" cy="130" r="19" fill="#FAEEDA" opacity="0.65"/>
+      <circle cx="460" cy="130" r="11" fill="#FAEEDA" opacity="0.95"/>
+      <g stroke="#FAC775" stroke-linecap="round" opacity="0.4">
+        <line x1="460" y1="103" x2="460" y2="113" stroke-width="1.8"/>
+        <line x1="432" y1="111" x2="438" y2="118" stroke-width="1.5"/>
+        <line x1="418" y1="130" x2="428" y2="130" stroke-width="1.5"/>
+        <line x1="432" y1="149" x2="438" y2="142" stroke-width="1.5"/>
+        <line x1="488" y1="103" x2="482" y2="113" stroke-width="1.5"/>
+        <line x1="492" y1="130" x2="482" y2="130" stroke-width="1.5"/>
+        <line x1="488" y1="149" x2="482" y2="142" stroke-width="1.5"/>
+      </g>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208 L680,265 Z" fill="#3B6D11"/>
+      <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208" fill="none" stroke="#97C459" stroke-width="3" stroke-linecap="round"/>
+      <g fill="#27500A">
+        <polygon points="68,268 80,233 92,268"/><polygon points="74,248 80,230 86,248"/>
+        <polygon points="96,268 110,244 124,268"/><polygon points="103,256 110,241 117,256"/>
+        <polygon points="490,268 504,236 518,268"/><polygon points="497,250 504,233 511,250"/>
+        <polygon points="544,268 556,250 568,268"/><polygon points="550,260 556,247 562,260"/>
+      </g>
+      <rect x="0" y="265" width="680" height="5" fill="#27500A"/>
+      <text x="340" y="334" text-anchor="middle" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="#C0DD97" letter-spacing="3">Mountain</text>
+      <text x="340" y="374" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="400" fill="#97C459" letter-spacing="3">Modulation</text>
+    </svg>
+    <div class="nav-logo-text"><span class="t1">Mountain</span><span class="t2">Modulation</span></div>
+  </a>
+  <div class="nav-right">
+    <a href="index.html#about">About</a>
+    <a href="index.html#blog">Blog</a>
+  </div>
+</nav>
+
+<div class="layout">
+  <aside class="sidebar">
+    <a href="index.html" class="sb-link">Home</a>
+    <a href="index.html#blog" class="sb-link">Blog</a>
+    <a href="index.html#about" class="sb-link">About</a>
+    <div class="sb-divider"></div>
+    <button class="sb-h1 open" onclick="tog(this)">Certifications <span class="arr">▶</span></button>
+    <div class="sb-c1 open">
+      <button class="sb-h2" onclick="tog(this)">CWNA <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
+      <button class="sb-h2" onclick="tog(this)">JNCIA-Junos <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
+      <button class="sb-h2" onclick="tog(this)">JNCIA-MistAI <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
+      <button class="sb-h2" onclick="tog(this)">JNCIS-MistAI-Wireless <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
+      <button class="sb-h2" onclick="tog(this)">JNCIS-MistAI-Wired <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
+      <button class="sb-h2 open" onclick="tog(this)">Automating Juniper Mist AI Enterprise <span class="arr">▶</span></button>
+      <div class="sb-c2 open">
+        <a href="study-notes-mist-automation.html" class="sb-l3">Study Notes</a>
+        <button class="sb-h3 open" onclick="tog(this)">Resources <span class="arr">▶</span></button>
+        <div class="sb-c3 open"><a href="resources-mist-automation.html" class="sb-l4 active">View All Resources</a></div>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Networking <span class="arr">▶</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2" onclick="tog(this)">Juniper <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">RF</a><a href="#" class="sb-l3">Automation</a><a href="#" class="sb-l3">Switch</a></div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">▶</span></button>
+      <div class="sb-c2">
+        <button class="sb-h3" onclick="tog(this)">Panorama <span class="arr">▶</span></button>
+        <div class="sb-c3"><a href="#" class="sb-l4">CLI</a></div>
+        <a href="#" class="sb-l3">Firewalls</a>
+      </div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Tech Field Day <span class="arr">▶</span></button>
+    <div class="sb-c1">
+      <button class="sb-h2" onclick="tog(this)">Mobility Field Day <span class="arr">▶</span></button>
+      <div class="sb-c2"><a href="#" class="sb-l3">MFD14</a></div>
+    </div>
+    <div class="sb-divider"></div>
+    <button class="sb-h1" onclick="tog(this)">Tools &amp; Lab <span class="arr">▶</span></button>
+    <div class="sb-c1"><a href="#" class="sb-l2">Scripts</a><a href="#" class="sb-l2">Lab Builds</a></div>
+    <div class="sb-divider"></div>
+    <div class="about-me-card">
+      <div class="about-me-header">
+        <div class="about-me-avatar">MM</div>
+        <div><div class="about-me-name">Your Name</div><div class="about-me-title">Your Title</div><div class="about-me-company">@ Your Company</div></div>
+      </div>
+      <div class="about-me-buttons">
+        <a href="#" class="about-btn btn-linkedin">💼 LinkedIn</a>
+        <a href="https://github.com/MountainModulation" target="_blank" class="about-btn btn-github">🐙 GitHub</a>
+        <a href="#" class="about-btn btn-email">✉️ Email</a>
+        <a href="#" class="about-btn btn-other">🔗 Other</a>
+        <span class="about-btn btn-location">📍 United States</span>
+      </div>
+      <a href="index.html#about" class="about-me-full">👤 View Full Profile →</a>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>›</span>Certifications<span>›</span>Automating Juniper Mist AI Enterprise<span>›</span>Resources
+    </div>
+
+    <div class="page-header">
+      <div class="page-header-text">
+        <p class="page-label">Certifications</p>
+        <h1 class="page-title">Resources</h1>
+      </div>
+      <button class="btn-add" onclick="toggleForm()">＋ Add Resource</button>
+    </div>
+
+    <div class="add-form" id="addForm">
+      <label>Resource Title</label>
+      <input type="text" id="resTitle" placeholder="e.g. Mist API Reference"/>
+      <label>URL</label>
+      <input type="url" id="resUrl" placeholder="https://..."/>
+      <label>Why is this helpful?</label>
+      <textarea id="resDesc" placeholder="Describe what this resource covers and why it's useful..."></textarea>
+      <label>Tag (optional)</label>
+      <input type="text" id="resTag" placeholder="e.g. Official Docs, Blog, Tutorial"/>
+      <div class="form-actions">
+        <button class="btn-save" onclick="saveResource()">Save Resource</button>
+        <button class="btn-cancel" onclick="toggleForm()">Cancel</button>
+      </div>
+    </div>
+
+    <div class="resources-list" id="resourcesList"></div>
+    <div class="empty-state" id="emptyState">
+      <span class="icon">🔗</span>
+      No resources yet — click <strong>+ Add Resource</strong> to get started
+    </div>
+  </main>
+</div>
+
+<div class="save-banner" id="saveBanner">✓ Saved</div>
+
+<footer>
+  <p>© 2025 Mountain Modulation &nbsp;·&nbsp; <a href="https://soretech.net">soretech.net</a></p>
+</footer>
+
+<script>
+  const STORAGE_KEY = 'mm_resources_mist_automation';
+  let resources = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  let editingId = null;
+
+  // Pre-populate with the existing resources on first load
+  if (resources.length === 0) {
+    resources = [
+      { id: 1, title: 'API for Developers', url: 'https://www.juniper.net/documentation/product/us/en/mist/#cat=for_developers', desc: "Juniper's official developer documentation hub for the Mist platform. Good starting point for understanding what APIs are available, how they're structured, and where to find reference material.", tag: 'Official Docs' },
+      { id: 2, title: 'Mist API Reference', url: 'https://www.juniper.net/documentation/us/en/software/mist/api/http/getting-started/how-to-get-started', desc: 'Step-by-step guide on how to get started with the Mist REST API — covering authentication, making your first request, and understanding the response format.', tag: 'Getting Started' },
+      { id: 3, title: 'Mist Product Updates', url: 'https://www.juniper.net/documentation/us/en/software/mist/product-updates/2026/june-2nd-2026-updates.html', desc: 'Latest Mist release notes — useful for keeping up with new API endpoints, feature changes, and deprecations that may affect automation scripts.', tag: 'Release Notes' },
+      { id: 4, title: 'Mist LAB Demo Apps', url: 'https://apps.mist-lab.fr/static/', desc: 'Community-built demo applications for the Mist platform. Great for seeing real-world examples of what is possible with the API.', tag: 'Community Tools' },
+      { id: 5, title: 'Semfio Networks', url: 'https://semfionetworks.com/', desc: 'Wireless networking blog with deep technical content on Wi-Fi design, RF, and Mist. Excellent supplementary reading for anyone working with the Mist platform.', tag: 'Blog' },
+    ];
+    persist();
+  }
+
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+
+  function toggleForm(reset) {
+    const form = document.getElementById('addForm');
+    form.classList.toggle('visible');
+    if (!form.classList.contains('visible') || reset) {
+      document.getElementById('resTitle').value = '';
+      document.getElementById('resUrl').value = '';
+      document.getElementById('resDesc').value = '';
+      document.getElementById('resTag').value = '';
+      editingId = null;
+    }
+  }
+
+  function saveResource() {
+    const title = document.getElementById('resTitle').value.trim();
+    const url   = document.getElementById('resUrl').value.trim();
+    const desc  = document.getElementById('resDesc').value.trim();
+    const tag   = document.getElementById('resTag').value.trim();
+    if (!title) return;
+    if (editingId !== null) {
+      const idx = resources.findIndex(r => r.id === editingId);
+      if (idx > -1) { resources[idx] = { ...resources[idx], title, url, desc, tag }; }
+      editingId = null;
+    } else {
+      resources.unshift({ id: Date.now(), title, url, desc, tag });
+    }
+    persist(); render(); toggleForm(true);
+    showBanner('✓ Resource saved');
+  }
+
+  function editResource(id) {
+    const r = resources.find(x => x.id === id);
+    if (!r) return;
+    editingId = id;
+    document.getElementById('resTitle').value = r.title;
+    document.getElementById('resUrl').value = r.url;
+    document.getElementById('resDesc').value = r.desc;
+    document.getElementById('resTag').value = r.tag || '';
+    const form = document.getElementById('addForm');
+    form.classList.add('visible');
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function deleteResource(id) {
+    if (!confirm('Delete this resource?')) return;
+    resources = resources.filter(r => r.id !== id);
+    persist(); render();
+    showBanner('✓ Deleted');
+  }
+
+  function persist() { localStorage.setItem(STORAGE_KEY, JSON.stringify(resources)); }
+
+  function showBanner(msg) {
+    const b = document.getElementById('saveBanner');
+    b.textContent = msg; b.classList.add('show');
+    setTimeout(() => b.classList.remove('show'), 2000);
+  }
+
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function render() {
+    const list  = document.getElementById('resourcesList');
+    const empty = document.getElementById('emptyState');
+    if (resources.length === 0) { list.innerHTML = ''; empty.style.display = 'block'; return; }
+    empty.style.display = 'none';
+    list.innerHTML = resources.map(r => `
+      <div class="resource-card">
+        <div class="resource-actions">
+          <button class="btn-icon btn-edit-res" onclick="editResource(${r.id})">✏️ Edit</button>
+          <button class="btn-icon btn-delete-res" onclick="deleteResource(${r.id})">🗑 Delete</button>
+        </div>
+        <div class="resource-top">
+          <div class="resource-title">${esc(r.title)}</div>
+          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-link">↗ Open</a>` : ''}
+        </div>
+        ${r.desc ? `<p class="resource-desc">${esc(r.desc)}</p>` : ''}
+        ${r.tag  ? `<span class="resource-tag">${esc(r.tag)}</span>` : ''}
+      </div>`).join('');
+  }
+
+  render();
+</script>
+</body>
+</html>
