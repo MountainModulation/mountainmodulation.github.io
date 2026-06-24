@@ -5,6 +5,13 @@
     "credly": "",
     "bullets": ""
   },
-  "resources": [],
+  "resources": [
+    {
+      "id": 1782335871256,
+      "title": "API for Developers",
+      "url": "https://www.juniper.net/documentation/product/us/en/mist/#cat=for_developers",
+      "note": ""
+    }
+  ],
   "notes": ""
 }
