@@ -1,5 +1,10 @@
 {
-  "exam": { "version": "", "date": "", "credly": "", "bullets": "" },
+  "exam": {
+    "version": "JN0-253",
+    "date": "November 2025",
+    "credly": "",
+    "bullets": ""
+  },
   "resources": [],
   "notes": ""
 }
