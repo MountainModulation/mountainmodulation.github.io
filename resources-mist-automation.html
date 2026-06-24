@@ -202,14 +202,16 @@
     <a href="index.html#about">About</a>
     <a href="index.html#blog">Blog</a>
   </div>
-  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<button class="hamburger" onclick="toggleSidebar()" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:18px;right:1rem;z-index:999;">
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+</button>
+<div id="mobileOverlay" onclick="toggleSidebar()" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:150;"></div>
 
 <div class="layout">
-  <aside class="sidebar">
+  <aside class="sidebar" id="sidebar">
     <a href="index.html" class="sb-link">Home</a>
     <a href="index.html#blog" class="sb-link">Blog</a>
     <a href="index.html#about" class="sb-link">About</a>
@@ -416,10 +418,25 @@
   }
 
   render();
+  
   function toggleSidebar() {
-    document.querySelector('.sidebar').classList.toggle('open');
-    document.getElementById('mobileOverlay').classList.toggle('show');
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    var hb = document.querySelector('.hamburger');
+    if (!sb) return;
+    var isOpen = sb.classList.contains('open');
+    sb.classList.toggle('open');
+    if (ov) ov.style.display = isOpen ? 'none' : 'block';
   }
+  // Show hamburger on mobile
+  if (window.innerWidth <= 768) {
+    var hb = document.querySelector('.hamburger');
+    if (hb) hb.style.display = 'flex';
+  }
+  window.addEventListener('resize', function() {
+    var hb = document.querySelector('.hamburger');
+    if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  });
 </script>
 </body>
 </html>

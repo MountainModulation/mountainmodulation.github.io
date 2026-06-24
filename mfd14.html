@@ -258,7 +258,12 @@
   </div>
 
 </nav>
-<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<button class="hamburger" onclick="toggleSidebar()" style="display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;background:none;border:none;position:fixed;top:18px;right:1rem;z-index:999;">
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+  <span style="display:block;width:24px;height:2px;background:#97C459;border-radius:2px;"></span>
+</button>
+<div id="mobileOverlay" onclick="toggleSidebar()" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:150;"></div>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
@@ -460,11 +465,6 @@
     if (btn) btn.addEventListener('click', toggleSidebar);
     if (overlay) overlay.addEventListener('click', toggleSidebar);
   });
-  function toggleSidebar() {
-    var sb = document.getElementById('sidebar');
-    var ov = document.getElementById('mobileOverlay');
-    if (sb) sb.classList.toggle('open');
-    if (ov) ov.classList.toggle('show');
-  }
+  
 </body>
 </html>
