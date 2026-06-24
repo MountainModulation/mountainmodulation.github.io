@@ -6,7 +6,6 @@
   <title>JNCIA-MistAI | Mountain Modulation</title>
   <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <!-- Marked.js for markdown rendering -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,8 +16,6 @@
     }
     html { scroll-behavior: smooth; }
     body { background: var(--green-dark); color: var(--cream); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 1.7; display: flex; flex-direction: column; min-height: 100vh; }
-
-    /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; display: flex; align-items: center; padding: 0.5rem 2rem; background: rgba(15,28,4,0.97); backdrop-filter: blur(8px); border-bottom: 0.5px solid rgba(99,153,34,0.3); gap: 1.5rem; }
     .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; flex-shrink: 0; }
     .nav-logo svg { height: 80px; width: auto; }
@@ -28,11 +25,7 @@
     .nav-right { margin-left: auto; display: flex; gap: 1.5rem; }
     .nav-right a { color: var(--green-bright); text-decoration: none; font-size: 13px; transition: color 0.2s; }
     .nav-right a:hover { color: var(--cream); }
-
-    /* LAYOUT */
     .layout { display: flex; margin-top: 90px; min-height: calc(100vh - 90px); }
-
-    /* SIDEBAR */
     .sidebar { width: var(--sidebar-w); flex-shrink: 0; position: fixed; top: 90px; left: 0; bottom: 0; overflow-y: auto; background: rgba(10,20,3,0.97); border-right: 0.5px solid rgba(99,153,34,0.2); padding: 1.25rem 0 2rem; }
     .sidebar::-webkit-scrollbar { width: 4px; }
     .sidebar::-webkit-scrollbar-thumb { background: rgba(99,153,34,0.2); border-radius: 2px; }
@@ -76,30 +69,22 @@
     .btn-location { background: transparent; border-color: rgba(99,153,34,0.2); color: rgba(192,221,151,0.5); font-size: 13px; }
     .about-me-full { display: block; text-align: center; padding: 6px; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); text-decoration: none; border: 0.5px solid rgba(99,153,34,0.25); border-radius: 8px; transition: background 0.2s; }
     .about-me-full:hover { background: rgba(59,109,17,0.2); color: var(--cream); }
-
-    /* MAIN */
     .main { margin-left: var(--sidebar-w); flex: 1; min-width: 0; padding: 3rem 3rem 5rem; max-width: 920px; }
     .breadcrumb { font-size: 12px; color: rgba(99,153,34,0.6); margin-bottom: 2rem; }
     .breadcrumb a { color: var(--green-light); text-decoration: none; }
-    .breadcrumb a:hover { color: var(--green-pale); }
     .breadcrumb span { margin: 0 6px; }
-
-    /* PAGE TITLE */
     .page-title-row { margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
     .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
     .page-title { font-family: 'Caveat', cursive; font-size: clamp(2rem,5vw,3rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; }
-
-    /* BLOCKS */
     .block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
     .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); flex-wrap: wrap; gap: 0.75rem; }
     .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); display: flex; align-items: center; gap: 8px; }
-    .block-title .icon { font-size: 1.2rem; }
-    .btn-edit { display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .btn-edit { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
     .btn-edit:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
-    .btn-add-small { display: inline-flex; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
+    .edit-mode .btn-edit { display: inline-flex; }
+    .btn-add-small { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; transition: background 0.2s; }
     .btn-add-small:hover { background: rgba(59,109,17,0.35); color: var(--cream); }
-
-    /* ── NOTES BLOCK ── */
+    .edit-mode .btn-add-small { display: inline-flex; }
     .markdown-editor { display: none; width: 100%; min-height: 320px; padding: 1rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: 'Inter', monospace; font-size: 13px; resize: vertical; outline: none; line-height: 1.7; }
     .markdown-editor:focus { border-color: var(--green-light); }
     .editor-actions { display: none; gap: 10px; margin-top: 0.75rem; }
@@ -108,8 +93,6 @@
     .btn-save:hover { background: var(--green-light); }
     .btn-cancel { padding: 0.5rem 1.2rem; background: transparent; border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: rgba(192,221,151,0.6); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
     .btn-cancel:hover { border-color: var(--green-light); color: var(--cream); }
-
-    /* Rendered markdown styles */
     .markdown-body { color: rgba(192,221,151,0.88); font-size: 14px; line-height: 1.85; }
     .markdown-body h1 { font-family: 'Caveat', cursive; font-size: 1.9rem; color: var(--green-pale); margin: 1.5rem 0 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); padding-bottom: 0.4rem; }
     .markdown-body h2 { font-family: 'Caveat', cursive; font-size: 1.5rem; color: var(--green-pale); margin: 1.25rem 0 0.5rem; }
@@ -123,14 +106,10 @@
     .markdown-body blockquote { border-left: 3px solid var(--green-light); padding-left: 1rem; margin: 1rem 0; color: rgba(192,221,151,0.6); font-style: italic; }
     .markdown-body a { color: var(--green-bright); }
     .markdown-body strong { color: var(--cream); font-weight: 500; }
-    .markdown-body hr { border: none; border-top: 0.5px solid rgba(99,153,34,0.2); margin: 1.5rem 0; }
     .markdown-body table { width: 100%; border-collapse: collapse; margin-bottom: 1rem; font-size: 13px; }
     .markdown-body th { background: rgba(59,109,17,0.2); color: var(--green-pale); padding: 8px 12px; text-align: left; border: 0.5px solid rgba(99,153,34,0.2); font-family: 'Caveat', cursive; font-size: 15px; }
     .markdown-body td { padding: 7px 12px; border: 0.5px solid rgba(99,153,34,0.15); color: rgba(192,221,151,0.8); }
-    .markdown-body tr:nth-child(even) td { background: rgba(59,109,17,0.05); }
     .notes-placeholder { color: rgba(192,221,151,0.25); font-size: 14px; text-align: center; padding: 2rem 0; }
-
-    /* ── RESOURCES BLOCK ── */
     .resource-list { display: flex; flex-direction: column; gap: 0.75rem; }
     .resource-row { display: flex; align-items: flex-start; gap: 1rem; padding: 0.75rem 1rem; background: rgba(23,52,4,0.4); border: 0.5px solid rgba(99,153,34,0.15); border-radius: 8px; transition: border-color 0.2s; }
     .resource-row:hover { border-color: rgba(99,153,34,0.35); }
@@ -141,7 +120,8 @@
     .resource-row-actions { display: flex; gap: 5px; flex-shrink: 0; }
     .resource-open { display: inline-flex; align-items: center; padding: 3px 10px; border-radius: 5px; background: rgba(99,153,34,0.12); border: 0.5px solid rgba(99,153,34,0.25); font-size: 12px; color: var(--green-bright); text-decoration: none; transition: background 0.2s; white-space: nowrap; }
     .resource-open:hover { background: rgba(99,153,34,0.22); }
-    .btn-icon { padding: 3px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; border: 0.5px solid transparent; background: none; }
+    .btn-icon { padding: 3px 8px; border-radius: 5px; font-size: 11px; cursor: pointer; border: 0.5px solid transparent; background: none; display: none; }
+    .edit-mode .btn-icon { display: inline-block; }
     .btn-del { color: rgba(239,100,100,0.6); border-color: rgba(239,100,100,0.15); }
     .btn-del:hover { background: rgba(239,100,100,0.08); }
     .res-form { display: none; background: rgba(10,20,3,0.5); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 10px; padding: 1.25rem; margin-top: 1rem; gap: 0.6rem; flex-direction: column; }
@@ -152,8 +132,6 @@
     .res-form label { font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-bright); }
     .res-form-actions { display: flex; gap: 8px; margin-top: 0.25rem; }
     .res-empty { color: rgba(192,221,151,0.25); font-size: 13px; text-align: center; padding: 1.5rem 0; }
-
-    /* ── EXAM BLOCK ── */
     .exam-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
     .exam-field { display: flex; flex-direction: column; gap: 4px; }
     .exam-field label { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--green-light); }
@@ -174,13 +152,21 @@
     .exam-edit-form small { font-size: 11px; color: rgba(99,153,34,0.5); }
     .exam-display { display: block; }
 
-    /* SAVE BANNER */
-    .save-banner { position: fixed; bottom: 1.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
+    /* LOCK BUTTON */
+    .lock-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(59,109,17,0.3); border: 0.5px solid rgba(99,153,34,0.4); color: var(--green-bright); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; transition: background 0.2s; }
+    .lock-btn:hover { background: rgba(59,109,17,0.5); }
+    .lock-btn.unlocked { background: rgba(239,159,39,0.2); border-color: rgba(239,159,39,0.5); color: var(--amber); }
+
+    /* EDIT MODE BANNER */
+    .edit-banner { display: none; position: fixed; top: 90px; left: var(--sidebar-w); right: 0; background: rgba(239,159,39,0.15); border-bottom: 0.5px solid rgba(239,159,39,0.3); padding: 0.5rem 1.5rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--amber); z-index: 100; text-align: center; }
+    .edit-mode .edit-banner { display: block; }
+
+    .save-banner { position: fixed; bottom: 4.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
     .save-banner.show { display: block; }
 
     footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
     footer a { color: var(--green-bright); text-decoration: none; }
-    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .exam-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .exam-grid { grid-template-columns: 1fr; } .edit-banner { left: 0; } }
   </style>
 </head>
 <body>
@@ -221,6 +207,8 @@
   </div>
 </nav>
 
+<div class="edit-banner">✏️ Edit mode active — changes save directly to GitHub</div>
+
 <div class="layout">
   <aside class="sidebar">
     <a href="index.html" class="sb-link">Home</a>
@@ -235,15 +223,15 @@
         <a href="jncia-mistai.html" class="sb-l3 active">JNCIA-MistAI</a>
         <a href="jncis-mistai-wireless.html" class="sb-l3">JNCIS-MistAI-Wireless</a>
         <a href="jncis-mistai-wired.html" class="sb-l3">JNCIS-MistAI-Wired</a>
-        <button class="sb-h3" onclick="tog(this)">Automating Mist AI Enterprise <span class="arr">&#9658;</span></button>
-        <div class="sb-c3">
-          <a href="study-notes-mist-automation.html" class="sb-l4">Study Notes</a>
-          <a href="resources-mist-automation.html" class="sb-l4">Resources</a>
-        </div>
+        <a href="automating-mist-ai.html" class="sb-l3">Automating Mist AI Enterprise</a>
       </div>
       <button class="sb-h2" onclick="tog(this)">CWNP <span class="arr">&#9658;</span></button>
       <div class="sb-c2">
         <a href="cwna.html" class="sb-l3">CWNA</a>
+      </div>
+      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2">
+        <a href="#" class="sb-l3">Coming Soon</a>
       </div>
     </div>
     <div class="sb-divider"></div>
@@ -296,16 +284,12 @@
       <h1 class="page-title">JNCIA-MistAI</h1>
     </div>
 
-    <!-- ═══════════════════════════════
-         BLOCK 1 — EXAM DETAILS
-    ════════════════════════════════ -->
+    <!-- EXAM DETAILS -->
     <div class="block">
       <div class="block-header">
-        <div class="block-title"><span class="icon">🎓</span> Exam Details</div>
-        <button class="btn-edit" onclick="toggleExamEdit()">✏️ Edit</button>
+        <div class="block-title">&#127891; Exam Details</div>
+        <button class="btn-edit" onclick="toggleExamEdit()">&#9999;&#65039; Edit</button>
       </div>
-
-      <!-- EDIT FORM -->
       <div class="exam-edit-form" id="examForm">
         <label>Exam Version</label>
         <input type="text" id="examVersion" placeholder="e.g. JN0-105"/>
@@ -314,28 +298,17 @@
         <label>Credly Badge URL</label>
         <input type="url" id="examCredly" placeholder="https://www.credly.com/badges/..."/>
         <label>Bullet Points <small>(one per line)</small></label>
-        <textarea id="examBullets" placeholder="Passed on first attempt&#10;Studied for 3 weeks&#10;Used Juniper free learning portal"></textarea>
+        <textarea id="examBullets" placeholder="Passed on first attempt&#10;Studied for 3 weeks"></textarea>
         <div class="res-form-actions">
           <button class="btn-save" onclick="saveExam()">Save</button>
           <button class="btn-cancel" onclick="toggleExamEdit()">Cancel</button>
         </div>
       </div>
-
-      <!-- DISPLAY -->
       <div class="exam-display" id="examDisplay">
-        <div class="exam-grid" id="examGrid">
-          <div class="exam-field">
-            <label>Exam Version</label>
-            <div class="exam-field-value" id="dispVersion">—</div>
-          </div>
-          <div class="exam-field">
-            <label>Date Taken</label>
-            <div class="exam-field-value" id="dispDate">—</div>
-          </div>
-          <div class="exam-field">
-            <label>Credly Badge</label>
-            <div class="exam-field-value" id="dispCredly">—</div>
-          </div>
+        <div class="exam-grid">
+          <div class="exam-field"><label>Exam Version</label><div class="exam-field-value" id="dispVersion">—</div></div>
+          <div class="exam-field"><label>Date Taken</label><div class="exam-field-value" id="dispDate">—</div></div>
+          <div class="exam-field"><label>Credly Badge</label><div class="exam-field-value" id="dispCredly">—</div></div>
         </div>
         <div class="exam-bullets" id="examBulletsSection" style="display:none">
           <div class="exam-bullets-title">Tidbits</div>
@@ -343,143 +316,123 @@
         </div>
       </div>
     </div>
-<!-- ═══════════════════════════════
-         BLOCK 2 — RESOURCES
-    ════════════════════════════════ -->
+
+    <!-- RESOURCES -->
     <div class="block">
       <div class="block-header">
-        <div class="block-title"><span class="icon">🔗</span> Resources</div>
-        <button class="btn-add-small" onclick="toggleResForm()">＋ Add Resource</button>
+        <div class="block-title">&#128279; Resources</div>
+        <button class="btn-add-small" onclick="toggleResForm()">&#65291; Add Resource</button>
       </div>
-
       <div class="res-form" id="resForm">
         <label>Title</label>
         <input type="text" id="resTitle" placeholder="e.g. Junos Documentation"/>
         <label>URL</label>
         <input type="url" id="resUrl" placeholder="https://..."/>
         <label>Why is this helpful? (optional)</label>
-        <textarea id="resNote" placeholder="Brief note about this resource..."></textarea>
+        <textarea id="resNote" placeholder="Brief note..."></textarea>
         <div class="res-form-actions">
           <button class="btn-save" onclick="saveResource()">Save</button>
           <button class="btn-cancel" onclick="toggleResForm()">Cancel</button>
         </div>
       </div>
-
       <div class="resource-list" id="resList"></div>
-      <div class="res-empty" id="resEmpty">No resources yet — click + Add Resource</div>
+      <div class="res-empty" id="resEmpty">No resources yet</div>
     </div>
 
-    <!-- ═══════════════════════════════
-         BLOCK 3 — NOTES
-    ════════════════════════════════ -->
+    <!-- NOTES -->
     <div class="block">
       <div class="block-header">
-        <div class="block-title"><span class="icon">📝</span> Notes</div>
-        <button class="btn-edit" onclick="toggleNotesEditor()">✏️ Edit Notes</button>
+        <div class="block-title">&#128221; Notes</div>
+        <button class="btn-edit" onclick="toggleNotesEditor()">&#9999;&#65039; Edit Notes</button>
       </div>
-
-      <textarea class="markdown-editor" id="notesEditor" placeholder="Paste your Obsidian markdown here...&#10;&#10;# Heading&#10;## Subheading&#10;- bullet point&#10;**bold** _italic_ `code`&#10;&#10;Everything renders automatically when you save."></textarea>
+      <textarea class="markdown-editor" id="notesEditor" placeholder="Paste your Obsidian markdown here..."></textarea>
       <div class="editor-actions" id="notesActions">
         <button class="btn-save" onclick="saveNotes()">Save Notes</button>
         <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
       </div>
-
       <div class="markdown-body" id="notesDisplay">
-        <p class="notes-placeholder">No notes yet — click Edit Notes to paste your Obsidian markdown.</p>
+        <p class="notes-placeholder">No notes yet.</p>
       </div>
     </div>
 
-    
   </main>
 </div>
 
-<div class="save-banner" id="saveBanner">✓ Saved</div>
+<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()" title="Toggle edit mode">&#128274;</button>
+<div class="save-banner" id="saveBanner">&#10003; Saved</div>
 
 <footer>
-  <p>© 2025 Mountain Modulation &nbsp;·&nbsp; <a href="https://soretech.net">soretech.net</a></p>
+  <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
 </footer>
 
 <script>
-  const NS = 'mm_jncia_mistai';
-  let data = JSON.parse(localStorage.getItem(NS) || '{}');
-  if (!data.notes)     data.notes     = '';
-  if (!data.resources) data.resources = [];
-  if (!data.exam)      data.exam      = { version:'', date:'', credly:'', bullets:'' };
+  const REPO  = 'MountainModulation/mountainmodulation.github.io';
+  const FILE  = 'data/jncia-mistai.json';
+  let pat     = sessionStorage.getItem('mm_pat') || '';
+  let data    = { exam: { version:'', date:'', credly:'', bullets:'' }, resources: [], notes: '' };
+  let fileSha = '';
 
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
-  function persist() { localStorage.setItem(NS, JSON.stringify(data)); }
+  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function banner(msg) {
     const b = document.getElementById('saveBanner');
     b.textContent = msg; b.classList.add('show');
-    setTimeout(() => b.classList.remove('show'), 2000);
+    setTimeout(() => b.classList.remove('show'), 2500);
   }
-  function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  /* ── NOTES ── */
-  function toggleNotesEditor() {
-    const ed = document.getElementById('notesEditor');
-    const ac = document.getElementById('notesActions');
-    const ds = document.getElementById('notesDisplay');
-    const editing = ed.style.display === 'block';
-    ed.style.display   = editing ? 'none'  : 'block';
-    ac.style.display   = editing ? 'none'  : 'flex';
-    ds.style.display   = editing ? 'block' : 'none';
-    if (!editing) ed.value = data.notes;
+  /* ── LOAD DATA FROM GITHUB ── */
+  async function loadData() {
+    try {
+      const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+        headers: pat ? { Authorization: `token ${pat}` } : {}
+      });
+      if (!r.ok) return;
+      const json = await r.json();
+      fileSha = json.sha;
+      data = JSON.parse(atob(json.content.replace(/\n/g,'')));
+    } catch(e) {}
+    renderAll();
   }
-  function saveNotes() {
-    data.notes = document.getElementById('notesEditor').value;
-    persist(); renderNotes(); toggleNotesEditor(); banner('✓ Notes saved');
-  }
-  function cancelNotes() { toggleNotesEditor(); }
-  function renderNotes() {
-    const el = document.getElementById('notesDisplay');
-    if (!data.notes.trim()) {
-      el.innerHTML = '<p class="notes-placeholder">No notes yet — click Edit Notes to paste your Obsidian markdown.</p>';
+
+  /* ── SAVE DATA TO GITHUB ── */
+  async function saveData() {
+    if (!pat) { alert('Enter your PAT first by clicking the lock icon.'); return; }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const body = { message: 'Update jncia-mistai data', content, sha: fileSha };
+    const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (r.ok) {
+      const json = await r.json();
+      fileSha = json.content.sha;
+      banner('✓ Saved to GitHub — live in ~60s');
     } else {
-      el.innerHTML = marked.parse(data.notes);
+      banner('✗ Save failed — check your PAT');
     }
   }
 
-  /* ── RESOURCES ── */
-  function toggleResForm() {
-    const f = document.getElementById('resForm');
-    f.classList.toggle('visible');
-    if (!f.classList.contains('visible')) {
-      document.getElementById('resTitle').value = '';
-      document.getElementById('resUrl').value   = '';
-      document.getElementById('resNote').value  = '';
+  /* ── EDIT MODE ── */
+  function toggleEditMode() {
+    if (!pat) {
+      const token = prompt('Enter your GitHub Personal Access Token:');
+      if (!token) return;
+      pat = token.trim();
+      sessionStorage.setItem('mm_pat', pat);
+    } else {
+      // Already have PAT — toggle off
+      pat = '';
+      sessionStorage.removeItem('mm_pat');
+      document.body.classList.remove('edit-mode');
+      document.getElementById('lockBtn').classList.remove('unlocked');
+      document.getElementById('lockBtn').textContent = '🔒';
+      return;
     }
-  }
-  function saveResource() {
-    const title = document.getElementById('resTitle').value.trim();
-    const url   = document.getElementById('resUrl').value.trim();
-    const note  = document.getElementById('resNote').value.trim();
-    if (!title && !url) return;
-    data.resources.unshift({ id: Date.now(), title: title || url, url, note });
-    persist(); renderResources(); toggleResForm(); banner('✓ Resource saved');
-  }
-  function deleteResource(id) {
-    if (!confirm('Delete this resource?')) return;
-    data.resources = data.resources.filter(r => r.id !== id);
-    persist(); renderResources(); banner('✓ Deleted');
-  }
-  function renderResources() {
-    const list  = document.getElementById('resList');
-    const empty = document.getElementById('resEmpty');
-    if (!data.resources.length) { list.innerHTML = ''; empty.style.display = 'block'; return; }
-    empty.style.display = 'none';
-    list.innerHTML = data.resources.map(r => `
-      <div class="resource-row">
-        <div class="resource-row-info">
-          <div class="resource-row-title">${esc(r.title)}</div>
-          ${r.url  ? `<div class="resource-row-url">${esc(r.url)}</div>` : ''}
-          ${r.note ? `<div class="resource-row-note">${esc(r.note)}</div>` : ''}
-        </div>
-        <div class="resource-row-actions">
-          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-open">↗ Open</a>` : ''}
-          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">🗑</button>
-        </div>
-      </div>`).join('');
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '🔓';
+    banner('✓ Edit mode unlocked');
   }
 
   /* ── EXAM ── */
@@ -488,45 +441,108 @@
     const disp = document.getElementById('examDisplay');
     const editing = form.classList.contains('visible');
     if (!editing) {
-      document.getElementById('examVersion').value = data.exam.version;
-      document.getElementById('examDate').value    = data.exam.date || '';
-      document.getElementById('examCredly').value  = data.exam.credly;
-      document.getElementById('examBullets').value = data.exam.bullets;
+      document.getElementById('examVersion').value = data.exam.version || '';
+      document.getElementById('examDate').value    = data.exam.date    || '';
+      document.getElementById('examCredly').value  = data.exam.credly  || '';
+      document.getElementById('examBullets').value = data.exam.bullets || '';
     }
     form.classList.toggle('visible');
     disp.style.display = editing ? 'block' : 'none';
   }
-  function saveExam() {
+  async function saveExam() {
     data.exam.version = document.getElementById('examVersion').value.trim();
     data.exam.date    = document.getElementById('examDate').value.trim();
     data.exam.credly  = document.getElementById('examCredly').value.trim();
     data.exam.bullets = document.getElementById('examBullets').value.trim();
-    persist(); renderExam(); toggleExamEdit(); banner('✓ Exam details saved');
+    await saveData(); renderExam(); toggleExamEdit();
   }
   function renderExam() {
     document.getElementById('dispVersion').textContent = data.exam.version || '—';
-    document.getElementById('dispDate').textContent = data.exam.date || '—';
-    const credlyEl = document.getElementById('dispCredly');
-    if (data.exam.credly) {
-      credlyEl.innerHTML = `<a href="${esc(data.exam.credly)}" target="_blank">🏅 View Badge</a>`;
-    } else {
-      credlyEl.textContent = '—';
-    }
-    const bullets = data.exam.bullets.split('\n').map(s => s.trim()).filter(Boolean);
-    const section = document.getElementById('examBulletsSection');
-    const list    = document.getElementById('dispBullets');
-    if (bullets.length) {
-      section.style.display = 'block';
-      list.innerHTML = bullets.map(b => `<li>${esc(b)}</li>`).join('');
-    } else {
-      section.style.display = 'none';
-    }
+    document.getElementById('dispDate').textContent    = data.exam.date    || '—';
+    const ce = document.getElementById('dispCredly');
+    ce.innerHTML = data.exam.credly ? `<a href="${esc(data.exam.credly)}" target="_blank">🏅 View Badge</a>` : '—';
+    const bullets = (data.exam.bullets||'').split('\n').map(s=>s.trim()).filter(Boolean);
+    const sec  = document.getElementById('examBulletsSection');
+    const list = document.getElementById('dispBullets');
+    if (bullets.length) { sec.style.display='block'; list.innerHTML=bullets.map(b=>`<li>${esc(b)}</li>`).join(''); }
+    else sec.style.display='none';
   }
 
-  /* ── INIT ── */
-  renderNotes();
-  renderResources();
-  renderExam();
+  /* ── RESOURCES ── */
+  function toggleResForm() {
+    const f = document.getElementById('resForm');
+    f.classList.toggle('visible');
+    if (!f.classList.contains('visible')) {
+      document.getElementById('resTitle').value='';
+      document.getElementById('resUrl').value='';
+      document.getElementById('resNote').value='';
+    }
+  }
+  async function saveResource() {
+    const title = document.getElementById('resTitle').value.trim();
+    const url   = document.getElementById('resUrl').value.trim();
+    const note  = document.getElementById('resNote').value.trim();
+    if (!title && !url) return;
+    data.resources.unshift({ id: Date.now(), title: title||url, url, note });
+    await saveData(); renderResources(); toggleResForm();
+  }
+  async function deleteResource(id) {
+    if (!confirm('Delete this resource?')) return;
+    data.resources = data.resources.filter(r=>r.id!==id);
+    await saveData(); renderResources();
+  }
+  function renderResources() {
+    const list  = document.getElementById('resList');
+    const empty = document.getElementById('resEmpty');
+    if (!data.resources.length) { list.innerHTML=''; empty.style.display='block'; return; }
+    empty.style.display='none';
+    list.innerHTML = data.resources.map(r=>`
+      <div class="resource-row">
+        <div class="resource-row-info">
+          <div class="resource-row-title">${esc(r.title)}</div>
+          ${r.url  ? `<div class="resource-row-url">${esc(r.url)}</div>` : ''}
+          ${r.note ? `<div class="resource-row-note">${esc(r.note)}</div>` : ''}
+        </div>
+        <div class="resource-row-actions">
+          ${r.url ? `<a href="${esc(r.url)}" target="_blank" class="resource-open">&#8599; Open</a>` : ''}
+          <button class="btn-icon btn-del" onclick="deleteResource(${r.id})">&#128465;</button>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── NOTES ── */
+  function toggleNotesEditor() {
+    const ed = document.getElementById('notesEditor');
+    const ac = document.getElementById('notesActions');
+    const ds = document.getElementById('notesDisplay');
+    const editing = ed.style.display==='block';
+    ed.style.display = editing ? 'none'  : 'block';
+    ac.style.display = editing ? 'none'  : 'flex'; // use flex not "visible"
+    ds.style.display = editing ? 'block' : 'none';
+    if (!editing) ed.value = data.notes||'';
+  }
+  async function saveNotes() {
+    data.notes = document.getElementById('notesEditor').value;
+    await saveData(); renderNotes(); toggleNotesEditor();
+  }
+  function cancelNotes() { toggleNotesEditor(); }
+  function renderNotes() {
+    const el = document.getElementById('notesDisplay');
+    el.innerHTML = (data.notes||'').trim()
+      ? marked.parse(data.notes)
+      : '<p class="notes-placeholder">No notes yet.</p>';
+  }
+
+  function renderAll() { renderExam(); renderResources(); renderNotes(); }
+
+  // Restore edit mode if PAT still in session
+  if (pat) {
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '🔓';
+  }
+
+  loadData();
 </script>
 </body>
 </html>

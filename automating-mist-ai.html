@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>JNCIS-MistAI-Wired | Mountain Modulation</title>
+  <title>Automating Mist AI Enterprise | Mountain Modulation</title>
   <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
@@ -222,8 +222,8 @@
         <a href="jncia-junos.html" class="sb-l3">JNCIA-Junos</a>
         <a href="jncia-mistai.html" class="sb-l3">JNCIA-MistAI</a>
         <a href="jncis-mistai-wireless.html" class="sb-l3">JNCIS-MistAI-Wireless</a>
-        <a href="jncis-mistai-wired.html" class="sb-l3 active">JNCIS-MistAI-Wired</a>
-        <a href="automating-mist-ai.html" class="sb-l3">Automating Mist AI Enterprise</a>
+        <a href="jncis-mistai-wired.html" class="sb-l3">JNCIS-MistAI-Wired</a>
+        <a href="automating-mist-ai.html" class="sb-l3 active">Automating Mist AI Enterprise</a>
       </div>
       <button class="sb-h2" onclick="tog(this)">CWNP <span class="arr">&#9658;</span></button>
       <div class="sb-c2">
@@ -276,12 +276,12 @@
     <div class="breadcrumb">
       <a href="index.html">Home</a><span>›</span>
       <a href="#">Certifications</a><span>›</span>
-      JNCIS-MistAI-Wired
+      Automating Mist AI Enterprise
     </div>
 
     <div class="page-title-row">
       <p class="page-label">Certification</p>
-      <h1 class="page-title">JNCIS-MistAI-Wired</h1>
+      <h1 class="page-title">Automating Mist AI Enterprise</h1>
     </div>
 
     <!-- EXAM DETAILS -->
@@ -367,7 +367,7 @@
 
 <script>
   const REPO  = 'MountainModulation/mountainmodulation.github.io';
-  const FILE  = 'data/jncis-mistai-wired.json';
+  const FILE  = 'data/automating-mist-ai.json';
   let pat     = sessionStorage.getItem('mm_pat') || '';
   let data    = { exam: { version:'', date:'', credly:'', bullets:'' }, resources: [], notes: '' };
   let fileSha = '';
@@ -398,7 +398,7 @@
   async function saveData() {
     if (!pat) { alert('Enter your PAT first by clicking the lock icon.'); return; }
     const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
-    const body = { message: 'Update jncis-mistai-wired data', content, sha: fileSha };
+    const body = { message: 'Update automating-mist-ai data', content, sha: fileSha };
     const r = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
       method: 'PUT',
       headers: { Authorization: `token ${pat}`, 'Content-Type': 'application/json' },
