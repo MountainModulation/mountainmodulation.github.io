@@ -231,10 +231,7 @@
     <div class="sb-c1 open">
       <button class="sb-h2" onclick="tog(this)">CWNA <span class="arr">▶</span></button>
       <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
-      <button class="sb-h2 open" onclick="tog(this)">JNCIA-Junos <span class="arr">▶</span></button>
-      <div class="sb-c2 open">
-        <a href="jncia-junos.html" class="sb-l3 active">Notes & Resources</a>
-      </div>
+      <a href="jncia-junos.html" class="sb-l2 active">JNCIA-Junos</a>
       <button class="sb-h2" onclick="tog(this)">JNCIA-MistAI <span class="arr">▶</span></button>
       <div class="sb-c2"><a href="#" class="sb-l3">Study Notes</a><a href="#" class="sb-l3">Practice Questions</a><a href="#" class="sb-l3">Resources</a></div>
       <button class="sb-h2" onclick="tog(this)">JNCIS-MistAI-Wireless <span class="arr">▶</span></button>
@@ -299,26 +296,53 @@
     </div>
 
     <!-- ═══════════════════════════════
-         BLOCK 1 — NOTES
+         BLOCK 1 — EXAM DETAILS
     ════════════════════════════════ -->
     <div class="block">
       <div class="block-header">
-        <div class="block-title"><span class="icon">📝</span> Notes</div>
-        <button class="btn-edit" onclick="toggleNotesEditor()">✏️ Edit Notes</button>
+        <div class="block-title"><span class="icon">🎓</span> Exam Details</div>
+        <button class="btn-edit" onclick="toggleExamEdit()">✏️ Edit</button>
       </div>
 
-      <textarea class="markdown-editor" id="notesEditor" placeholder="Paste your Obsidian markdown here...&#10;&#10;# Heading&#10;## Subheading&#10;- bullet point&#10;**bold** _italic_ `code`&#10;&#10;Everything renders automatically when you save."></textarea>
-      <div class="editor-actions" id="notesActions">
-        <button class="btn-save" onclick="saveNotes()">Save Notes</button>
-        <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
+      <!-- EDIT FORM -->
+      <div class="exam-edit-form" id="examForm">
+        <label>Exam Version</label>
+        <input type="text" id="examVersion" placeholder="e.g. JN0-105"/>
+        <label>Date Taken</label>
+        <input type="text" id="examDate" placeholder="e.g. June 24, 2026"/>
+        <label>Credly Badge URL</label>
+        <input type="url" id="examCredly" placeholder="https://www.credly.com/badges/..."/>
+        <label>Bullet Points <small>(one per line)</small></label>
+        <textarea id="examBullets" placeholder="Passed on first attempt&#10;Studied for 3 weeks&#10;Used Juniper free learning portal"></textarea>
+        <div class="res-form-actions">
+          <button class="btn-save" onclick="saveExam()">Save</button>
+          <button class="btn-cancel" onclick="toggleExamEdit()">Cancel</button>
+        </div>
       </div>
 
-      <div class="markdown-body" id="notesDisplay">
-        <p class="notes-placeholder">No notes yet — click Edit Notes to paste your Obsidian markdown.</p>
+      <!-- DISPLAY -->
+      <div class="exam-display" id="examDisplay">
+        <div class="exam-grid" id="examGrid">
+          <div class="exam-field">
+            <label>Exam Version</label>
+            <div class="exam-field-value" id="dispVersion">—</div>
+          </div>
+          <div class="exam-field">
+            <label>Date Taken</label>
+            <div class="exam-field-value" id="dispDate">—</div>
+          </div>
+          <div class="exam-field">
+            <label>Credly Badge</label>
+            <div class="exam-field-value" id="dispCredly">—</div>
+          </div>
+        </div>
+        <div class="exam-bullets" id="examBulletsSection" style="display:none">
+          <div class="exam-bullets-title">Tidbits</div>
+          <ul class="bullet-list" id="dispBullets"></ul>
+        </div>
       </div>
     </div>
-
-    <!-- ═══════════════════════════════
+<!-- ═══════════════════════════════
          BLOCK 2 — RESOURCES
     ════════════════════════════════ -->
     <div class="block">
@@ -345,47 +369,26 @@
     </div>
 
     <!-- ═══════════════════════════════
-         BLOCK 3 — EXAM DETAILS
+         BLOCK 3 — NOTES
     ════════════════════════════════ -->
     <div class="block">
       <div class="block-header">
-        <div class="block-title"><span class="icon">🎓</span> Exam Details</div>
-        <button class="btn-edit" onclick="toggleExamEdit()">✏️ Edit</button>
+        <div class="block-title"><span class="icon">📝</span> Notes</div>
+        <button class="btn-edit" onclick="toggleNotesEditor()">✏️ Edit Notes</button>
       </div>
 
-      <!-- EDIT FORM -->
-      <div class="exam-edit-form" id="examForm">
-        <label>Exam Version</label>
-        <input type="text" id="examVersion" placeholder="e.g. JN0-105"/>
-        <label>Credly Badge URL</label>
-        <input type="url" id="examCredly" placeholder="https://www.credly.com/badges/..."/>
-        <label>Bullet Points <small>(one per line)</small></label>
-        <textarea id="examBullets" placeholder="Passed on first attempt&#10;Studied for 3 weeks&#10;Used Juniper free learning portal"></textarea>
-        <div class="res-form-actions">
-          <button class="btn-save" onclick="saveExam()">Save</button>
-          <button class="btn-cancel" onclick="toggleExamEdit()">Cancel</button>
-        </div>
+      <textarea class="markdown-editor" id="notesEditor" placeholder="Paste your Obsidian markdown here...&#10;&#10;# Heading&#10;## Subheading&#10;- bullet point&#10;**bold** _italic_ `code`&#10;&#10;Everything renders automatically when you save."></textarea>
+      <div class="editor-actions" id="notesActions">
+        <button class="btn-save" onclick="saveNotes()">Save Notes</button>
+        <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
       </div>
 
-      <!-- DISPLAY -->
-      <div class="exam-display" id="examDisplay">
-        <div class="exam-grid" id="examGrid">
-          <div class="exam-field">
-            <label>Exam Version</label>
-            <div class="exam-field-value" id="dispVersion">—</div>
-          </div>
-          <div class="exam-field">
-            <label>Credly Badge</label>
-            <div class="exam-field-value" id="dispCredly">—</div>
-          </div>
-        </div>
-        <div class="exam-bullets" id="examBulletsSection" style="display:none">
-          <div class="exam-bullets-title">Tidbits</div>
-          <ul class="bullet-list" id="dispBullets"></ul>
-        </div>
+      <div class="markdown-body" id="notesDisplay">
+        <p class="notes-placeholder">No notes yet — click Edit Notes to paste your Obsidian markdown.</p>
       </div>
     </div>
 
+    
   </main>
 </div>
 
@@ -400,7 +403,7 @@
   let data = JSON.parse(localStorage.getItem(NS) || '{}');
   if (!data.notes)     data.notes     = '';
   if (!data.resources) data.resources = [];
-  if (!data.exam)      data.exam      = { version:'', credly:'', bullets:'' };
+  if (!data.exam)      data.exam      = { version:'', date:'', credly:'', bullets:'' };
 
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
   function persist() { localStorage.setItem(NS, JSON.stringify(data)); }
@@ -485,6 +488,7 @@
     const editing = form.classList.contains('visible');
     if (!editing) {
       document.getElementById('examVersion').value = data.exam.version;
+      document.getElementById('examDate').value    = data.exam.date || '';
       document.getElementById('examCredly').value  = data.exam.credly;
       document.getElementById('examBullets').value = data.exam.bullets;
     }
@@ -493,12 +497,14 @@
   }
   function saveExam() {
     data.exam.version = document.getElementById('examVersion').value.trim();
+    data.exam.date    = document.getElementById('examDate').value.trim();
     data.exam.credly  = document.getElementById('examCredly').value.trim();
     data.exam.bullets = document.getElementById('examBullets').value.trim();
     persist(); renderExam(); toggleExamEdit(); banner('✓ Exam details saved');
   }
   function renderExam() {
     document.getElementById('dispVersion').textContent = data.exam.version || '—';
+    document.getElementById('dispDate').textContent = data.exam.date || '—';
     const credlyEl = document.getElementById('dispCredly');
     if (data.exam.credly) {
       credlyEl.innerHTML = `<a href="${esc(data.exam.credly)}" target="_blank">🏅 View Badge</a>`;
