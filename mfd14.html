@@ -164,6 +164,16 @@
 
     footer { margin-left: var(--sidebar-w); border-top: 0.5px solid rgba(99,153,34,0.15); padding: 1.5rem 2rem; text-align: center; font-size: 11px; color: rgba(99,153,34,0.4); }
     footer a { color: var(--green-bright); text-decoration: none; }
+
+    .vendor-card-logo {
+      height: 32px;
+      max-width: 120px;
+      object-fit: contain;
+      filter: brightness(0) invert(0.85) sepia(0.3) saturate(0.5);
+      margin-bottom: 0.5rem;
+    }
+    .vendor-card:hover .vendor-card-logo { filter: brightness(0) invert(1); }
+
     @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
@@ -244,18 +254,6 @@
       <button class="sb-h2 open" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
       <div class="sb-c2 open">
         <a href="mfd14.html" class="sb-l3 active">MFD14</a>
-        <button class="sb-h3 open" onclick="tog(this)">Vendors <span class="arr">&#9658;</span></button>
-        <div class="sb-c3 open">
-          <a href="mfd14-hpe.html" class="sb-l4">HPE</a>
-          <a href="mfd14-cisco.html" class="sb-l4">Cisco</a>
-          <a href="mfd14-celona.html" class="sb-l4">Celona</a>
-          <a href="mfd14-wyebot.html" class="sb-l4">Wyebot</a>
-          <a href="mfd14-onelayer.html" class="sb-l4">OneLayer</a>
-          <a href="mfd14-ubiquiti.html" class="sb-l4">Ubiquiti</a>
-          <a href="mfd14-fortinet.html" class="sb-l4">Fortinet</a>
-          <a href="mfd14-arista.html" class="sb-l4">Arista</a>
-          <a href="mfd14-nile.html" class="sb-l4">Nile</a>
-        </div>
       </div>
     </div>
     <div class="sb-divider"></div>
@@ -312,92 +310,92 @@
     <div class="vendor-grid">
 
       <a href="mfd14-hpe.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2025/06/HPE-logo-full-clr-pos-rgb-100x29.jpg" alt="HPE logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">HPE</div>
         <div class="vendor-card-time">7:30 – 11:30 AM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-cisco.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2014/04/cisco-logo-transparent-100x53.png" alt="Cisco logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Cisco</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-celona.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2019/09/Celona-Logo-2022-100x23.png" alt="Celona logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">Celona</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-wyebot.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2022/08/Wyebot-Logo-100x32.png" alt="Wyebot logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Wyebot</div>
         <div class="vendor-card-time">8:00 – 9:00 AM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-onelayer.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2025/09/OneLayer-Logo-100x20.png" alt="OneLayer logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">OneLayer</div>
         <div class="vendor-card-time">10:00 – 11:30 AM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-ubiquiti.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2024/04/UbiquitiHorizontal-logo-dark-100x24.png" alt="Ubiquiti logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Ubiquiti</div>
         <div class="vendor-card-time">1:00 – 2:30 PM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-fortinet.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2018/07/Fortinet-logo-100x33.png" alt="Fortinet logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Thursday, May 7</div>
         <div class="vendor-card-name">Fortinet</div>
         <div class="vendor-card-time">3:30 – 5:00 PM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-arista.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2012/08/Arista_logo1-100x20.jpeg" alt="Arista logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Arista</div>
         <div class="vendor-card-time">8:00 – 9:30 AM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
       <a href="mfd14-nile.html" class="vendor-card">
+        <img src="https://techfieldday.com/wp-content/uploads/2023/05/Nile-Logo-White-Amber-100x50.png" alt="Nile logo" class="vendor-card-logo"/>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Nile</div>
         <div class="vendor-card-time">10:30 AM – 12:00 PM</div>
         <div class="vendor-card-footer">
-          <span class="vendor-card-tag">My Notes</span>
-          <span class="vendor-card-arrow">&#8599;</span>
+          <span class="vendor-card-arrow">&#8599; View Notes</span>
         </div>
       </a>
 
