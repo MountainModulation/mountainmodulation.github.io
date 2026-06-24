@@ -3,7 +3,7 @@
     "version": "JN0-105",
     "date": "October 2025",
     "credly": "",
-    "bullets": ""
+    "bullets": "Junos, Associate (JNCIA-Junos)"
   },
   "resources": [],
   "notes": "# Juniper Pros / Fun facts\n- Junos OS has the ability to roll back to previous configurations. This feature allows administrators to revert to an earlier configuration state, which is invaluable for quickly recovering from configuration errors or undesired changes. Junos OS maintains an archive of previous configurations, enabling easy rollback to any saved state. \n- Configuration Files\n\t> - active\n\t\t- active configuration is what’s currently running on the device\n\t> - candidate configuration is what has been modified and not committed to the device\n\t> -  View the configuration file\n\t\t- Hierarchy view \n\t\t\t- `show configuration`\n\t\t- Set View (looks like Cisco)\n\t\t\t-  `show configuration | display set`"
