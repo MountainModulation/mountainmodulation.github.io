@@ -7,6 +7,12 @@
   },
   "resources": [
     {
+      "id": 1782335903437,
+      "title": "Mist API Reference",
+      "url": "https://www.juniper.net/documentation/us/en/software/mist/api/http/getting-started/how-to-get-started",
+      "note": ""
+    },
+    {
       "id": 1782335871256,
       "title": "API for Developers",
       "url": "https://www.juniper.net/documentation/product/us/en/mist/#cat=for_developers",
