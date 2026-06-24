@@ -166,15 +166,64 @@
     footer a { color: var(--green-bright); text-decoration: none; }
 
     .vendor-card-logo {
-      height: 32px;
-      max-width: 120px;
+      height: 36px;
+      max-width: 140px;
       object-fit: contain;
-      filter: brightness(0) invert(0.85) sepia(0.3) saturate(0.5);
+      filter: brightness(0) invert(0.8);
       margin-bottom: 0.5rem;
+      display: block;
     }
     .vendor-card:hover .vendor-card-logo { filter: brightness(0) invert(1); }
+    .vendor-card-logo-text {
+      font-family: 'Caveat', cursive;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--green-bright);
+      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
 
-    @media (max-width: 768px) { .sidebar { display: none; } .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
+    /* MOBILE HAMBURGER */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 8px;
+      background: none;
+      border: none;
+      z-index: 300;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--green-bright);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 150;
+    }
+    .mobile-overlay.show { display: block; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        display: flex !important;
+        flex-direction: column;
+        z-index: 200;
+      }
+      .sidebar.open { transform: translateX(0); }
+    }
+
+    @media (max-width: 768px) { .main, footer { margin-left: 0; } .vendor-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -213,7 +262,11 @@
     <a href="index.html#about">About</a>
     <a href="index.html#blog">Blog</a>
   </div>
+  <button class="hamburger" onclick="toggleSidebar()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
 
 <div class="layout">
   <aside class="sidebar">
@@ -310,7 +363,7 @@
     <div class="vendor-grid">
 
       <a href="mfd14-hpe.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2025/06/HPE-logo-full-clr-pos-rgb-100x29.jpg" alt="HPE logo" class="vendor-card-logo"/>
+        <div class="vendor-card-logo-text">HPE</div>
         <div class="vendor-card-day">Wednesday, May 6</div>
         <div class="vendor-card-name">HPE</div>
         <div class="vendor-card-time">7:30 – 11:30 AM</div>
@@ -380,7 +433,7 @@
       </a>
 
       <a href="mfd14-arista.html" class="vendor-card">
-        <img src="https://techfieldday.com/wp-content/uploads/2012/08/Arista_logo1-100x20.jpeg" alt="Arista logo" class="vendor-card-logo"/>
+        <div class="vendor-card-logo-text">Arista</div>
         <div class="vendor-card-day">Friday, May 8</div>
         <div class="vendor-card-name">Arista</div>
         <div class="vendor-card-time">8:00 – 9:30 AM</div>
@@ -409,6 +462,10 @@
 
 <script>
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  function toggleSidebar() {
+    document.querySelector('.sidebar').classList.toggle('open');
+    document.getElementById('mobileOverlay').classList.toggle('show');
+  }
 </script>
 </body>
 </html>
