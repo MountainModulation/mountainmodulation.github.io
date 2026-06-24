@@ -413,13 +413,24 @@
 </footer>
 
 <script>
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  function toggleSidebar() {
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    if (!sb) return;
+    var isOpen = sb.classList.contains('open');
+    sb.classList.toggle('open');
+    if (ov) ov.style.display = isOpen ? 'none' : 'block';
+  }
+  if (window.innerWidth <= 768) { var hb = document.querySelector('.hamburger'); if (hb) hb.style.display = 'flex'; }
+  window.addEventListener('resize', function() { var hb = document.querySelector('.hamburger'); if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none'; });
   const REPO  = 'MountainModulation/mountainmodulation.github.io';
   const FILE  = 'data/automating-mist-ai.json';
   let pat     = sessionStorage.getItem('mm_pat') || '';
   let data    = { exam: { version:'', date:'', credly:'', bullets:'' }, resources: [], notes: '' };
   let fileSha = '';
 
-  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  
   function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   function banner(msg) {
     const b = document.getElementById('saveBanner');
@@ -591,24 +602,11 @@
 
   loadData();
   
-  function toggleSidebar() {
-    var sb = document.getElementById('sidebar');
-    var ov = document.getElementById('mobileOverlay');
-    var hb = document.querySelector('.hamburger');
-    if (!sb) return;
-    var isOpen = sb.classList.contains('open');
-    sb.classList.toggle('open');
-    if (ov) ov.style.display = isOpen ? 'none' : 'block';
-  }
   // Show hamburger on mobile
-  if (window.innerWidth <= 768) {
+  
     var hb = document.querySelector('.hamburger');
     if (hb) hb.style.display = 'flex';
   }
-  window.addEventListener('resize', function() {
-    var hb = document.querySelector('.hamburger');
-    if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
-  });
 </script>
 </body>
 </html>

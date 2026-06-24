@@ -514,20 +514,15 @@
 </footer>
 
 <script>
-  function tog(el) {
-    el.classList.toggle('open');
-    el.nextElementSibling.classList.toggle('open');
-  }
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
   function toggleSidebar() {
     var sb = document.getElementById('sidebar');
     var ov = document.getElementById('mobileOverlay');
-    var hb = document.querySelector('.hamburger');
     if (!sb) return;
     var isOpen = sb.classList.contains('open');
     sb.classList.toggle('open');
     if (ov) ov.style.display = isOpen ? 'none' : 'block';
   }
-  // Show hamburger on mobile
   if (window.innerWidth <= 768) {
     var hb = document.querySelector('.hamburger');
     if (hb) hb.style.display = 'flex';
@@ -537,6 +532,5 @@
     if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
   });
 </script>
-
 </body>
 </html>

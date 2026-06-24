@@ -321,12 +321,22 @@
 </footer>
 
 <script>
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  function toggleSidebar() {
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    if (!sb) return;
+    var isOpen = sb.classList.contains('open');
+    sb.classList.toggle('open');
+    if (ov) ov.style.display = isOpen ? 'none' : 'block';
+  }
+  if (window.innerWidth <= 768) { var hb = document.querySelector('.hamburger'); if (hb) hb.style.display = 'flex'; }
+  window.addEventListener('resize', function() { var hb = document.querySelector('.hamburger'); if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none'; });
   const STORAGE_KEY = 'mm_notes_mist_automation';
   let notes = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   let editingId = null;
 
-  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
-
+  
   function toggleForm(reset) {
     const form = document.getElementById('addForm');
     form.classList.toggle('visible');
@@ -399,24 +409,11 @@
 
   render();
   
-  function toggleSidebar() {
-    var sb = document.getElementById('sidebar');
-    var ov = document.getElementById('mobileOverlay');
-    var hb = document.querySelector('.hamburger');
-    if (!sb) return;
-    var isOpen = sb.classList.contains('open');
-    sb.classList.toggle('open');
-    if (ov) ov.style.display = isOpen ? 'none' : 'block';
-  }
   // Show hamburger on mobile
-  if (window.innerWidth <= 768) {
+  
     var hb = document.querySelector('.hamburger');
     if (hb) hb.style.display = 'flex';
   }
-  window.addEventListener('resize', function() {
-    var hb = document.querySelector('.hamburger');
-    if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
-  });
 </script>
 </body>
 </html>

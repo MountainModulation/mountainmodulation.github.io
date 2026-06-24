@@ -458,13 +458,23 @@
 </footer>
 
 <script>
-      function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
-  document.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('hamburgerBtn');
-    var overlay = document.getElementById('mobileOverlay');
-    if (btn) btn.addEventListener('click', toggleSidebar);
-    if (overlay) overlay.addEventListener('click', toggleSidebar);
+  function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
+  function toggleSidebar() {
+    var sb = document.getElementById('sidebar');
+    var ov = document.getElementById('mobileOverlay');
+    if (!sb) return;
+    var isOpen = sb.classList.contains('open');
+    sb.classList.toggle('open');
+    if (ov) ov.style.display = isOpen ? 'none' : 'block';
+  }
+  if (window.innerWidth <= 768) {
+    var hb = document.querySelector('.hamburger');
+    if (hb) hb.style.display = 'flex';
+  }
+  window.addEventListener('resize', function() {
+    var hb = document.querySelector('.hamburger');
+    if (hb) hb.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
   });
-  
+</script>
 </body>
 </html>
