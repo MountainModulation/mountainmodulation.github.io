@@ -7,6 +7,12 @@
   },
   "resources": [
     {
+      "id": 1782335958768,
+      "title": "Network Automation Toolkit",
+      "url": "https://apps.mist-lab.fr/static/",
+      "note": ""
+    },
+    {
       "id": 1782335903437,
       "title": "Mist API Reference",
       "url": "https://www.juniper.net/documentation/us/en/software/mist/api/http/getting-started/how-to-get-started",
