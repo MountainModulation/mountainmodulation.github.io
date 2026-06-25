@@ -363,9 +363,10 @@
     <!-- OVERVIEW -->
     <div class="content-block">
       <h2>&#128269; Overview</h2>
-      <p>When your Palo Alto firewall connects to an ISP that assigns IP addresses via DHCP, you need to configure the WAN-facing Ethernet interface as a DHCP client. This is common in branch office deployments where the ISP provides a dynamic IP rather than a static one.</p>
-      <p>This guide covers configuring the interface, verifying the DHCP lease, and troubleshooting common issues — both through the GUI and CLI.</p>
-      <div class="tip-box">&#128161; <strong>Tip:</strong> Even if your ISP provides a "static" IP via DHCP (a fixed address assigned to your MAC), you still configure the interface as DHCP — the ISP handles the reservation on their end.</div>
+      <p>By configuring the WAN interface to communicate with your ISP via DHCP, the firewall can automatically receive its public IP address, default gateway, and DNS information.</p>
+      <p>I originally set out to stop paying for static IP addresses at my house because they were expensive and, in my case, completely unnecessary. When I first made the switch, it was surprisingly tricky. I will blame my ISP here and not any naivety on my part.</p>
+      <p>In my environment, I also have a VPN portal that my family uses regularly to access my server. Because of that, I set up a Raspberry Pi to handle Dynamic DNS updates with my domain provider every five minutes. That way, if my public IP address changes, I can still reliably reach my VPN portal without having to play “guess the new IP address,” while keeping downtime to an acceptable minimum.</p>
+      <div class="tip-box">&#128161; <strong>Side Note:</strong> All of these steps are done on PAN version 11.1.13, if you're running a different code, this may vary a bit.</div>
     </div>
 
     <!-- PREREQUISITES -->
