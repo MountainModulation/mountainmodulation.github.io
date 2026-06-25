@@ -175,15 +175,16 @@
       .exam-grid { grid-template-columns: 1fr; }
     }
     .content-block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
-    .content-block h2 { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); display: flex; align-items: center; gap: 8px; }
+    .content-block h2 { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
     .content-block h3 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin: 1.25rem 0 0.5rem; }
     .content-block p { font-size: 14px; color: rgba(192,221,151,0.85); margin-bottom: 0.85rem; line-height: 1.8; }
     .content-block ul, .content-block ol { padding-left: 1.5rem; margin-bottom: 1rem; }
     .content-block li { font-size: 14px; color: rgba(192,221,151,0.8); margin-bottom: 0.4rem; line-height: 1.7; }
-    .tab-bar { display: flex; gap: 0; margin-bottom: 0; border-bottom: none; }
-    .tab-btn { padding: 6px 18px; font-family: 'Caveat', cursive; font-size: 15px; cursor: pointer; border: 0.5px solid rgba(99,153,34,0.25); background: rgba(59,109,17,0.08); color: rgba(192,221,151,0.6); transition: all 0.2s; border-bottom: none; border-radius: 6px 6px 0 0; margin-right: 4px; }
+    .tab-group { margin-bottom: 1.5rem; }
+    .tab-bar { display: flex; gap: 0; }
+    .tab-btn { padding: 6px 16px; font-family: 'Caveat', cursive; font-size: 15px; cursor: pointer; border: 0.5px solid rgba(99,153,34,0.25); background: rgba(59,109,17,0.08); color: rgba(192,221,151,0.5); transition: all 0.2s; border-bottom: none; border-radius: 6px 6px 0 0; margin-right: 4px; }
     .tab-btn.active { background: rgba(59,109,17,0.25); color: var(--green-pale); border-color: rgba(99,153,34,0.4); }
-    .tab-content { display: none; background: rgba(10,20,3,0.6); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 0 6px 6px 6px; padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+    .tab-content { display: none; background: rgba(10,20,3,0.5); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 0 6px 6px 6px; padding: 1.25rem 1.5rem; }
     .tab-content.active { display: block; }
     code { background: rgba(99,153,34,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--green-pale); }
     pre { background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 8px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0 1rem; }
@@ -195,15 +196,19 @@
     .tip-box { background: rgba(239,159,39,0.08); border: 0.5px solid rgba(239,159,39,0.25); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: rgba(239,159,39,0.85); }
     .warn-box { background: rgba(239,80,80,0.08); border: 0.5px solid rgba(239,80,80,0.2); border-left: 3px solid rgba(239,80,80,0.7); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: rgba(239,150,150,0.85); }
     .check-list { list-style: none; padding-left: 0; }
-    .check-list li::before { content: "✓ "; color: var(--green-light); font-weight: bold; }
+    .check-list li::before { content: "&#10003; "; color: var(--green-light); font-weight: bold; }
+    .screenshot-wrap { text-align: center; padding: 0.5rem 0; }
+    .screenshot-wrap img { max-width: 100%; border-radius: 8px; border: 0.5px solid rgba(99,153,34,0.25); display: block; margin: 0 auto 0.5rem; }
+    .screenshot-caption { font-size: 12px; color: rgba(192,221,151,0.4); font-style: italic; }
+    .screenshot-missing { text-align: center; padding: 2rem; color: rgba(192,221,151,0.2); border: 0.5px dashed rgba(99,153,34,0.15); border-radius: 8px; font-size: 13px; }
     .page-title-row { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
     .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
     .page-title { font-family: 'Caveat', cursive; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; margin-bottom: 0.5rem; }
     .page-subtitle { font-size: 13px; color: rgba(192,221,151,0.5); }
-    .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
+    .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
+    .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); }
     .btn-edit { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; }
     .edit-mode .btn-edit { display: inline-flex; }
-    .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
     .markdown-editor { display: none; width: 100%; min-height: 280px; padding: 1rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: monospace; font-size: 13px; resize: vertical; outline: none; }
     .editor-actions { display: none; gap: 10px; margin-top: 0.75rem; }
     .editor-actions.visible { display: flex; }
@@ -357,7 +362,7 @@
     <div class="page-title-row">
       <p class="page-label">Palo Alto Networks &#183; Firewalls</p>
       <h1 class="page-title">Configuring a DHCP WAN Interface</h1>
-      <p class="page-subtitle">PAN-OS &#183; ethernet interface &#183; ISP DHCP &#183; CLI &amp; GUI</p>
+      <p class="page-subtitle">PAN-OS 11.1 &#183; Ethernet Interface &#183; ISP DHCP &#183; CLI &amp; GUI</p>
     </div>
 
     <!-- OVERVIEW -->
@@ -365,19 +370,19 @@
       <h2>&#128269; Overview</h2>
       <p>By configuring the WAN interface to communicate with your ISP via DHCP, the firewall can automatically receive its public IP address, default gateway, and DNS information.</p>
       <p>I originally set out to stop paying for static IP addresses at my house because they were expensive and, in my case, completely unnecessary. When I first made the switch, it was surprisingly tricky. I will blame my ISP here and not any naivety on my part.</p>
-      <p>In my environment, I also have a VPN portal that my family uses regularly to access my server. Because of that, I set up a Raspberry Pi to handle Dynamic DNS updates with my domain provider every five minutes. That way, if my public IP address changes, I can still reliably reach my VPN portal without having to play “guess the new IP address,” while keeping downtime to an acceptable minimum.</p>
-      <div class="tip-box">&#128161; <strong>Side Note:</strong> All of these steps are done on PAN version 11.1.13, if you're running a different code, this may vary a bit.</div>
+      <p>In my environment, I also have a VPN portal that my family uses regularly to access my server. Because of that, I set up a Raspberry Pi to handle Dynamic DNS updates with my domain provider every five minutes. That way, if my public IP address changes, I can still reliably reach my VPN portal without having to play "guess the new IP address," while keeping downtime to an acceptable minimum.</p>
+      <div class="tip-box">&#128161; <strong>Side Note:</strong> All of these steps are done on PAN version 11.1.13. If you're running a different version, this may vary a bit.</div>
     </div>
 
     <!-- PREREQUISITES -->
     <div class="content-block">
       <h2>&#9989; Prerequisites</h2>
       <ul class="check-list">
-        <li>Physical cable connected from ISP modem/ONT to the firewall WAN port</li>
-        <li>Know which interface is your WAN port (e.g. <code>ethernet1/1</code>)</li>
-        <li>Interface must be assigned to a zone (typically <code>untrust</code>)</li>
-        <li>Admin access to the firewall (GUI or SSH)</li>
-        <li>PAN-OS 9.0 or later (steps are similar across versions)</li>
+        <li>Know the limitations of your ISP. Will they distribute more than one public IP address? Do you need to contact them because your MAC address will change when switching out their equipment?</li>
+        <li>Know which interface is your WAN port (e.g. <code>ethernet1/8</code>)</li>
+        <li>Interface must be assigned to a zone, typically untrust (I use <code>WAN</code>)</li>
+        <li>Local admin access to the firewall (GUI or SSH)</li>
+        <li>PAN-OS 11.1 or later (steps are similar across versions but also painfully different)</li>
       </ul>
     </div>
 
@@ -386,42 +391,61 @@
       <h2>&#9881;&#65039; Configuration</h2>
 
       <h3>Step 1 — Assign the interface to a Virtual Router and Zone</h3>
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab(this, 'cfg-gui-1')">GUI</button>
-        <button class="tab-btn" onclick="switchTab(this, 'cfg-cli-1')">CLI</button>
-      </div>
-      <div id="cfg-gui-1" class="tab-content active">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><p>Navigate to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><p>Click on your WAN interface (e.g. <code>ethernet1/1</code>)</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><p>Set <strong>Interface Type</strong> to <code>Layer3</code></p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><p>Under the <strong>Config</strong> tab, assign <strong>Virtual Router</strong> to <code>default</code> and <strong>Security Zone</strong> to <code>untrust</code></p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><p>Click <strong>OK</strong></p></div></div>
-      </div>
-      <div id="cfg-cli-1" class="tab-content">
-<pre><code>set network interface ethernet ethernet1/1 layer3 ip dhcp-client enable yes
-set network interface ethernet ethernet1/1 layer3 interface-management-profile allow-ping
-set zone untrust network layer3 ethernet1/1
-set network virtual-router default interface ethernet1/1</code></pre>
+      <div class="tab-group">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this,'cfg-gui-1')">GUI</button>
+          <button class="tab-btn" onclick="switchTab(this,'cfg-cli-1')">CLI</button>
+          <button class="tab-btn" onclick="switchTab(this,'cfg-ss-1')">Screenshots</button>
+        </div>
+        <div id="cfg-gui-1" class="tab-content active">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>Navigate to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>Click on your WAN interface (e.g. <code>ethernet1/8</code>)</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Set <strong>Interface Type</strong> to <code>Layer3</code></p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><p>Under the <strong>Config</strong> tab, assign <strong>Virtual Router</strong> to <code>default</code> and <strong>Security Zone</strong> to your WAN zone (e.g. <code>WAN</code> or <code>untrust</code>)</p></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><p>Click <strong>OK</strong></p></div></div>
+        </div>
+        <div id="cfg-cli-1" class="tab-content">
+<pre><code>set network interface ethernet ethernet1/8 layer3 ip dhcp-client enable yes
+set zone WAN network layer3 ethernet1/8
+set network virtual-router default interface ethernet1/8</code></pre>
+        </div>
+        <div id="cfg-ss-1" class="tab-content">
+          <div class="screenshot-wrap">
+            <img src="images/pa-dhcp-eth-step1.png" alt="Step 1 - Assign interface to VR and Zone" id="ss1" style="max-width:100%;border-radius:8px;border:0.5px solid rgba(99,153,34,0.25);display:block;margin:0 auto 0.5rem;"/>
+            <div id="ss1-placeholder" class="screenshot-missing" style="display:none;">&#128247; Screenshot coming soon &mdash; upload <code>images/pa-dhcp-eth-step1.png</code></div>
+            <p class="screenshot-caption">Network &#8594; Interfaces &#8594; Ethernet &#8594; Config tab — assign Virtual Router and Zone</p>
+          </div>
+        </div>
       </div>
 
       <h3>Step 2 — Configure the interface as a DHCP client</h3>
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab(this, 'cfg-gui-2')">GUI</button>
-        <button class="tab-btn" onclick="switchTab(this, 'cfg-cli-2')">CLI</button>
-      </div>
-      <div id="cfg-gui-2" class="tab-content active">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><p>On the interface config page, click the <strong>IPv4</strong> tab</p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><p>Set <strong>Type</strong> to <code>DHCP Client</code></p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><p>Check <strong>Automatically create default route pointing to default gateway provided by server</strong></p></div></div>
-        <div class="step"><div class="step-num">4</div><div class="step-body"><p>Optionally set a <strong>Default Route Metric</strong> (useful for dual-WAN)</p></div></div>
-        <div class="step"><div class="step-num">5</div><div class="step-body"><p>Click <strong>OK</strong> then <strong>Commit</strong></p></div></div>
-      </div>
-      <div id="cfg-cli-2" class="tab-content">
-<pre><code>set network interface ethernet ethernet1/1 layer3 dhcp-client enable yes
-set network interface ethernet ethernet1/1 layer3 dhcp-client create-default-route yes
-set network interface ethernet ethernet1/1 layer3 dhcp-client default-route-metric 10
+      <div class="tab-group">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this,'cfg-gui-2')">GUI</button>
+          <button class="tab-btn" onclick="switchTab(this,'cfg-cli-2')">CLI</button>
+          <button class="tab-btn" onclick="switchTab(this,'cfg-ss-2')">Screenshots</button>
+        </div>
+        <div id="cfg-gui-2" class="tab-content active">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>On the interface config page, click the <strong>IPv4</strong> tab</p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>Set <strong>Type</strong> to <code>DHCP Client</code></p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Check <strong>Automatically create default route pointing to default gateway provided by server</strong></p></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><p>Optionally set a <strong>Default Route Metric</strong> (useful for dual-WAN setups)</p></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><p>Click <strong>OK</strong> then <strong>Commit</strong></p></div></div>
+        </div>
+        <div id="cfg-cli-2" class="tab-content">
+<pre><code>set network interface ethernet ethernet1/8 layer3 dhcp-client enable yes
+set network interface ethernet ethernet1/8 layer3 dhcp-client create-default-route yes
+set network interface ethernet ethernet1/8 layer3 dhcp-client default-route-metric 10
 commit</code></pre>
-        <div class="tip-box">&#128161; The <code>default-route-metric</code> value is optional. Lower metric = higher priority. Useful if you have two WAN links.</div>
+          <div class="tip-box">&#128161; The <code>default-route-metric</code> is optional. Lower value = higher priority. Useful if you have two WAN links.</div>
+        </div>
+        <div id="cfg-ss-2" class="tab-content">
+          <div class="screenshot-wrap">
+            <img src="images/pa-dhcp-eth-step2.png" alt="Step 2 - Configure DHCP client" id="ss2" style="max-width:100%;border-radius:8px;border:0.5px solid rgba(99,153,34,0.25);display:block;margin:0 auto 0.5rem;"/>
+            <div id="ss2-placeholder" class="screenshot-missing" style="display:none;">&#128247; Screenshot coming soon &mdash; upload <code>images/pa-dhcp-eth-step2.png</code></div>
+            <p class="screenshot-caption">Interface IPv4 tab — set Type to DHCP Client and enable default route creation</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -431,31 +455,33 @@ commit</code></pre>
       <p>After committing, verify the firewall received a DHCP lease from the ISP.</p>
 
       <h3>Check DHCP client status</h3>
-      <div class="tab-bar">
-        <button class="tab-btn active" onclick="switchTab(this, 'ver-gui-1')">GUI</button>
-        <button class="tab-btn" onclick="switchTab(this, 'ver-cli-1')">CLI</button>
-      </div>
-      <div id="ver-gui-1" class="tab-content active">
-        <div class="step"><div class="step-num">1</div><div class="step-body"><p>Go to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
-        <div class="step"><div class="step-num">2</div><div class="step-body"><p>The interface should show a green dot and an IP address in the <strong>IP Address</strong> column</p></div></div>
-        <div class="step"><div class="step-num">3</div><div class="step-body"><p>Go to <strong>Dashboard &#8594; Widgets &#8594; Interface</strong> to see the assigned IP, gateway, and DNS</p></div></div>
-      </div>
-      <div id="ver-cli-1" class="tab-content">
+      <div class="tab-group">
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="switchTab(this,'ver-gui-1')">GUI</button>
+          <button class="tab-btn" onclick="switchTab(this,'ver-cli-1')">CLI</button>
+        </div>
+        <div id="ver-gui-1" class="tab-content active">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>Go to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>The interface should show a green dot and an IP address in the <strong>IP Address</strong> column</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Go to <strong>Dashboard &#8594; Widgets &#8594; Interface</strong> to see the assigned IP, gateway, and DNS</p></div></div>
+        </div>
+        <div id="ver-cli-1" class="tab-content">
 <pre><code># Check DHCP lease info
-show dhcp client state interface ethernet1/1
+show dhcp client state interface ethernet1/8
 
 # Check interface IP
-show interface ethernet1/1
+show interface ethernet1/8
 
 # Check routing table for default route
 show routing route type unicast destination 0.0.0.0/0
 
 # Ping the ISP gateway
-ping source ethernet1/1 host &lt;gateway-ip&gt;</code></pre>
+ping source ethernet1/8 host &lt;gateway-ip&gt;</code></pre>
+        </div>
       </div>
 
       <h3>Expected output</h3>
-<pre><code>Interface:    ethernet1/1
+<pre><code>Interface:    ethernet1/8
 State:        client
 IP:           x.x.x.x/xx
 Gateway:      x.x.x.1
@@ -470,21 +496,19 @@ Lease Expiry: xx days xx hours</code></pre>
 
       <h3>No IP address assigned</h3>
       <ul>
-        <li>Check physical link — <code>show interface ethernet1/1</code> should show <strong>up/up</strong></li>
+        <li>Check physical link — <code>show interface ethernet1/8</code> should show <strong>up/up</strong></li>
         <li>Verify the ISP modem/ONT is online and passing DHCP</li>
         <li>Try releasing and renewing the lease</li>
       </ul>
-<pre><code># Release and renew DHCP lease
-request dhcp client renew interface ethernet1/1</code></pre>
+<pre><code>request dhcp client renew interface ethernet1/8</code></pre>
 
       <h3>IP assigned but no internet</h3>
       <ul>
         <li>Confirm default route was created: <code>show routing route</code></li>
-        <li>Check NAT policy — outbound traffic from <code>trust</code> to <code>untrust</code> needs a source NAT rule</li>
+        <li>Check NAT policy — outbound traffic from trust to untrust needs a source NAT rule</li>
         <li>Check security policy — verify traffic is allowed from trust to untrust</li>
-        <li>Ping the gateway from the firewall dataplane</li>
       </ul>
-<pre><code># Ping from dataplane (not management)
+<pre><code># Ping from dataplane
 ping source &lt;dhcp-assigned-ip&gt; host 8.8.8.8
 
 # Check NAT policy hits
@@ -492,31 +516,23 @@ show running nat-policy</code></pre>
 
       <h3>DHCP lease keeps dropping</h3>
       <ul>
-        <li>Check for link flapping: <code>show interface ethernet1/1</code> — look at input/output errors</li>
+        <li>Check for link flapping: <code>show interface ethernet1/8</code> — look at input/output errors</li>
         <li>Check ISP modem logs for disconnects</li>
         <li>Verify no duplicate MAC address on the ISP network</li>
       </ul>
-<pre><code># Check interface counters
-show counter interface ethernet1/1
-
-# Check system logs for DHCP events
+<pre><code>show counter interface ethernet1/8
 show log system direction equal forward match "dhcp"</code></pre>
 
       <div class="warn-box">&#9888;&#65039; <strong>Common gotcha:</strong> If you previously had a static IP on this interface, make sure to remove it before switching to DHCP. Having both configured will cause issues.</div>
 
       <h3>Useful debug commands</h3>
-<pre><code># Enable DHCP client debug logging
-debug dhcp client on
-
-# View DHCP packet capture
-show dhcp client statistics interface ethernet1/1
-
-# Turn off debug when done
+<pre><code>debug dhcp client on
+show dhcp client statistics interface ethernet1/8
 debug dhcp client off</code></pre>
     </div>
 
     <!-- MY NOTES -->
-    <div class="content-block" id="notesBlock">
+    <div class="content-block">
       <div class="block-header">
         <div class="block-title">&#128221; My Notes</div>
         <button class="btn-edit" onclick="toggleNotesEditor()">&#9999;&#65039; Edit Notes</button>
@@ -556,11 +572,10 @@ debug dhcp client off</code></pre>
   }
 
   function switchTab(btn, tabId) {
-    const parent = btn.closest('.content-block') || btn.closest('.tab-group');
-    const allBtns = btn.parentElement.querySelectorAll('.tab-btn');
-    const allTabs = btn.parentElement.parentElement.querySelectorAll('.tab-content');
-    allBtns.forEach(b => b.classList.remove('active'));
-    allTabs.forEach(t => t.classList.remove('active'));
+    const bar = btn.parentElement;
+    const group = bar.parentElement;
+    bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    group.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
     btn.classList.add('active');
     document.getElementById(tabId).classList.add('active');
   }
@@ -639,6 +654,22 @@ debug dhcp client off</code></pre>
     document.getElementById('lockBtn').textContent = '🔓';
   }
   loadData();
+
+  // Check screenshots - show placeholder if image fails to load
+  ['ss1','ss2'].forEach(function(id) {
+    var img = document.getElementById(id);
+    if (!img) return;
+    img.onerror = function() {
+      this.style.display = 'none';
+      var ph = document.getElementById(id + '-placeholder');
+      if (ph) ph.style.display = 'block';
+    };
+    if (img.complete && img.naturalWidth === 0) {
+      img.style.display = 'none';
+      var ph = document.getElementById(id + '-placeholder');
+      if (ph) ph.style.display = 'block';
+    }
+  });
 </script>
 </body>
 </html>
