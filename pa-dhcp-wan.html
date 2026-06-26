@@ -459,11 +459,12 @@ commit</code></pre>
         <div class="tab-bar">
           <button class="tab-btn active" onclick="switchTab(this,'ver-gui-1')">GUI</button>
           <button class="tab-btn" onclick="switchTab(this,'ver-cli-1')">CLI</button>
+          <button class="tab-btn" onclick="switchTab(this,'ver-ss-1')">Screenshots</button>
         </div>
         <div id="ver-gui-1" class="tab-content active">
-          <div class="step"><div class="step-num">1</div><div class="step-body"><p>Go to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
-          <div class="step"><div class="step-num">2</div><div class="step-body"><p>The interface should show a green dot and an IP address in the <strong>IP Address</strong> column</p></div></div>
-          <div class="step"><div class="step-num">3</div><div class="step-body"><p>Go to <strong>Dashboard &#8594; Widgets &#8594; Interface</strong> to see the assigned IP, gateway, and DNS</p></div></div>
+          <div class="step"><div class="step-num">1</div><div class="step-body"><p>Navigate to <strong>Network &#8594; Interfaces &#8594; Ethernet</strong></p></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><p>Click on <strong>Dynamic DHCP Client</strong> on your interface (e.g. <code>ethernet1/8</code>)</p></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><p>The state should show <strong>Bound</strong> with an IP address, Gateway, Primary DNS, and Secondary DNS servers populated</p></div></div>
         </div>
         <div id="ver-cli-1" class="tab-content">
 <pre><code># Check DHCP lease info
@@ -478,16 +479,37 @@ show routing route type unicast destination 0.0.0.0/0
 # Ping the ISP gateway
 ping source ethernet1/8 host &lt;gateway-ip&gt;</code></pre>
         </div>
+        <div id="ver-ss-1" class="tab-content">
+          <div class="screenshot-wrap">
+            <img src="images/pa-dhcp-eth-verify.png" alt="DHCP verification - Bound state" id="ss3" style="max-width:100%;border-radius:8px;border:0.5px solid rgba(99,153,34,0.25);display:block;margin:0 auto 0.5rem;"/>
+            <div id="ss3-placeholder" class="screenshot-missing" style="display:none;">&#128247; Screenshot coming soon &mdash; upload <code>images/pa-dhcp-eth-verify.png</code></div>
+            <p class="screenshot-caption">Network &#8594; Interfaces &#8594; Ethernet &#8594; Dynamic DHCP Client — showing Bound state</p>
+          </div>
+        </div>
       </div>
 
       <h3>Expected output</h3>
-<pre><code>Interface:    ethernet1/8
-State:        client
-IP:           x.x.x.x/xx
-Gateway:      x.x.x.1
-DNS:          8.8.8.8, 8.8.4.4
-Lease:        Bound
-Lease Expiry: xx days xx hours</code></pre>
+<pre><code>> show interface ethernet1/8
+--------------------------------------------------------------------------------
+Name: ethernet1/8, ID: 23
+Link status:
+  Runtime link speed/duplex/state: 1000/full/up
+  Configured link speed/duplex/state: auto/auto/auto
+MAC address:
+  Port MAC address &lt;MAC address omitted&gt;
+Interface Type : Port Type: RJ45
+Capability : auto, 10Mb/s-half, 10Mb/s-full, 100Mb/s-half, 100Mb/s-full, 1Gb/s-full
+Operation mode: layer3
+Untagged sub-interface support: no
+--------------------------------------------------------------------------------
+Name: ethernet1/8, ID: 23
+Operation mode: layer3
+Virtual router default
+Interface MTU 1500
+Interface IP address (dynamic): &lt;IP Address Omitted&gt;
+Interface management profile: N/A
+Service configured: SSL-VPN
+Zone: WAN, virtual system: vsys1</code></pre>
     </div>
 
     <!-- TROUBLESHOOTING -->
@@ -505,8 +527,19 @@ Lease Expiry: xx days xx hours</code></pre>
       <h3>IP assigned but no internet</h3>
       <ul>
         <li>Confirm default route was created: <code>show routing route</code></li>
+      </ul>
+<pre><code>> show routing route
+
+flags: A:active, ?:loose, C:connect, H:host, S:static, ~:internal, R:rip, O:ospf, B:bgp,
+       Oi:ospf intra-area, Oo:ospf inter-area, O1:ospf ext-type-1, O2:ospf ext-type-2, E:ecmp, M:multicast
+
+VIRTUAL ROUTER: default (id 1)
+  ==========
+destination          nexthop                  metric flags   age   interface
+0.0.0.0/0            &lt;IP Address Omitted&gt;     10     A S           ethernet1/8</code></pre>
+      <ul>
         <li>Check NAT policy — outbound traffic from trust to untrust needs a source NAT rule</li>
-        <li>Check security policy — verify traffic is allowed from trust to untrust</li>
+        <li>Check security policy — verify traffic is allowed from trust to WAN (or untrust)</li>
       </ul>
 <pre><code># Ping from dataplane
 ping source &lt;dhcp-assigned-ip&gt; host 8.8.8.8
@@ -521,20 +554,17 @@ show running nat-policy</code></pre>
         <li>Verify no duplicate MAC address on the ISP network</li>
       </ul>
 <pre><code>show counter interface ethernet1/8
-show log system direction equal forward match "dhcp"</code></pre>
+show log system direction equal forward | match dhcp</code></pre>
 
       <div class="warn-box">&#9888;&#65039; <strong>Common gotcha:</strong> If you previously had a static IP on this interface, make sure to remove it before switching to DHCP. Having both configured will cause issues.</div>
 
-      <h3>Useful debug commands</h3>
-<pre><code>debug dhcp client on
-show dhcp client statistics interface ethernet1/8
-debug dhcp client off</code></pre>
+
     </div>
 
     <!-- MY NOTES -->
     <div class="content-block">
       <div class="block-header">
-        <div class="block-title">&#128221; My Notes</div>
+        <div class="block-title">&#128221; Additional Obsidian Notes</div>
         <button class="btn-edit" onclick="toggleNotesEditor()">&#9999;&#65039; Edit Notes</button>
       </div>
       <textarea class="markdown-editor" id="notesEditor" placeholder="Add your own notes, gotchas, or environment-specific details here..."></textarea>
@@ -656,7 +686,7 @@ debug dhcp client off</code></pre>
   loadData();
 
   // Check screenshots - show placeholder if image fails to load
-  ['ss1','ss2'].forEach(function(id) {
+  ['ss1','ss2','ss3'].forEach(function(id) {
     var img = document.getElementById(id);
     if (!img) return;
     img.onerror = function() {
