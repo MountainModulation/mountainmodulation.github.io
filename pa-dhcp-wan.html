@@ -7,6 +7,23 @@
   <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
+  <script>
+  // Custom marked renderer for tip and warning boxes
+  const renderer = new marked.Renderer();
+  const originalBlockquote = renderer.blockquote.bind(renderer);
+  renderer.blockquote = function(quote) {
+    // quote is the inner HTML already rendered
+    var text = quote.replace(/<[^>]+>/g, '').trim();
+    if (text.startsWith('💡') || text.startsWith('&#128161;')) {
+      return '<div class="tip-box">' + quote + '</div>';
+    }
+    if (text.startsWith('⚠️') || text.startsWith('&#9888;')) {
+      return '<div class="warn-box">' + quote + '</div>';
+    }
+    return '<blockquote>' + quote + '</blockquote>';
+  };
+  marked.setOptions({ renderer: renderer });
+  </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -314,6 +331,7 @@
         <button class="sb-h3 open" onclick="tog(this)">Firewalls <span class="arr">&#9658;</span></button>
         <div class="sb-c3 open">
           <a href="pa-dhcp-wan.html" class="sb-l4 active">DHCP WAN Interface</a>
+          <a href="pa-dynamic-updates.html" class="sb-l4">Dynamic Updates</a>
         </div>
       </div>
     </div>
