@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mountain Modulation</title>
+  <title>Dynamic Updates | Mountain Modulation</title>
   <link rel="icon" type="image/svg+xml" href="mountain_modulation_favicon.svg"/>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -173,30 +174,58 @@
       .edit-banner { left: 0 !important; }
       .exam-grid { grid-template-columns: 1fr; }
     }
-    .hero { min-height: 90vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 4rem 2rem; margin-left: var(--sidebar-w); }
-    .hero svg.logo-hero { width: min(580px, 85vw); margin-bottom: 2rem; filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5)); }
-    .hero p { font-size: 1.05rem; color: var(--green-bright); max-width: 480px; margin: 0 auto 2rem; }
-    .hero-btn { display: inline-block; padding: 0.75rem 2rem; background: transparent; border: 1px solid var(--green-light); color: var(--green-pale); border-radius: 6px; text-decoration: none; font-size: 14px; letter-spacing: 1px; transition: background 0.2s, color 0.2s; }
-    .hero-btn:hover { background: var(--green-mid); color: var(--cream); }
-    .content-section { max-width: 820px; margin: 0 auto; padding: 5rem 2.5rem; border-top: 0.5px solid rgba(99,153,34,0.15); margin-left: var(--sidebar-w); }
-    .section-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.5rem; }
-    .section-title { font-family: 'Caveat', cursive; font-size: clamp(1.8rem,4vw,2.6rem); font-weight: 700; color: var(--green-pale); margin-bottom: 1.25rem; }
-    .divider { width: 50px; height: 2px; background: var(--green-light); margin-bottom: 2rem; border-radius: 2px; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
-    .about-text p { color: rgba(192,221,151,0.85); margin-bottom: 1rem; font-size: 15px; }
-    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1.25rem; }
-    .tag { padding: 4px 12px; border: 0.5px solid var(--green-light); border-radius: 20px; font-size: 11px; color: var(--green-bright); letter-spacing: 0.5px; }
-    .about-card { background: rgba(59,109,17,0.12); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 12px; padding: 1.5rem; }
-    .about-card h3 { font-family: 'Caveat', cursive; font-size: 1.3rem; color: var(--green-pale); margin-bottom: 1rem; }
-    .about-card ul { list-style: none; }
-    .about-card ul li { color: rgba(192,221,151,0.75); font-size: 13px; padding: 5px 0; border-bottom: 0.5px solid rgba(99,153,34,0.12); }
-    .about-card ul li:last-child { border-bottom: none; }
-    .about-card ul li::before { content: "→ "; color: var(--green-light); }
-    .coming-soon { text-align: center; padding: 3rem; color: rgba(192,221,151,0.35); border: 0.5px dashed rgba(99,153,34,0.2); border-radius: 12px; font-size: 14px; }
-    @media (max-width: 768px) {
-      .hero, .content-section { margin-left: 0; }
-      .about-grid { grid-template-columns: 1fr; }
-    }
+    .content-block { background: rgba(59,109,17,0.08); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem; }
+    .content-block h2 { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
+    .content-block h3 { font-family: 'Caveat', cursive; font-size: 1.2rem; color: var(--green-bright); margin: 1.25rem 0 0.5rem; }
+    .content-block p { font-size: 14px; color: rgba(192,221,151,0.85); margin-bottom: 0.85rem; line-height: 1.8; }
+    .content-block ul, .content-block ol { padding-left: 1.5rem; margin-bottom: 1rem; }
+    .content-block li { font-size: 14px; color: rgba(192,221,151,0.8); margin-bottom: 0.4rem; line-height: 1.7; }
+    .tab-group { margin-bottom: 1.5rem; }
+    .tab-bar { display: flex; gap: 0; }
+    .tab-btn { padding: 6px 16px; font-family: 'Caveat', cursive; font-size: 15px; cursor: pointer; border: 0.5px solid rgba(99,153,34,0.25); background: rgba(59,109,17,0.08); color: rgba(192,221,151,0.5); transition: all 0.2s; border-bottom: none; border-radius: 6px 6px 0 0; margin-right: 4px; }
+    .tab-btn.active { background: rgba(59,109,17,0.25); color: var(--green-pale); border-color: rgba(99,153,34,0.4); }
+    .tab-content { display: none; background: rgba(10,20,3,0.5); border: 0.5px solid rgba(99,153,34,0.25); border-radius: 0 6px 6px 6px; padding: 1.25rem 1.5rem; }
+    .tab-content.active { display: block; }
+    code { background: rgba(99,153,34,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--green-pale); }
+    pre { background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 8px; padding: 1rem 1.25rem; overflow-x: auto; margin: 0.75rem 0 1rem; }
+    pre code { background: none; padding: 0; color: #97C459; font-size: 13px; line-height: 1.7; display: block; }
+    .step { display: flex; gap: 1rem; margin-bottom: 1.25rem; align-items: flex-start; }
+    .step-num { width: 28px; height: 28px; border-radius: 50%; background: rgba(99,153,34,0.2); border: 0.5px solid var(--green-light); display: flex; align-items: center; justify-content: center; font-family: 'Caveat', cursive; font-size: 14px; color: var(--green-pale); flex-shrink: 0; margin-top: 2px; }
+    .step-body { flex: 1; }
+    .step-body p { margin-bottom: 0.4rem; }
+    .tip-box { background: rgba(239,159,39,0.08); border: 0.5px solid rgba(239,159,39,0.25); border-left: 3px solid var(--amber); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: rgba(239,159,39,0.85); }
+    .warn-box { background: rgba(239,80,80,0.08); border: 0.5px solid rgba(239,80,80,0.2); border-left: 3px solid rgba(239,80,80,0.7); border-radius: 0 8px 8px 0; padding: 0.75rem 1rem; margin: 0.75rem 0; font-size: 13px; color: rgba(239,150,150,0.85); }
+    .page-title-row { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 0.5px solid rgba(99,153,34,0.2); }
+    .page-label { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--green-light); margin-bottom: 0.4rem; }
+    .page-title { font-family: 'Caveat', cursive; font-size: clamp(1.8rem,4vw,2.8rem); font-weight: 700; color: var(--green-pale); line-height: 1.1; margin-bottom: 0.5rem; }
+    .page-subtitle { font-size: 13px; color: rgba(192,221,151,0.5); }
+    .block-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 0.5px solid rgba(99,153,34,0.15); }
+    .block-title { font-family: 'Caveat', cursive; font-size: 1.6rem; font-weight: 700; color: var(--green-pale); }
+    .btn-edit { display: none; align-items: center; gap: 5px; padding: 5px 14px; background: rgba(59,109,17,0.2); border: 0.5px solid rgba(99,153,34,0.35); border-radius: 7px; color: var(--green-bright); font-family: 'Caveat', cursive; font-size: 14px; cursor: pointer; }
+    .edit-mode .btn-edit { display: inline-flex; }
+    .markdown-editor { display: none; width: 100%; min-height: 280px; padding: 1rem; background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: var(--cream); font-family: monospace; font-size: 13px; resize: vertical; outline: none; }
+    .editor-actions { display: none; gap: 10px; margin-top: 0.75rem; }
+    .editor-actions.visible { display: flex; }
+    .btn-save { padding: 0.5rem 1.4rem; background: var(--green-mid); border: none; border-radius: 8px; color: var(--cream); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
+    .btn-save:hover { background: var(--green-light); }
+    .btn-cancel { padding: 0.5rem 1.2rem; background: transparent; border: 0.5px solid rgba(99,153,34,0.3); border-radius: 8px; color: rgba(192,221,151,0.6); font-family: 'Caveat', cursive; font-size: 16px; cursor: pointer; }
+    .markdown-body { color: rgba(192,221,151,0.88); font-size: 14px; line-height: 1.85; }
+    .markdown-body h1, .markdown-body h2, .markdown-body h3 { font-family: 'Caveat', cursive; color: var(--green-pale); margin: 1rem 0 0.5rem; }
+    .markdown-body h1 { font-size: 1.8rem; } .markdown-body h2 { font-size: 1.4rem; } .markdown-body h3 { font-size: 1.2rem; color: var(--green-bright); }
+    .markdown-body p { margin-bottom: 0.85rem; }
+    .markdown-body ul, .markdown-body ol { padding-left: 1.5rem; margin-bottom: 0.85rem; }
+    .markdown-body li { margin-bottom: 0.3rem; }
+    .markdown-body code { background: rgba(99,153,34,0.15); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--green-pale); }
+    .markdown-body pre { background: rgba(10,20,3,0.8); border: 0.5px solid rgba(99,153,34,0.2); border-radius: 8px; padding: 1rem; overflow-x: auto; margin-bottom: 1rem; }
+    .markdown-body pre code { background: none; color: var(--green-bright); font-size: 13px; }
+    .notes-placeholder { color: rgba(192,221,151,0.25); font-size: 14px; text-align: center; padding: 2rem 0; }
+    .lock-btn { position: fixed; bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; border-radius: 50%; background: rgba(59,109,17,0.3); border: 0.5px solid rgba(99,153,34,0.4); color: var(--green-bright); font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 999; }
+    .lock-btn.unlocked { background: rgba(239,159,39,0.2); border-color: rgba(239,159,39,0.5); color: var(--amber); }
+    .edit-banner { display: none; position: fixed; top: 90px; left: var(--sidebar-w); right: 0; background: rgba(239,159,39,0.15); border-bottom: 0.5px solid rgba(239,159,39,0.3); padding: 0.5rem 1.5rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--amber); z-index: 100; text-align: center; }
+    .edit-mode .edit-banner { display: block; }
+    .save-banner { position: fixed; bottom: 4.5rem; right: 1.5rem; background: rgba(59,109,17,0.95); border: 0.5px solid var(--green-light); border-radius: 10px; padding: 0.75rem 1.25rem; font-family: 'Caveat', cursive; font-size: 15px; color: var(--green-pale); display: none; z-index: 999; }
+    .save-banner.show { display: block; }
+    @media (max-width: 768px) { .main { margin-left: 0 !important; } .edit-banner { left: 0 !important; } }
   </style>
 </head>
 <body>
@@ -240,6 +269,7 @@
   <span></span><span></span><span></span>
 </button>
 <div class="mobile-overlay" id="mobileOverlay" onclick="toggleSidebar()"></div>
+<div class="edit-banner">&#9999;&#65039; Edit mode active</div>
 
 <div class="layout">
   <aside class="sidebar" id="sidebar">
@@ -258,13 +288,9 @@
         <a href="automating-mist-ai.html" class="sb-l3">Automating Mist AI Enterprise</a>
       </div>
       <button class="sb-h2" onclick="tog(this)">CWNP <span class="arr">&#9658;</span></button>
-      <div class="sb-c2">
-        <a href="cwna.html" class="sb-l3">CWNA</a>
-      </div>
+      <div class="sb-c2">        <a href="cwna.html" class="sb-l3">CWNA</a></div>
       <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
-      <div class="sb-c2">
-        <a href="#" class="sb-l3">Coming Soon</a>
-      </div>
+      <div class="sb-c2"><a href="#" class="sb-l3">Coming Soon</a></div>
     </div>
     <div class="sb-divider"></div>
     <button class="sb-h1" onclick="tog(this)">Networking <span class="arr">&#9658;</span></button>
@@ -275,14 +301,14 @@
         <a href="#" class="sb-l3">Automation</a>
         <a href="#" class="sb-l3">Switch</a>
       </div>
-      <button class="sb-h2" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
-      <div class="sb-c2">
+      <button class="sb-h2 open" onclick="tog(this)">Palo Alto Networks <span class="arr">&#9658;</span></button>
+      <div class="sb-c2 open">
         <button class="sb-h3" onclick="tog(this)">Panorama <span class="arr">&#9658;</span></button>
         <div class="sb-c3"><a href="#" class="sb-l4">CLI</a></div>
-        <button class="sb-h3" onclick="tog(this)">Firewalls <span class="arr">&#9658;</span></button>
-        <div class="sb-c3">
+        <button class="sb-h3 open" onclick="tog(this)">Firewalls <span class="arr">&#9658;</span></button>
+        <div class="sb-c3 open">
           <a href="pa-dhcp-wan.html" class="sb-l4">DHCP WAN Interface</a>
-          <a href="pa-dynamic-updates.html" class="sb-l4">Dynamic Updates</a>
+          <a href="pa-dynamic-updates.html" class="sb-l4 active">Dynamic Updates</a>
         </div>
       </div>
     </div>
@@ -290,9 +316,7 @@
     <button class="sb-h1" onclick="tog(this)">Tech Field Day <span class="arr">&#9658;</span></button>
     <div class="sb-c1">
       <button class="sb-h2" onclick="tog(this)">Mobility Field Day <span class="arr">&#9658;</span></button>
-      <div class="sb-c2">
-        <a href="mfd14.html" class="sb-l3">MFD14</a>
-      </div>
+      <div class="sb-c2"><a href="mfd14.html" class="sb-l3">MFD14</a></div>
     </div>
     <div class="sb-divider"></div>
     <button class="sb-h1" onclick="tog(this)">Tools &amp; Lab <span class="arr">&#9658;</span></button>
@@ -321,86 +345,83 @@
     </div>
   </aside>
 
-  <div style="flex:1; min-width:0;">
-    <div class="hero">
-      <svg class="logo-hero" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 420">
-        <defs><style>@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&amp;display=swap');</style></defs>
-        <rect width="680" height="420" rx="12" fill="#173404"/>
-        <circle cx="460" cy="130" r="70" fill="#EF9F27" opacity="0.08"/>
-        <circle cx="460" cy="130" r="50" fill="#FAC775" opacity="0.13"/>
-        <circle cx="460" cy="130" r="32" fill="#FAC775" opacity="0.22"/>
-        <circle cx="460" cy="130" r="19" fill="#FAEEDA" opacity="0.65"/>
-        <circle cx="460" cy="130" r="11" fill="#FAEEDA" opacity="0.95"/>
-        <g stroke="#FAC775" stroke-linecap="round" opacity="0.38">
-          <line x1="460" y1="103" x2="460" y2="113" stroke-width="1.8"/>
-          <line x1="432" y1="111" x2="438" y2="118" stroke-width="1.5"/>
-          <line x1="418" y1="130" x2="428" y2="130" stroke-width="1.5"/>
-          <line x1="432" y1="149" x2="438" y2="142" stroke-width="1.5"/>
-          <line x1="488" y1="103" x2="482" y2="113" stroke-width="1.5"/>
-          <line x1="492" y1="130" x2="482" y2="130" stroke-width="1.5"/>
-          <line x1="488" y1="149" x2="482" y2="142" stroke-width="1.5"/>
-        </g>
-        <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208 L680,265 Z" fill="#3B6D11"/>
-        <path d="M0,265 C20,265 28,240 46,210 C64,180 74,154 96,124 C118,94 130,74 152,54 C174,34 186,22 210,34 C234,46 239,86 256,116 C273,146 280,158 296,142 C312,126 318,106 336,74 C354,42 362,10 382,5 C402,0 410,28 428,60 C446,92 452,118 470,134 C488,150 494,144 512,128 C530,112 536,96 554,112 C572,128 578,155 596,170 C610,183 620,198 640,208" fill="none" stroke="#97C459" stroke-width="3" stroke-linecap="round"/>
-        <g fill="#27500A">
-          <polygon points="68,268 80,233 92,268"/><polygon points="74,248 80,230 86,248"/><rect x="78" y="266" width="4" height="7" rx="1"/>
-          <polygon points="96,268 110,244 124,268"/><polygon points="103,256 110,241 117,256"/><rect x="108" y="266" width="4" height="7" rx="1"/>
-          <polygon points="124,268 136,250 148,268"/><polygon points="130,259 136,247 142,259"/><rect x="134" y="266" width="4" height="7" rx="1"/>
-          <polygon points="490,268 504,236 518,268"/><polygon points="497,250 504,233 511,250"/><rect x="502" y="266" width="4" height="7" rx="1"/>
-          <polygon points="518,268 530,244 542,268"/><polygon points="524,256 530,241 536,256"/><rect x="528" y="266" width="4" height="7" rx="1"/>
-          <polygon points="544,268 556,250 568,268"/><polygon points="550,260 556,247 562,260"/><rect x="554" y="266" width="4" height="7" rx="1"/>
-        </g>
-        <rect x="0" y="265" width="680" height="5" fill="#27500A"/>
-        <text x="340" y="334" text-anchor="middle" font-family="Caveat, cursive" font-size="50" font-weight="700" fill="#C0DD97" letter-spacing="3">Mountain</text>
-        <text x="340" y="374" text-anchor="middle" font-family="Caveat, cursive" font-size="30" font-weight="400" fill="#97C459" letter-spacing="3">Modulation</text>
-        <line x1="70" y1="356" x2="195" y2="356" stroke="#639922" stroke-width="0.8" opacity="0.4"/>
-        <line x1="485" y1="356" x2="610" y2="356" stroke="#639922" stroke-width="0.8" opacity="0.4"/>
-      </svg>
-      <p>Networking, wireless, and the signal between the peaks.</p>
-      <a href="#blog" class="hero-btn">Read the blog &#8594;</a>
+  <main class="main">
+    <div class="breadcrumb">
+      <a href="index.html">Home</a><span>&#8250;</span>
+      Networking<span>&#8250;</span>
+      Palo Alto Networks<span>&#8250;</span>
+      Firewalls<span>&#8250;</span>
+      Dynamic Updates
     </div>
 
-    <section class="content-section" id="about">
-      <p class="section-label">Who I am</p>
-      <h2 class="section-title">About</h2>
-      <div class="divider"></div>
-      <div class="about-grid">
-        <div class="about-text">
-          <p>Welcome to Mountain Modulation — a blog about networking, wireless technology, and the craft of keeping signals strong across any terrain.</p>
-          <p>I'm a network engineer with a passion for Juniper, Wi-Fi, SD-WAN, and the endlessly fascinating world of RF. This is where I share what I learn, break down complex topics, and document the journey.</p>
-          <div class="about-tags">
-            <span class="tag">Juniper Mist</span><span class="tag">SD-WAN</span><span class="tag">Wi-Fi</span>
-            <span class="tag">RF</span><span class="tag">Palo Alto</span><span class="tag">Automation</span>
-          </div>
-        </div>
-        <div class="about-card">
-          <h3>Topics covered</h3>
-          <ul>
-            <li>Juniper Mist &amp; WAN Assurance</li>
-            <li>Wireless design &amp; RF fundamentals</li>
-            <li>Palo Alto Networks &amp; Panorama</li>
-            <li>Network automation &amp; REST APIs</li>
-            <li>Certifications &amp; study notes</li>
-            <li>Tech Field Day coverage</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+    <div class="page-title-row">
+      <p class="page-label">Palo Alto Networks &#183; Firewalls</p>
+      <h1 class="page-title">Dynamic Updates</h1>
+      <p class="page-subtitle">PAN-OS &#183; Threat Prevention &#183; Content Updates &#183; CLI &amp; GUI</p>
+    </div>
 
-    <section class="content-section" id="blog">
-      <p class="section-label">Latest posts</p>
-      <h2 class="section-title">Blog</h2>
-      <div class="divider"></div>
-      <div class="coming-soon">&#10022; &nbsp; Posts coming soon &#10022;</div>
-    </section>
-  </div>
+    <!-- OVERVIEW -->
+    <div class="content-block">
+      <div class="block-header">
+        <div class="block-title">&#128269; Overview</div>
+        <button class="btn-edit" onclick="toggleOverviewEditor()">&#9999;&#65039; Edit</button>
+      </div>
+      <textarea class="markdown-editor" id="overviewEditor" placeholder="Write your overview here in Markdown..."></textarea>
+      <div class="editor-actions" id="overviewActions">
+        <button class="btn-save" onclick="saveOverview()">Save</button>
+        <button class="btn-cancel" onclick="cancelOverview()">Cancel</button>
+      </div>
+      <div class="markdown-body" id="overviewDisplay">
+        <p class="notes-placeholder">No overview yet &#8212; click Edit to add one.</p>
+      </div>
+    </div>
+
+    <!-- CONFIGURATION -->
+    <div class="content-block">
+      <div class="block-header">
+        <div class="block-title">&#9881;&#65039; Configuration</div>
+        <button class="btn-edit" onclick="toggleConfigEditor()">&#9999;&#65039; Edit</button>
+      </div>
+      <textarea class="markdown-editor" id="configEditor" placeholder="Write your configuration steps here in Markdown..."></textarea>
+      <div class="editor-actions" id="configActions">
+        <button class="btn-save" onclick="saveConfig()">Save</button>
+        <button class="btn-cancel" onclick="cancelConfig()">Cancel</button>
+      </div>
+      <div class="markdown-body" id="configDisplay">
+        <p class="notes-placeholder">No configuration steps yet &#8212; click Edit to add them.</p>
+      </div>
+    </div>
+
+        <!-- ADDITIONAL OBSIDIAN NOTES -->
+    <div class="content-block">
+      <div class="block-header">
+        <div class="block-title">&#128221; Additional Obsidian Notes</div>
+        <button class="btn-edit" onclick="toggleNotesEditor()">&#9999;&#65039; Edit Notes</button>
+      </div>
+      <textarea class="markdown-editor" id="notesEditor" placeholder="Paste your Obsidian markdown notes here..."></textarea>
+      <div class="editor-actions" id="notesActions">
+        <button class="btn-save" onclick="saveNotes()">Save Notes</button>
+        <button class="btn-cancel" onclick="cancelNotes()">Cancel</button>
+      </div>
+      <div class="markdown-body" id="notesDisplay"><p class="notes-placeholder">No notes yet &#8212; click Edit Notes to add your own observations.</p></div>
+    </div>
+
+  </main>
 </div>
 
+<button class="lock-btn" id="lockBtn" onclick="toggleEditMode()">&#128274;</button>
+<div class="save-banner" id="saveBanner">&#10003; Saved</div>
 <footer>
   <p>&#169; 2025 Mountain Modulation &nbsp;&middot;&nbsp; <a href="https://soretech.net">soretech.net</a></p>
 </footer>
 
 <script>
+  const REPO = 'MountainModulation/mountainmodulation.github.io';
+  const FILE = 'data/pa-dynamic-updates.json';
+  let pat = sessionStorage.getItem('mm_pat') || '';
+  let data = { overview: '', config: '', notes: '' };
+  let fileSha = '';
+
   function tog(el) { el.classList.toggle('open'); el.nextElementSibling.classList.toggle('open'); }
   function toggleSidebar() {
     var sb = document.getElementById('sidebar');
@@ -410,6 +431,133 @@
     sb.classList.toggle('open');
     if (ov) ov.style.display = isOpen ? 'none' : 'block';
   }
+
+  function switchTab(btn, tabId) {
+    const bar = btn.parentElement;
+    const group = bar.parentElement;
+    bar.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    group.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+  async function loadData() {
+    try {
+      const r = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
+        headers: pat ? { Authorization: 'token ' + pat } : {}
+      });
+      if (!r.ok) return;
+      const json = await r.json();
+      fileSha = json.sha;
+      data = JSON.parse(atob(json.content.replace(/\n/g, '')));
+    } catch(e) {}
+    renderAll();
+  }
+
+  async function saveData() {
+    if (!pat) { alert('Enter your PAT first.'); return; }
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+    const r = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
+      method: 'PUT',
+      headers: { Authorization: 'token ' + pat, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: 'Update pa-dynamic-updates data', content, sha: fileSha })
+    });
+    if (r.ok) { const j = await r.json(); fileSha = j.content.sha; banner('✓ Saved to GitHub'); }
+    else banner('✗ Save failed');
+  }
+
+  function toggleEditMode() {
+    if (!pat) {
+      const t = prompt('Enter your GitHub Personal Access Token:');
+      if (!t) return;
+      pat = t.trim(); sessionStorage.setItem('mm_pat', pat);
+    } else {
+      pat = ''; sessionStorage.removeItem('mm_pat');
+      document.body.classList.remove('edit-mode');
+      document.getElementById('lockBtn').classList.remove('unlocked');
+      document.getElementById('lockBtn').textContent = '🔒';
+      return;
+    }
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '🔓';
+    banner('✓ Edit mode unlocked');
+  }
+
+  function toggleOverviewEditor() {
+    const ed = document.getElementById('overviewEditor');
+    const ac = document.getElementById('overviewActions');
+    const ds = document.getElementById('overviewDisplay');
+    const editing = ed.style.display === 'block';
+    ed.style.display = editing ? 'none' : 'block';
+    ac.style.display = editing ? 'none' : 'flex';
+    ds.style.display = editing ? 'block' : 'none';
+    if (!editing) ed.value = data.overview || '';
+  }
+  async function saveOverview() {
+    data.overview = document.getElementById('overviewEditor').value;
+    await saveData(); renderOverview(); toggleOverviewEditor();
+  }
+  function cancelOverview() { toggleOverviewEditor(); }
+  function renderOverview() {
+    const el = document.getElementById('overviewDisplay');
+    el.innerHTML = (data.overview || '').trim() ? marked.parse(data.overview) : '<p class="notes-placeholder">No overview yet &#8212; click Edit to add one.</p>';
+  }
+
+  function toggleNotesEditor() {
+    const ed = document.getElementById('notesEditor');
+    const ac = document.getElementById('notesActions');
+    const ds = document.getElementById('notesDisplay');
+    const editing = ed.style.display === 'block';
+    ed.style.display = editing ? 'none' : 'block';
+    ac.style.display = editing ? 'none' : 'flex';
+    ds.style.display = editing ? 'block' : 'none';
+    if (!editing) ed.value = data.notes || '';
+  }
+  async function saveNotes() {
+    data.notes = document.getElementById('notesEditor').value;
+    await saveData(); renderNotes(); toggleNotesEditor();
+  }
+  function cancelNotes() { toggleNotesEditor(); }
+  function renderNotes() {
+    const el = document.getElementById('notesDisplay');
+    el.innerHTML = (data.notes || '').trim() ? marked.parse(data.notes) : '<p class="notes-placeholder">No notes yet &#8212; click Edit Notes to add your own observations.</p>';
+  }
+
+  function banner(msg) {
+    const b = document.getElementById('saveBanner');
+    b.textContent = msg; b.classList.add('show');
+    setTimeout(() => b.classList.remove('show'), 2500);
+  }
+
+  function toggleConfigEditor() {
+    const ed = document.getElementById('configEditor');
+    const ac = document.getElementById('configActions');
+    const ds = document.getElementById('configDisplay');
+    const editing = ed.style.display === 'block';
+    ed.style.display = editing ? 'none' : 'block';
+    ac.style.display = editing ? 'none' : 'flex';
+    ds.style.display = editing ? 'block' : 'none';
+    if (!editing) ed.value = data.config || '';
+  }
+  async function saveConfig() {
+    data.config = document.getElementById('configEditor').value;
+    await saveData(); renderConfig(); toggleConfigEditor();
+  }
+  function cancelConfig() { toggleConfigEditor(); }
+  function renderConfig() {
+    const el = document.getElementById('configDisplay');
+    el.innerHTML = (data.config || '').trim() ? marked.parse(data.config) : '<p class="notes-placeholder">No configuration steps yet &#8212; click Edit to add them.</p>';
+  }
+
+  function renderAll() { renderOverview(); renderConfig(); renderNotes(); }
+
+  if (pat) {
+    document.body.classList.add('edit-mode');
+    document.getElementById('lockBtn').classList.add('unlocked');
+    document.getElementById('lockBtn').textContent = '🔓';
+  }
+  loadData();
 </script>
 </body>
 </html>
